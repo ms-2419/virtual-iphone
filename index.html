@@ -302,13 +302,13 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 인스타그램 피드 포스트 (.png)
+// 인스타그램 피드 포스트 (.jpeg 변경)
 window.igPosts = [
-  'IMG_7096.png',
-  'IMG_7048.png',
-  'IMG_7047.png',
-  'IMG_7046.png',
-  'IMG_7045.png'
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
 ];
 
 window.igChats = [
@@ -356,27 +356,28 @@ window.igPage = function(view, who) {
 
   if (view === 'profile') {
     body = `
-      <div style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;font-size:22px;font-weight:700">
-        <span>＿leejaehyun＿</span>
-        <span onclick="igPage('dm')" style="font-size:22px;cursor:pointer">☰</span>
+      <div style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700">
+        <span>sunwoo</span>
+        <span onclick="igPage('dm')" style="font-size:20px;cursor:pointer">☰</span>
       </div>
-      <div style="display:flex;align-items:center;gap:22px;padding:18px 14px 24px">
-        <div style="width:100px;height:100px;flex-shrink:0;border-radius:50%;background:#eef0f5;display:grid;place-items:center">
-          <svg width="76" height="76" viewBox="0 0 24 24" fill="#fff">
+      <div style="display:flex;align-items:center;gap:18px;padding:12px 14px 16px">
+        <!-- 프사 크기 조절 (70px) -->
+        <div style="width:70px;height:70px;flex-shrink:0;border-radius:50%;background:#eef0f5;display:grid;place-items:center">
+          <svg width="50" height="50" viewBox="0 0 24 24" fill="#fff">
             <circle cx="12" cy="8" r="4.5"/>
             <path d="M3 22v-2a9 9 0 0 1 18 0v2z"/>
           </svg>
         </div>
         <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
-          <div><b style="font-size:22px">${photos.length}</b><div style="font-size:14px;margin-top:4px">게시물</div></div>
-          <div><b style="font-size:22px">913</b><div style="font-size:14px;margin-top:4px">팔로워</div></div>
-          <div><b style="font-size:22px">96</b><div style="font-size:14px;margin-top:4px">팔로잉</div></div>
+          <div><b style="font-size:18px">${photos.length}</b><div style="font-size:12px;margin-top:2px">게시물</div></div>
+          <div><b style="font-size:18px">913</b><div style="font-size:12px;margin-top:2px">팔로워</div></div>
+          <div><b style="font-size:18px">96</b><div style="font-size:12px;margin-top:2px">팔로잉</div></div>
         </div>
       </div>
-      <div style="padding:0 14px 18px;font-size:15px;font-weight:600">leejaehyun_</div>
-      <div style="display:flex;gap:8px;padding:0 12px 18px">
-        <button style="flex:1;border:0;border-radius:9px;background:#efeff3;padding:10px;font-size:14px;font-weight:600">프로필 편집</button>
-        <button style="flex:1;border:0;border-radius:9px;background:#efeff3;padding:10px;font-size:14px;font-weight:600">프로필 공유</button>
+      <div style="padding:0 14px 12px;font-size:14px;font-weight:600">김선우</div>
+      <div style="display:flex;gap:8px;padding:0 12px 14px">
+        <button style="flex:1;border:0;border-radius:8px;background:#efeff3;padding:8px;font-size:13px;font-weight:600">프로필 편집</button>
+        <button style="flex:1;border:0;border-radius:8px;background:#efeff3;padding:8px;font-size:13px;font-weight:600">프로필 공유</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
         ${photos.map(file => `
@@ -388,7 +389,11 @@ window.igPage = function(view, who) {
       <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
         <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
       </div>
-      <img src="./${who}" style="display:block;width:100%;height:auto">`;
+      <img src="./${who}" style="display:block;width:100%;height:auto">
+      <div style="padding:10px">
+        <div style="font-size:18px;margin-bottom:6px">♡ 💬 ➤</div>
+        <div style="font-size:13px"><b>sunwoo</b> 📷</div>
+      </div>`;
   } else if (view === 'dm') {
     body = `
       <div style="padding:14px;font-size:17px;font-weight:600">메시지</div>
@@ -408,9 +413,19 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
+    // 피드 화면 (sunwoo / 김선우 반영)
     body = photos.map(file => `
-      <div style="margin:0;padding:0">
+      <div style="margin:0 0 16px;border-bottom:1px solid #f0f0f0;padding-bottom:10px">
+        <div style="padding:8px 12px;display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#eee;display:grid;place-items:center;font-size:12px">☺</div>
+          <b style="font-size:13px">sunwoo</b>
+        </div>
         <img src="./${file}" onclick="igOpenPost('${file}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
+        <div style="padding:8px 12px 0">
+          <div style="font-size:18px;margin-bottom:4px">♡ 💬 ➤</div>
+          <div style="font-size:12px"><b>좋아요 128개</b></div>
+          <div style="font-size:12px;margin-top:4px"><b>sunwoo</b> 📷</div>
+        </div>
       </div>
     `).join('');
   }
