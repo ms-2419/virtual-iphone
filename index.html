@@ -276,50 +276,8 @@ function movePhoto(n){
  if(name==='메시지'){
   html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
  }else if(name==='사진'){
-  html = `<h2 style="margin:8px 20px">사진</h2>
-  <div onclick="document.getElementById('album629').style.display='block';document.getElementById('photoHome629').style.display='none'" style="display:flex;align-items:center;gap:14px;margin:20px;cursor:pointer">
-    <div style="width:100px;height:100px;border-radius:12px;overflow:hidden">
-      <img src="IMG_7080.jpeg" style="width:100%;height:100%;object-fit:cover">
-    </div>
-    <div><b>ㅋㅋ♥</b><div style="color:#888;font-size:13px;margin-top:5px">14장</div></div>
-  </div>
-  <div id="photoHome629" style="color:#888;font-size:13px;margin:20px">나만의 추억을 모아둔 앨범</div>
-  <div id="album629" style="display:none;margin:16px">
-    <div onclick="document.getElementById('album629').style.display='none';document.getElementById('photoHome629').style.display='block'" style="color:#1684ff;cursor:pointer">‹ 앨범</div>
-    <h3>ㅋㅋ♥</h3>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px">
-      ${['IMG_7080.jpeg','IMG_7081.jpeg','IMG_7082.jpeg','IMG_7083.jpeg','IMG_7084.jpeg','IMG_7085.jpeg','IMG_6986.jpeg','IMG_6785.jpeg','IMG_6531.jpeg','IMG_6279.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'].map((f,i)=>`<img src="${f}" onclick="window.albumPhoto629(${i})" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">`).join('')}
-    </div>
-  </div>
-  <div id="viewer629" style="display:none;position:fixed;inset:0;background:#000;z-index:99999;align-items:center;justify-content:center;flex-direction:column">
-    <div style="position:absolute;top:20px;left:20px;right:20px;display:flex;justify-content:space-between;color:white">
-      <span onclick="document.getElementById('viewer629').style.display='none'" style="font-size:32px;cursor:pointer">×</span>
-      <span id="count629"></span><span></span>
-    </div>
-    <img id="big629" style="width:100%;max-height:78vh;object-fit:contain">
-    <div style="position:absolute;bottom:35px;display:flex;gap:80px;color:white;font-size:36px">
-      <span onclick="window.albumPhoto629(window.albumIndex629-1)" style="cursor:pointer">‹</span>
-      <span onclick="window.albumPhoto629(window.albumIndex629+1)" style="cursor:pointer">›</span>
-    </div>
-  </div>`;
-  window.albumFiles629=['IMG_7080.jpeg','IMG_7081.jpeg','IMG_7082.jpeg','IMG_7083.jpeg','IMG_7084.jpeg','IMG_7085.jpeg','IMG_6986.jpeg','IMG_6785.jpeg','IMG_6531.jpeg','IMG_6279.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
-  window.albumIndex629=0;
-  window.albumPhoto629=function(i){
-    window.albumIndex629=(i+window.albumFiles629.length)%window.albumFiles629.length;
-    document.getElementById('viewer629').style.display='flex';
-    document.getElementById('big629').src=window.albumFiles629[window.albumIndex629];
-    document.getElementById('count629').innerText=(window.albumIndex629+1)+' / '+window.albumFiles629.length;
-  };
-}
-  window.albumFiles629=['IMG_7080.jpeg','IMG_7081.jpeg','IMG_7082.jpeg','IMG_7083.jpeg','IMG_7084.jpeg','IMG_7085.jpeg','IMG_6986.jpeg','IMG_6785.jpeg','IMG_6531.jpeg','IMG_6279.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
-  window.albumIndex629=0;
-  window.albumPhoto629=function(i){
-    window.albumIndex629=(i+window.albumFiles629.length)%window.albumFiles629.length;
-    document.getElementById('viewer629').style.display='flex';
-    document.getElementById('big629').src=window.albumFiles629[window.albumIndex629];
-    document.getElementById('count629').innerText=(window.albumIndex629+1)+' / '+window.albumFiles629.length;
-  };
-}
+  html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div><div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer"><img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div><span style="color:#aaa;font-size:22px">›</span></div><div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>';
+ }else if(name==='카메라'){
   html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
  }else if(name==='설정'){
   html='<h2>설정</h2><div class="row">✈️ 에어플레인 모드</div><div class="row">Wi-Fi</div><div class="row">Bluetooth</div><div class="row">알림</div><div class="row">디스플레이 및 밝기</div>';
