@@ -327,10 +327,10 @@ function openPhotoViewer629(i) {
 }else if(name==='Instagram'){
 window.igChats = [
   ['leejaehyun','이재현','형이 너 얼마나 사랑하는지 알지?'],
-  ['zuyeon','주연','잘 지내러 선우야'],
+  ['zuyeon','주연','잘 지내? ㅎ'],
   ['0hoony_','후니',' 서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','에릭','ㅇㅇ 확인했어'],
+  ['eric_00','에릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?'],
   ['luv.archive','luv','사진 보내줘'],
   ['daily.zip','daily','ㅋㅋㅋㅋ'],
@@ -340,13 +340,17 @@ window.igChats = [
 
 window.igPage = function(view, who){
   const profiles = {
-    sunwoo:{id:'sunwoo',name:'선우',posts:2},
-    leejaehyun:{id:'leejaehyun',name:'이재현',posts:3}
+    sunwoo:{id:'sunwoo',name:'선우',posts:5},
+    leejaehyun:{id:'leejaehyun',name:'이재현',posts:5}
   };
-  const p = profiles[who || 'leejaehyun','sunwoo'];
+  const p = profiles[who || 'sunwoo'];
   const photos = [
-    'IMG_7045.jpeg','IMG_7046.jpeg','IMG_7047.jpeg'
-  ];
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
+];
 
   const nav = `
     <div style="position:sticky;bottom:0;background:white;border-top:1px solid #ddd;
@@ -466,8 +470,11 @@ window.igPage = function(view, who){
           <span style="margin-left:auto;cursor:pointer">•••</span>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">
-          ${photos.map(f=>`<img src="./${f}" onclick="igOpenPost('${f}')"
-          style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">`).join('')}
+          ${photos.map(f=>`
+  <img src="./${f}"
+    onclick="igOpenPost('${f}')"
+    style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">
+`).join('')}
         </div>
         <div style="font-size:12px;margin-top:9px"><b>좋아요 128개</b></div>
         <div style="font-size:12px;margin-top:5px"><b>leejaehyun</b> 📷</div>
