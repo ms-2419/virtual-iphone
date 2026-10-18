@@ -302,15 +302,13 @@ function openPhotoViewer629(i) {
   };
 }
 
-
+// 인스타그램 사진 파일 목록 (.png 고정)
 window.igPosts = [
   'IMG_7096.png',
   'IMG_7048.png',
   'IMG_7047.png',
   'IMG_7046.png',
   'IMG_7045.png'
-];
-
 ];
 
 window.igChats = [
@@ -331,11 +329,43 @@ window.igPage = function(view, who) {
   if (!container) return;
 
   const photos = window.igPosts;
-
   let body = '';
+
+  // 상단바 영역
+  const topHeader = `
+    <div style="position:sticky;top:0;background:#fff;z-index:10;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f0f0">
+      <b style="font-size:22px;letter-spacing:-1px">Instagram</b>
+      <div style="display:flex;gap:18px;font-size:22px">
+        <span onclick="igPage('home')" style="cursor:pointer">♡</span>
+        <span onclick="igPage('dm')" style="cursor:pointer">➤</span>
+      </div>
+    </div>`;
+
+  // 하단 바 영역
+  const bottomNav = `
+    <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;padding:10px 0;font-size:22px;z-index:10;margin-top:auto">
+      <span onclick="igPage('home')" style="cursor:pointer">⌂</span>
+      <span onclick="igPage('search')" style="cursor:pointer">⌕</span>
+      <span onclick="igPage('reels')" style="cursor:pointer">▣</span>
+      <span onclick="igPage('dm')" style="cursor:pointer">➤</span>
+      <span onclick="igPage('profile')" style="cursor:pointer">◉</span>
+    </div>`;
 
   if (view === 'profile') {
     body = `
+      <div style="padding:10px 12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+        <b>sunwoo</b>
+        <span onclick="igPage('dm')" style="cursor:pointer;font-size:20px">☰</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:15px 12px">
+        <div style="width:60px;height:60px;border-radius:50%;background:#eee;display:grid;place-items:center;font-size:24px">☺</div>
+        <div style="display:flex;flex:1;justify-content:space-around;text-align:center">
+          <div><b>${photos.length}</b><div style="font-size:11px">게시물</div></div>
+          <div><b>128</b><div style="font-size:11px">팔로워</div></div>
+          <div><b>96</b><div style="font-size:11px">팔로잉</div></div>
+        </div>
+      </div>
+      <div style="padding:0 12px 10px"><b>선우</b></div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">
         ${photos.map(file => `
           <img src="./${file}"
@@ -345,52 +375,76 @@ window.igPage = function(view, who) {
       </div>`;
   } else if (view === 'post') {
     body = `
-      <div style="padding:8px 12px 15px">
-        <span onclick="igPage('home')" style="font-size:26px;cursor:pointer">‹</span>
+      <div style="padding:10px 12px;border-bottom:1px solid #eee">
+        <span onclick="igPage('home')" style="font-size:20px;cursor:pointer">‹ 게시물</span>
       </div>
-      <img src="./${who}"
-        style="display:block;width:100%;height:auto">`;
+      <img src="./${who}" style="display:block;width:100%;height:auto;max-height:400px;object-fit:contain">
+      <div style="padding:10px">
+        <div style="font-size:20px;margin-bottom:6px">♡ 💬 ➤</div>
+        <div style="font-size:13px"><b>leejaehyun</b> 📷</div>
+      </div>`;
   } else if (view === 'dm') {
     body = `
-      <div style="padding:12px;font-size:20px;font-weight:bold">메시지</div>
+      <div style="padding:12px;font-size:18px;font-weight:bold;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px">
+        <span onclick="igPage('home')" style="cursor:pointer">‹</span> 메시지 (DM)
+      </div>
+      <input placeholder="검색" style="margin:10px 12px;width:calc(100% - 24px);padding:8px 12px;border-radius:10px;border:0;background:#efefef;font-size:14px">
       ${window.igChats.map(c => `
-        <div style="display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #eee">
-          <div style="width:42px;height:42px;border-radius:50%;background:#eee;display:grid;place-items:center;color:#aaa">○</div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #eee;cursor:pointer">
+          <div style="width:42px;height:42px;border-radius:50%;background:#eee;display:grid;place-items:center;color:#aaa">☺</div>
           <div>
-            <div style="font-size:14px">${c[0]}</div>
-            <div style="font-size:12px;color:#888;margin-top:4px">${c[2]}</div>
+            <div style="font-size:14px;font-weight:bold">${c[0]}</div>
+            <div style="font-size:12px;color:#888;margin-top:2px">${c[2]}</div>
           </div>
         </div>
       `).join('')}`;
   } else {
-    body = photos.map(file => `
-      <div style="margin:0 0 12px">
-        <img src="./${file}"
-          onclick="igOpenPost('${file}')"
-          alt="게시물 사진"
-          style="display:block;width:100%;height:auto;cursor:pointer">
-      </div>
-    `).join('');
+    // 기본 피드 홈 화면
+    body = topHeader + `
+      <div style="padding:10px 0">
+        <!-- 스토리 영역 -->
+        <div style="display:flex;gap:12px;overflow-x:auto;padding:0 12px 12px;border-bottom:1px solid #f0f0f0">
+          ${['내 스토리','zuyeon','leejaehyun','0hoony_','qfeed'].map(n=>`
+            <div onclick="igPage('${n==='leejaehyun'?'profile':'home'}')" style="min-width:58px;text-align:center;cursor:pointer">
+              <div style="width:54px;height:54px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#ffc45a,#d62976,#8134af);margin:auto">
+                <div style="width:100%;height:100%;border-radius:50%;background:#eee;border:2px solid white;display:grid;place-items:center;font-size:18px">☺</div>
+              </div>
+              <small style="display:block;margin-top:4px;font-size:10px">${n}</small>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- 피드 게시물들 -->
+        ${photos.map(file => `
+          <div style="margin:0 0 16px;border-bottom:1px solid #f0f0f0;padding-bottom:10px">
+            <div style="padding:8px 12px;display:flex;align-items:center;gap:8px">
+              <div style="width:28px;height:28px;border-radius:50%;background:#eee;display:grid;place-items:center;font-size:12px">☺</div>
+              <b style="font-size:13px">leejaehyun</b>
+            </div>
+            <img src="./${file}"
+              onclick="igOpenPost('${file}')"
+              alt="게시물 사진"
+              style="display:block;width:100%;height:auto;cursor:pointer">
+            <div style="padding:8px 12px 0">
+              <div style="font-size:18px;margin-bottom:4px">♡ 💬 ➤</div>
+              <div style="font-size:12px"><b>좋아요 128개</b></div>
+              <div style="font-size:12px;margin-top:4px"><b>leejaehyun</b> 📷</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
   }
 
   container.innerHTML = `
-    <div style="background:#fff;color:#171717;min-height:100%;
-      padding:0;box-sizing:border-box;font-family:Arial,sans-serif">
+    <div style="background:#fff;color:#171717;min-height:100%;display:flex;flex-direction:column;box-sizing:border-box;font-family:Arial,sans-serif">
       ${body}
-      <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;
-        display:flex;justify-content:space-around;align-items:center;padding:10px 0;
-        font-size:25px">
-        <span onclick="igPage('home')" style="cursor:pointer">⌂</span>
-        <span onclick="igPage('dm')" style="cursor:pointer">➤</span>
-        <span onclick="igPage('profile')" style="cursor:pointer">◉</span>
-      </div>
+      ${bottomNav}
     </div>`;
 };
 
 window.igOpenPost = function(file) {
   igPage('post', file);
 };
-
 
 function openApp(name){
   const page=document.getElementById('page');
