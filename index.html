@@ -302,13 +302,13 @@ function openPhotoViewer629(i) {
   };
 }
 
-
+// 인스타그램 피드 포스트 (.png)
 window.igPosts = [
-  'IMG_7096.jpeg',
-  'IMG_7048.jpeg',
-  'IMG_7047.jpeg',
-  'IMG_7046.jpeg',
-  'IMG_7045.jpeg'
+  'IMG_7096.png',
+  'IMG_7048.png',
+  'IMG_7047.png',
+  'IMG_7046.png',
+  'IMG_7045.png'
 ];
 
 window.igChats = [
@@ -327,23 +327,15 @@ window.igPage = function(view, who) {
   const photos = window.igPosts;
 
   const iconStyle = 'width:23px;height:23px;display:block;';
-
   const homeIcon = `<svg style="${iconStyle}" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10.8 12 3l9 7.8v9.7a.8.8 0 0 1-.8.8h-5.5v-6.2H9.3v6.2H3.8a.8.8 0 0 1-.8-.8z"/></svg>`;
-
   const reelsIcon = `<svg style="${iconStyle}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 8h18M8 3l4 5M15 3l4 5"/><path d="m10 11 5 3-5 3z" fill="currentColor" stroke="none"/></svg>`;
-
   const dmIcon = `<svg style="${iconStyle}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 3 3 10.5l7 3.5 3.5 7z"/><path d="M10 14 21 3"/></svg>`;
-
   const searchIcon = `<svg style="${iconStyle}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16.2 16.2 4.3 4.3"/></svg>`;
-
   const profileIcon = `<svg style="width:25px;height:25px;display:block" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ddd"/><circle cx="12" cy="9" r="4" fill="#fff"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0" fill="#fff"/></svg>`;
-
   const heartIcon = `<svg style="width:23px;height:23px;display:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.8 8.8c0 5-8.8 11-8.8 11s-8.8-6-8.8-11a4.6 4.6 0 0 1 8.8-1.6 4.6 4.6 0 0 1 8.8 1.6z"/></svg>`;
 
   const top = `
-    <div style="height:43px;padding:0 13px;display:flex;
-      align-items:center;justify-content:space-between;
-      background:#fff;position:sticky;top:0;z-index:5">
+    <div style="height:43px;padding:0 13px;display:flex;align-items:center;justify-content:space-between;background:#fff;position:sticky;top:0;z-index:5;border-bottom:1px solid #f0f0f0">
       <b style="font-size:20px;letter-spacing:-1px">Instagram</b>
       <div style="display:flex;align-items:center;gap:17px">
         <span onclick="igPage('activity')" style="cursor:pointer;display:flex">${heartIcon}</span>
@@ -352,9 +344,7 @@ window.igPage = function(view, who) {
     </div>`;
 
   const bottom = `
-    <div style="height:45px;flex-shrink:0;background:#fff;
-      border-top:1px solid #eee;display:flex;align-items:center;
-      justify-content:space-around;position:sticky;bottom:0;z-index:5">
+    <div style="height:45px;flex-shrink:0;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:sticky;bottom:0;z-index:5">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
       <span onclick="igPage('reels')" style="cursor:pointer;display:flex">${reelsIcon}</span>
       <span onclick="igPage('dm')" style="cursor:pointer;display:flex">${dmIcon}</span>
@@ -364,55 +354,38 @@ window.igPage = function(view, who) {
 
   let body = '';
 
-  
-if (view === 'profile') {
-  body = `
-    <div style="padding:12px 14px;display:flex;align-items:center;
-      justify-content:space-between;font-size:22px;font-weight:700">
-      <span>＿leejaehyun＿</span>
-      <span onclick="igPage('dm')" style="font-size:22px;cursor:pointer">☰</span>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:22px;padding:18px 14px 24px">
-      <div style="width:100px;height:100px;flex-shrink:0;border-radius:50%;
-        background:#eef0f5;display:grid;place-items:center">
-        <svg width="76" height="76" viewBox="0 0 24 24" fill="#fff">
-          <circle cx="12" cy="8" r="4.5"/>
-          <path d="M3 22v-2a9 9 0 0 1 18 0v2z"/>
-        </svg>
+  if (view === 'profile') {
+    body = `
+      <div style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;font-size:22px;font-weight:700">
+        <span>＿leejaehyun＿</span>
+        <span onclick="igPage('dm')" style="font-size:22px;cursor:pointer">☰</span>
       </div>
-
-      <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
-        <div><b style="font-size:22px">${photos.length + 2}</b>
-          <div style="font-size:14px;margin-top:4px">게시물</div></div>
-        <div><b style="font-size:22px">913</b>
-          <div style="font-size:14px;margin-top:4px">팔로워</div></div>
-        <div><b style="font-size:22px">96</b>
-          <div style="font-size:14px;margin-top:4px">팔로잉</div></div>
+      <div style="display:flex;align-items:center;gap:22px;padding:18px 14px 24px">
+        <div style="width:100px;height:100px;flex-shrink:0;border-radius:50%;background:#eef0f5;display:grid;place-items:center">
+          <svg width="76" height="76" viewBox="0 0 24 24" fill="#fff">
+            <circle cx="12" cy="8" r="4.5"/>
+            <path d="M3 22v-2a9 9 0 0 1 18 0v2z"/>
+          </svg>
+        </div>
+        <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
+          <div><b style="font-size:22px">${photos.length}</b><div style="font-size:14px;margin-top:4px">게시물</div></div>
+          <div><b style="font-size:22px">913</b><div style="font-size:14px;margin-top:4px">팔로워</div></div>
+          <div><b style="font-size:22px">96</b><div style="font-size:14px;margin-top:4px">팔로잉</div></div>
+        </div>
       </div>
-    </div>
-
-    <div style="padding:0 14px 18px;font-size:15px;font-weight:600">
-      leejaehyun_
-    </div>
-
-    <div style="display:flex;gap:8px;padding:0 12px 18px">
-      <button style="flex:1;border:0;border-radius:9px;background:#efeff3;
-        padding:10px;font-size:14px;font-weight:600">프로필 편집</button>
-      <button style="flex:1;border:0;border-radius:9px;background:#efeff3;
-        padding:10px;font-size:14px;font-weight:600">프로필 공유</button>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
-      ${photos.map(file => `
-        <img src="./${file}" onclick="igOpenPost('${file}')"
-          style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-      `).join('')}
-    </div>`;
-}
+      <div style="padding:0 14px 18px;font-size:15px;font-weight:600">leejaehyun_</div>
+      <div style="display:flex;gap:8px;padding:0 12px 18px">
+        <button style="flex:1;border:0;border-radius:9px;background:#efeff3;padding:10px;font-size:14px;font-weight:600">프로필 편집</button>
+        <button style="flex:1;border:0;border-radius:9px;background:#efeff3;padding:10px;font-size:14px;font-weight:600">프로필 공유</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
+        ${photos.map(file => `
+          <img src="./${file}" onclick="igOpenPost('${file}')" style="display:block;width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">
+        `).join('')}
+      </div>`;
   } else if (view === 'post') {
     body = `
-      <div style="padding:10px 12px;font-size:14px">
+      <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
         <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
       </div>
       <img src="./${who}" style="display:block;width:100%;height:auto">`;
@@ -421,35 +394,29 @@ if (view === 'profile') {
       <div style="padding:14px;font-size:17px;font-weight:600">메시지</div>
       ${window.igChats.map(c => `
         <div style="display:flex;align-items:center;gap:10px;padding:10px 13px">
-          <div style="width:36px;height:36px;border-radius:50%;background:#eee;
-            display:grid;place-items:center">${profileIcon}</div>
+          <div style="width:36px;height:36px;border-radius:50%;background:#eee;display:grid;place-items:center">${profileIcon}</div>
           <div>
-            <div style="font-size:13px">${c[0]}</div>
+            <div style="font-size:13px;font-weight:600">${c[0]}</div>
             <div style="font-size:12px;color:#888;margin-top:3px">${c[2]}</div>
           </div>
         </div>
       `).join('')}`;
   } else if (view === 'activity') {
-    body = `<div style="padding:15px;font-size:14px">활동</div>`;
+    body = `<div style="padding:15px;font-size:14px">활동 알림이 없습니다.</div>`;
   } else if (view === 'search') {
-    body = `<div style="padding:12px"><input placeholder="검색"
-      style="width:100%;padding:10px;border:0;border-radius:9px;background:#efefef"></div>`;
+    body = `<div style="padding:12px"><input placeholder="검색" style="width:100%;padding:10px;border:0;border-radius:9px;background:#efefef"></div>`;
   } else if (view === 'reels') {
-    body = `<div style="padding:15px;font-size:14px">릴스</div>`;
+    body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
     body = photos.map(file => `
       <div style="margin:0;padding:0">
-        <img src="./${file}"
-          onclick="igOpenPost('${file}')"
-          alt="게시물 사진"
-          style="display:block;width:100%;height:auto;cursor:pointer">
+        <img src="./${file}" onclick="igOpenPost('${file}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
       </div>
     `).join('');
   }
 
   container.innerHTML = `
-    <div style="background:#fff;color:#111;min-height:100%;
-      display:flex;flex-direction:column;font-family:Arial,sans-serif">
+    <div style="background:#fff;color:#111;min-height:100%;display:flex;flex-direction:column;font-family:Arial,sans-serif">
       ${view === 'post' ? '' : top}
       <div style="flex:1">${body}</div>
       ${bottom}
@@ -499,7 +466,7 @@ function openApp(name){
     setTimeout(()=>igPage('home'), 10);
     return;
   }else{
-    html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
+    html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'"> 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'"> 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'"> 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
   }
   content.innerHTML=html;
 }
