@@ -320,12 +320,14 @@ window.igChats = [
   ['new_days','김시작','내일 만날래?']
 ];
 
-// 요청하신 인스타그램 최근 검색어 목록
+// 요청하신 인스타그램 최근 검색어 목록 (2개 추가)
 window.igSearches = [
   '이재현',
   '바보',
   '남자친구 생일 선물',
-  '형 사랑해'
+  '형 사랑해',
+  '아 갑자기 뭔;',
+  '쪽팔려'
 ];
 
 window.igPage = function(view, who) {
@@ -412,7 +414,7 @@ window.igPage = function(view, who) {
   } else if (view === 'activity') {
     body = `<div style="padding:15px;font-size:14px">활동 알림이 없습니다.</div>`;
   } else if (view === 'search') {
-    // 검색 탭: 요청하신 최근 검색어 목록 반영
+    // 검색 탭
     body = `
       <div style="padding:12px">
         <input id="igSearchInput" placeholder="검색" style="width:100%;padding:10px 12px;border:0;border-radius:10px;background:#efefef;font-size:14px;outline:none">
@@ -437,7 +439,7 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
-    // 피드 화면: 프로필 및 버튼 오버레이 없이 깔끔하게 사진만 배치
+    // 피드 화면: 오직 사진만 연속 배치
     body = photos.map(file => `
       <div style="margin:0;padding:0">
         <img src="./${file}" onclick="igOpenPost('${file}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
