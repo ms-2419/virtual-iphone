@@ -50,7 +50,7 @@ body{
 }
 .date{font-size:17px;margin-bottom:8px;text-shadow:0 1px 5px #333}
 .clock{
- font-size:55px;font-weight:500;letter-spacing:-4px;
+ font-size:40px;font-weight:500;letter-spacing:-4px;
  text-shadow:0 1px 5px #333
 }
 .lock-hint{
@@ -185,7 +185,7 @@ function openApp(name){
  if(name==='메시지'){
   html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
  }else if(name==='사진'){
-  html='<h2>사진</h2><p>사진 보관함</p><div style="font-size:55px">🌅 🌸 🐈</div>';
+  html='<h2>사진</h2><p>사진 보관함</p><div style="font-size:40px">🌅 🌸 🐈</div>';
  }else if(name==='카메라'){
   html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
  }else if(name==='설정'){
@@ -193,7 +193,7 @@ function openApp(name){
  }else if(name==='메모'){
   html='<h2>메모</h2><textarea placeholder="메모를 입력하세요..."></textarea>';
  }else if(name==='전화'){
-  html='<h2>전화</h2><div style="font-size:55px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기　최근 통화　연락처</p><input placeholder="번호 입력">';
+  html='<h2>전화</h2><div style="font-size:40px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기　최근 통화　연락처</p><input placeholder="번호 입력">';
  }else if(name==='캘린더'){
   html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
  }else{
