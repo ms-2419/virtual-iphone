@@ -314,7 +314,7 @@ function openPhotoViewer629(i) {
   html='<h2>전화</h2><div style="font-size:40px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기　최근 통화　연락처</p><input placeholder="번호 입력">';
  }else if(name==='캘린더'){
   html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
- }else if(name==='인스타그램'){
+ }else if(name==='Instagram'){
 html = `
 <div style="background:#fff;color:#262626;min-height:100vh;margin:-10px;padding:10px;font-family:Arial,sans-serif">
   <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
@@ -329,7 +329,7 @@ html = `
       </div>
       <small>내 스토리</small>
     </div>
-    ${['damin_18','jaehyun','sunwoo','hanbit_hs'].map(n=>`
+    ${['zuyeon','leejaehyun','0hoony_','qfeed','eric_00'].map(n=>`
       <div style="text-align:center;min-width:62px">
         <div style="width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);margin:auto;box-sizing:border-box">
           <div style="background:#eee;border:2px solid white;border-radius:50%;height:100%;display:grid;place-items:center">☺</div>
@@ -359,7 +359,6 @@ html = `
   html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
 
  }
-  if(name==='인스타그램') html='<h2>인스타 연결 테스트 성공</h2>';
  content.innerHTML=html;
 }
 function updateClock(){
