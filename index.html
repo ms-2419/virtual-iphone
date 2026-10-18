@@ -72,10 +72,20 @@ body{
 .widgets h2{font-size:21px;margin:8px 0}
 .widgets span{font-size:11px}
 .grid{
- position:absolute;top:330px;left:18px;right:18px;
- display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
- grid-template-rows:auto auto;gap:26px 7px;
+ position:absolute;
+ top:250px;
+ left:18px;
+ right:18px;
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ grid-template-rows:auto auto;
+ gap:18px 7px;
 }
+.grid .app:nth-child(1){grid-column:1;grid-row:1}
+.grid .app:nth-child(2){grid-column:1;grid-row:2}
+.grid .app:nth-child(3){grid-column:2;grid-row:2}
+.grid .app:nth-child(4){grid-column:3;grid-row:2}
+.grid .app:nth-child(5){grid-column:4;grid-row:2}
 .app{
  border:0;background:none;color:white;text-align:center;
  font-size:11px;cursor:pointer;padding:0;min-width:0;
@@ -144,7 +154,6 @@ body{
 <div class="home" id="home">
  <div class="widgets"><small>♡</small><h2>713일</h2><span>좋아해 ♡</span></div>
   <div class="grid">
-  <button class="app" onclick="openApp('사진')"><div class="icon">🌈</div>사진</button>
   <button class="app" onclick="openApp('Safari')"><div class="icon">🧭</div>Safari</button>
   <button class="app" onclick="openApp('Instagram')"><div class="icon">📸</div>Instagram</button>
   <button class="app" onclick="openApp('시계')"><div class="icon">🕒</div>시계</button>
