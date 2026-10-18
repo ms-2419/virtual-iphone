@@ -302,7 +302,7 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 인스타그램 피드 포스트 (.jpeg 변경)
+// 인스타그램 피드 포스트 (.jpeg)
 window.igPosts = [
   'IMG_7096.jpeg',
   'IMG_7048.jpeg',
@@ -361,7 +361,6 @@ window.igPage = function(view, who) {
         <span onclick="igPage('dm')" style="font-size:20px;cursor:pointer">☰</span>
       </div>
       <div style="display:flex;align-items:center;gap:18px;padding:12px 14px 16px">
-        <!-- 프사 크기 조절 (70px) -->
         <div style="width:70px;height:70px;flex-shrink:0;border-radius:50%;background:#eef0f5;display:grid;place-items:center">
           <svg width="50" height="50" viewBox="0 0 24 24" fill="#fff">
             <circle cx="12" cy="8" r="4.5"/>
@@ -389,11 +388,7 @@ window.igPage = function(view, who) {
       <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
         <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
       </div>
-      <img src="./${who}" style="display:block;width:100%;height:auto">
-      <div style="padding:10px">
-        <div style="font-size:18px;margin-bottom:6px">♡ 💬 ➤</div>
-        <div style="font-size:13px"><b>sunwoo</b> 📷</div>
-      </div>`;
+      <img src="./${who}" style="display:block;width:100%;height:auto">`;
   } else if (view === 'dm') {
     body = `
       <div style="padding:14px;font-size:17px;font-weight:600">메시지</div>
@@ -413,19 +408,10 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
-    // 피드 화면 (sunwoo / 김선우 반영)
+    // 피드 화면: 프로필 및 하트/댓글 제거하고 오직 사진만 연달아 표시
     body = photos.map(file => `
-      <div style="margin:0 0 16px;border-bottom:1px solid #f0f0f0;padding-bottom:10px">
-        <div style="padding:8px 12px;display:flex;align-items:center;gap:8px">
-          <div style="width:28px;height:28px;border-radius:50%;background:#eee;display:grid;place-items:center;font-size:12px">☺</div>
-          <b style="font-size:13px">sunwoo</b>
-        </div>
+      <div style="margin:0;padding:0">
         <img src="./${file}" onclick="igOpenPost('${file}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
-        <div style="padding:8px 12px 0">
-          <div style="font-size:18px;margin-bottom:4px">♡ 💬 ➤</div>
-          <div style="font-size:12px"><b>좋아요 128개</b></div>
-          <div style="font-size:12px;margin-top:4px"><b>sunwoo</b> 📷</div>
-        </div>
       </div>
     `).join('');
   }
