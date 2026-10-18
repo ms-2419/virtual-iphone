@@ -62,34 +62,38 @@ body{
  display:none;z-index:2
 }
 .widgets{
- height:125px;border-radius:23px;background:#ffffff30;
- border:1px solid #ffffff35;padding:16px;
- backdrop-filter:blur(8px);margin-bottom:28px;
- text-shadow:0 1px 4px #333
+ position:absolute;top:90px;right:18px;
+ width:92px;height:112px;border-radius:22px;
+ background:#ffffff30;border:1px solid #ffffff35;
+ padding:12px 10px;backdrop-filter:blur(12px);
+ margin:0;text-shadow:0 1px 4px #333;
 }
-.widgets small{font-size:13px}
-.widgets h2{font-size:25px;margin:8px 0}
+.widgets small{font-size:10px}
+.widgets h2{font-size:21px;margin:8px 0}
+.widgets span{font-size:11px}
 .grid{
+ position:absolute;top:330px;left:18px;right:18px;
  display:grid;grid-template-columns:repeat(4,1fr);
- gap:24px 7px
+ grid-template-rows:auto auto;gap:26px 7px;
 }
 .app{
  border:0;background:none;color:white;text-align:center;
- font-size:11px;cursor:pointer;padding:0;min-width:0
+ font-size:11px;cursor:pointer;padding:0;min-width:0;
 }
 .icon{
- width:55px;height:55px;border-radius:15px;
- background:#ffffffed;color:#333;margin:0 auto 6px;
- display:grid;place-items:center;font-size:27px;
- box-shadow:0 2px 6px #0002
+ width:58px;height:58px;border-radius:17px;
+ background:#fff;color:#222;margin:0 auto 6px;
+ display:grid;place-items:center;font-size:32px;
+ box-shadow:0 2px 6px #0002;
 }
 .dock{
  position:absolute;bottom:20px;left:14px;right:14px;
- height:80px;border-radius:25px;background:#ffffff45;
- backdrop-filter:blur(14px);display:flex;
- align-items:center;justify-content:space-evenly
+ height:82px;border-radius:28px;
+ background:#ffffff40;border:1px solid #ffffff25;
+ backdrop-filter:blur(18px);
+ display:flex;align-items:center;justify-content:space-evenly;
 }
-.dock .icon{margin:0}
+.dock .icon{width:58px;height:58px;margin:0}
 .page{
  position:absolute;inset:0;background:#f7f7fa;color:#222;
  display:none;padding:65px 20px 35px;overflow:auto;z-index:4
@@ -137,29 +141,22 @@ body{
  <div class="clock" id="clock">5:31</div>
  <div class="lock-hint">탭하여 iPhone 열기 ↑</div>
 </div>
-
 <div class="home" id="home">
  <div class="widgets">
-  <small>오늘의 날짜</small>
-  <h2 id="widgetDate"></h2>
-  <span>좋은 하루 보내기 ♡</span>
- </div>
- <div class="grid">
-  <button class="app" onclick="openApp('메시지')"><div class="icon">💬</div>메시지</button>
+  <div class="grid">
   <button class="app" onclick="openApp('사진')"><div class="icon">🌈</div>사진</button>
-  <button class="app" onclick="openApp('카메라')"><div class="icon">📷</div>카메라</button>
-  <button class="app" onclick="openApp('설정')"><div class="icon">⚙️</div>설정</button>
-  <button class="app" onclick="openApp('메모')"><div class="icon">📝</div>메모</button>
-  <button class="app" onclick="openApp('전화')"><div class="icon">📞</div>전화</button>
-  <button class="app" onclick="openApp('캘린더')"><div class="icon">📅</div>캘린더</button>
   <button class="app" onclick="openApp('Safari')"><div class="icon">🧭</div>Safari</button>
- </div>
- <div class="dock">
+  <button class="app" onclick="openApp('Instagram')"><div class="icon">📸</div>Instagram</button>
+  <button class="app" onclick="openApp('시계')"><div class="icon">🕒</div>시계</button>
+  <button class="app" onclick="openApp('캘린더')"><div class="icon">📅</div>캘린더</button>
+  <button class="app" onclick="openApp('메모')"><div class="icon">📝</div>메모</button>
+</div>
+<div class="dock">
   <button class="app" onclick="openApp('전화')"><div class="icon">📞</div></button>
   <button class="app" onclick="openApp('메시지')"><div class="icon">💬</div></button>
   <button class="app" onclick="openApp('사진')"><div class="icon">🌈</div></button>
-  <button class="app" onclick="openApp('카메라')"><div class="icon">📷</div></button>
- </div>
+  <button class="app" onclick="openApp('카카오톡')"><div class="icon">💛</div></button>
+</div>
 </div>
 
 <div class="page" id="page">
