@@ -302,29 +302,40 @@ function openPhotoViewer629(i) {
     if (Math.abs(dx) > 50) openPhotoViewer629(albumIndex629 + (dx < 0 ? 1 : -1));
   };
 }
- function openApp(name){
- const page=document.getElementById('page');
- const content=document.getElementById('pageContent');
- document.getElementById('lock').style.display='none';
- document.getElementById('home').style.display='none';
- page.style.display='block';
- let html='';
- if(name==='메시지'){
-  html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
- }else if(name==='사진'){
-  html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div><div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer"><img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div><span style="color:#aaa;font-size:22px">›</span></div><div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div><div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'"><img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div><div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:65px 12px 30px"><button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
- }else if(name==='카메라'){
-  html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
- }else if(name==='설정'){
-  html='<h2>설정</h2><div class="row">✈️ 에어플레인 모드</div><div class="row">Wi-Fi</div><div class="row">Bluetooth</div><div class="row">알림</div><div class="row">디스플레이 및 밝기</div>';
- }else if(name==='메모'){
-  html='<h2>메모</h2><textarea placeholder="메모를 입력하세요..."></textarea>';
- }else if(name==='전화'){
-  html='<h2>전화</h2><div style="font-size:40px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기　최근 통화　연락처</p><input placeholder="번호 입력">';
- }else if(name==='캘린더'){
-  html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
- 
-}else if(name==='Instagram'){
+function openApp(name){
+  const page=document.getElementById('page');
+  const content=document.getElementById('pageContent');
+  document.getElementById('lock').style.display='none';
+  document.getElementById('home').style.display='none';
+  page.style.display='block';
+  let html='';
+
+  if(name==='메시지'){
+    html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
+  }else if(name==='사진'){
+    html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div>' +
+         '<div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer">' +
+         '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
+         '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
+         '<span style="color:#aaa;font-size:22px">›</span></div>' +
+         '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
+         '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
+         '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
+         '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
+         '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:65px 12px 30px">' +
+         '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
+         '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
+  }else if(name==='카메라'){
+    html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
+  }else if(name==='설정'){
+    html='<h2>설정</h2><div class="row">✈️ 에어플레인 모드</div><div class="row">Wi-Fi</div><div class="row">Bluetooth</div><div class="row">알림</div><div class="row">디스플레이 및 밝기</div>';
+  }else if(name==='메모'){
+    html='<h2>메모</h2><textarea placeholder="메모를 입력하세요..."></textarea>';
+  }else if(name==='전화'){
+    html='<h2>전화</h2><div style="font-size:40px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기 최근 통화 연락처</p><input placeholder="번호 입력">';
+  }else if(name==='캘린더'){
+    html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
+  }else if(name==='Instagram'){
     window.igChats = [
       ['leejaehyun','이재현','형 어떻게 사냐 선우야'],
       ['zuyeon','주연','잘 지내니'],
@@ -409,7 +420,7 @@ function openPhotoViewer629(i) {
         const c=window.igChats.find(x=>x[0]===who) || window.igChats[0];
         const msgs = who==='leejaehyun'
           ? [['them','뭐 해?'],['me','그냥 집이야'],['them','나도 ㅋㅋ'],['them','사진 보냈어?'],['me','응 봤어'],['them','마음에 들어?'],['me','완전'],['them','다행이다'],['me','ㅋㅋㅋㅋ'],['them','나중에 또 보내줄게']]
-          : [['them','뭐 해?'],['me','그냥 쉬는 중'],['them','아 ㅋㅋ'],['me','너는?'],['them','나도 쉬어'],['me','ㅋㅋㅋㅋ'],['them','오늘 재밌었어'],['me','인정'],['them','내일 보자'],['me','웅']];
+          : [['them','뭐 해?'],['me','그냥 쉬는 중'],['them','아 ㅋㅋ'],['me','너는?'],['me','나도 쉬어'],['me','ㅋㅋㅋㅋ'],['them','오늘 재밌었어'],['me','인정'],['them','내일 보자'],['me','웅']];
         body = `
           <div style="display:flex;align-items:center;gap:12px;border-bottom:1px solid #eee;padding:8px 0 14px">
             <span onclick="igPage('dm')" style="font-size:25px;cursor:pointer">‹</span>
@@ -468,13 +479,10 @@ function openPhotoViewer629(i) {
 
     html = '<div id="igRoot"></div>';
     setTimeout(()=>igPage('home'),0);
+  }else{
+    html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
   }
-
-}else{
-  html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
-
- }
- content.innerHTML=html;
+  content.innerHTML=html;
 }
 function updateClock(){
  const now=new Date();
