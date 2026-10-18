@@ -170,7 +170,19 @@ body{
 </div>
 
 <script>
-function goHome(){
+let touchStartY = 0;
+
+document.getElementById('lock').addEventListener('touchstart', function(e) {
+  touchStartY = e.changedTouches[0].clientY;
+}, {passive: true});
+
+document.getElementById('lock').addEventListener('touchend', function(e) {
+  const touchEndY = e.changedTouches[0].clientY;
+  if (touchStartY - touchEndY > 50) {
+    goHome();
+  }
+}, {passive: true});
+ function goHome(){
  document.getElementById('lock').style.display='none';
  document.getElementById('page').style.display='none';
  document.getElementById('home').style.display='block';
