@@ -208,6 +208,15 @@ body{
     <button class="app" onclick="openApp('카카오톡')">
       <div class="icon"><img src="./IMG_7071.jpeg" alt="카카오톡"></div>
     </button>
+   <button class="app" onclick="openApp('인스타그램')">
+  <div class="icon" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:22%">
+    <div style="width:24px;height:24px;border:3px solid white;border-radius:8px;position:relative;box-sizing:border-box">
+      <div style="width:9px;height:9px;border:2px solid white;border-radius:50%;position:absolute;top:4px;left:4px"></div>
+      <div style="width:3px;height:3px;background:white;border-radius:50%;position:absolute;top:3px;right:3px"></div>
+    </div>
+  </div>
+  <div style="font-size:11px;margin-top:4px">Instagram</div>
+</button>
   </div>
 </div>
 
@@ -314,7 +323,48 @@ function openPhotoViewer629(i) {
   html='<h2>전화</h2><div style="font-size:40px;text-align:center;margin:35px">📞</div><p style="text-align:center">즐겨찾기　최근 통화　연락처</p><input placeholder="번호 입력">';
  }else if(name==='캘린더'){
   html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
- }else{
+ }else if(name==='인스타그램'){
+html = `
+<div style="background:#fff;color:#262626;min-height:100vh;margin:-10px;padding:10px;font-family:Arial,sans-serif">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+    <b style="font-size:27px;font-family:cursive">Instagram</b>
+    <span style="font-size:25px">♡　➤</span>
+  </div>
+
+  <div style="display:flex;gap:12px;overflow-x:auto;padding:10px 0">
+    <div style="text-align:center;min-width:62px">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);padding:3px;margin:auto;box-sizing:border-box">
+        <div style="background:#eee;border:2px solid white;border-radius:50%;height:100%;display:grid;place-items:center">＋</div>
+      </div>
+      <small>내 스토리</small>
+    </div>
+    ${['damin_18','jaehyun','sunwoo','hanbit_hs'].map(n=>`
+      <div style="text-align:center;min-width:62px">
+        <div style="width:56px;height:56px;border-radius:50%;padding:3px;background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);margin:auto;box-sizing:border-box">
+          <div style="background:#eee;border:2px solid white;border-radius:50%;height:100%;display:grid;place-items:center">☺</div>
+        </div>
+        <small>${n}</small>
+      </div>
+    `).join('')}
+  </div>
+
+  <div style="border-top:1px solid #eee;padding-top:12px">
+    <b>damin_18</b>
+    <div style="height:260px;background:#f2eaf0;display:grid;place-items:center;font-size:65px;margin-top:10px">📷</div>
+    <div style="font-size:27px;padding:8px 0">♡　♧　➤</div>
+    <b>좋아요 128개</b>
+    <p><b>damin_18</b> 오늘도 좋은 하루 ♡</p>
+    <div id="igComments"></div>
+    <div style="display:flex;border-top:1px solid #eee;padding-top:8px">
+      <input id="igInput" placeholder="댓글 달기..." style="border:0;outline:0;flex:1;min-width:0;padding:8px">
+      <button onclick="var x=document.getElementById('igInput');if(x.value.trim()){var p=document.createElement('p');p.innerHTML='<b>me</b> '+x.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');document.getElementById('igComments').appendChild(p);x.value=''}" style="border:0;background:white;color:#0095f6">게시</button>
+    </div>
+  </div>
+
+  <div style="position:sticky;bottom:0;background:white;border-top:1px solid #ddd;padding:14px 0;display:flex;justify-content:space-around;font-size:24px">
+    <span>⌂</span><span>⌕</span><span>＋</span><span>♡</span><span>☺</span>
+  </div>
+</div>`;}else{
   html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
 
  }
