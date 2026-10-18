@@ -1,125 +1,17 @@
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My iPhone</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#222;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:grid;place-items:center;min-height:100dvh}
-.phone{width:min(100vw,390px);height:min(844px,100dvh);min-height:560px;position:relative;overflow:hidden;border-radius:35px;background:linear-gradient(145deg,#f7c5dc,#b6b7f0 55%,#7bb9e8);color:white}
-.status{height:50px;padding:15px 25px;display:flex;justify-content:space-between;font-size:14px;font-weight:bold}
-.screen{padding:15px 20px}
-.lock{text-align:center;padding-top:65px}
-.date{font-size:17px;margin-bottom:5px}
-.clock{font-size:78px;font-weight:600;letter-spacing:-4px}
-.hint{position:absolute;bottom:65px;left:0;right:0;text-align:center;font-size:14px}
-.shortcuts{position:absolute;bottom:25px;left:28px;right:28px;display:flex;justify-content:space-between}
-.circle{background:#ffffff55;border-radius:50%;width:45px;height:45px;display:grid;place-items:center;font-size:22px}
-.hidden{display:none!important}
-h1{font-size:30px;margin:12px 0 30px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px 8px}
-.app{text-align:center;font-size:11px;color:white;cursor:pointer}
-.ico{width:58px;height:58px;border-radius:14px;display:grid;place-items:center;font-size:29px;margin:0 auto 6px;box-shadow:0 2px 6px #0002}
-.green{background:#32c759}.gray{background:#999}.black{background:#333}.blue{background:#fff;color:#1685f8}.pink{background:linear-gradient(135deg,#ff6a8b,#ffc5d6)}
-.dock{position:absolute;bottom:12px;left:12px;right:12px;border-radius:25px;background:#ffffff55;display:flex;justify-content:space-around;padding:10px}
-.dock .ico{margin:0;width:50px;height:50px}
-.panel{position:absolute;inset:0;background:#f5f5f7;color:#111;padding:55px 18px 35px;overflow:auto}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;color:#1685f8}
-.nav strong{color:#111;font-size:21px}
-.card{background:white;border-radius:14px;padding:15px;margin:10px 0}
-.item{padding:13px 0;border-bottom:1px solid #eee;cursor:pointer}
-.item:last-child{border:0}
-.muted{color:#888;font-size:13px}
-.bubble{padding:10px 13px;background:#e5e5ea;color:#111;border-radius:18px;margin:10px 0;max-width:82%;width:fit-content;overflow-wrap:anywhere}
-.mine{background:#1685f8;color:white;margin-left:auto}
-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:20px;font-size:15px}
-button{border:0;border-radius:18px;background:#1685f8;color:white;padding:10px 15px}
-.homebar{position:absolute;z-index:10;bottom:5px;left:calc(50% - 65px);width:130px;height:5px;background:#111;border-radius:9px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.tile{aspect-ratio:1;background:linear-gradient(145deg,#f8c5d8,#9fc8ef);display:grid;place-items:center;font-size:30px}
-</style>
-</head>
-<body>
-<div class="phone">
-<div class="status"><span id="time">9:41</span><span>●●●　 Wi-Fi　 ▰</span></div>
-<section class="screen lock" id="lock" onclick="home()">
-<div class="date" id="date"></div>
-<div class="clock" id="clock">9:41</div>
-<div class="hint">위로 쓸어올려 열기</div>
-<div class="shortcuts"><div class="circle">🔦</div><div class="circle" onclick="event.stopPropagation();app('카메라')">📷</div></div>
-</section>
-<section class="screen hidden" id="homescreen">
-<h1>안녕하세요</h1>
-<div class="grid">
-<div class="app" onclick="app('메시지')"><div class="ico green">💬</div>메시지</div>
-<div class="app" onclick="app('전화')"><div class="ico green">📞</div>전화</div>
-<div class="app" onclick="app('사진')"><div class="ico pink">🌈</div>사진</div>
-<div class="app" onclick="app('설정')"><div class="ico gray">⚙️</div>설정</div>
-<div class="app" onclick="app('카메라')"><div class="ico black">📷</div>카메라</div>
-<div class="app" onclick="app('메모')"><div class="ico" style="background:#ffe99c">📝</div>메모</div>
-<div class="app" onclick="app('Safari')"><div class="ico blue">🧭</div>Safari</div>
-<div class="app" onclick="app('메일')"><div class="ico blue">✉️</div>메일</div>
+
+<div class="status">
+ <div class="status-left">
+  <span id="statusTime">5:31</span>
+ </div>
+ <div class="status-right">
+  <svg width="27" height="18" viewBox="0 0 27 18" aria-label="통신 신호">
+   <path d="M2 16V12 M8 16V9 M14 16V5 M20 16V1" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  <svg width="27" height="20" viewBox="0 0 27 20" aria-label="Wi-Fi">
+   <path d="M2 6 Q13.5 -2 25 6 M6 11 Q13.5 5 21 11 M10 15 Q13.5 12 17 15" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+   <circle cx="13.5" cy="18" r="1.5" fill="white"/>
+  </svg>
+  <span class="battery"></span>
+ </div>
 </div>
-<div class="dock">
-<div class="app" onclick="app('전화')"><div class="ico green">📞</div></div>
-<div class="app" onclick="app('메시지')"><div class="ico green">💬</div></div>
-<div class="app" onclick="app('Safari')"><div class="ico blue">🧭</div></div>
-<div class="app" onclick="app('음악')"><div class="ico pink">🎵</div></div>
-</div>
-</section>
-<section class="panel hidden" id="panel"></section>
-<div class="homebar" onclick="gohome()"></div>
-</div>
-<script>
-let messages=[];
-function updateTime(){
-const d=new Date();
-const t=d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
-document.getElementById('time').textContent=t;
-document.getElementById('clock').textContent=t;
-document.getElementById('date').textContent=d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});
-}
-updateTime();
-function gohome(){
-document.getElementById('lock').classList.add('hidden');
-document.getElementById('panel').classList.add('hidden');
-document.getElementById('homescreen').classList.remove('hidden');
-}
-function app(name){
-const p=document.getElementById('panel');
-document.getElementById('lock').classList.add('hidden');
-document.getElementById('homescreen').classList.add('hidden');
-p.classList.remove('hidden');
-let content='';
-if(name==='메시지'){
-content='<div class="nav"><span onclick="home()">취소</span><strong>메시지</strong><span></span></div><div class="card"><div class="item" onclick="chat()">💬　새로운 대화 <div class="muted">눌러서 대화 열기</div></div></div><div id="chat"></div>';
-}else if(name==='전화'){
-content='<div class="nav"><span onclick="home()">뒤로</span><strong>최근 통화</strong><span>편집</span></div><div class="card"><div class="item">📞　엄마 <span class="muted">오늘</span></div><div class="item">📞　친구 <span class="muted">어제</span></div><div class="item">☎️　부재중 전화</div></div>';
-}else if(name==='사진'){
-content='<div class="nav"><span onclick="home()">뒤로</span><strong>사진</strong><span>선택</span></div><div class="tiles">'+Array.from({length:18},(_,i)=>'<div class="tile">'+['🌅','🌷','🌊','🌙','🌸','☁️'][i%6]+'</div>').join('')+'</div>';
-}else if(name==='설정'){
-content='<div class="nav"><span onclick="home()">뒤로</span><strong>설정</strong><span></span></div><div class="card">'+['에어플레인 모드','Wi-Fi','Bluetooth','알림','배경화면','일반','개인정보 보호'].map(x=>'<div class="item">⚙️　'+x+'</div>').join('')+'</div>';
-}else if(name==='메모'){
-content='<div class="nav"><span onclick="home()">뒤로</span><strong>메모</strong><span>완료</span></div><textarea id="note" placeholder="메모를 입력하세요" style="width:100%;height:65vh;border:0;background:transparent;font-size:18px"></textarea>';
-}else{
-content='<div class="nav"><span onclick="home()">뒤로</span><strong>'+name+'</strong><span></span></div><div class="card">이 앱은 가상 화면입니다.</div>';
-}
-p.innerHTML=content;
-}
-function chat(){
-const p=document.getElementById('panel');
-p.innerHTML='<div class="nav"><span onclick="app(\'메시지\')">뒤로</span><strong>대화</strong><span>정보</span></div><div id="bubbles"></div><div style="position:absolute;bottom:20px;left:15px;right:15px;display:flex;gap:6px"><input id="msg" placeholder="iMessage"><button onclick="send()">전송</button></div>';
-}
-function send(){
-const input=document.getElementById('msg');
-if(!input.value.trim())return;
-messages.push(input.value.trim());
-document.getElementById('bubbles').innerHTML=messages.map(x=>'<div class="bubble mine"></div>').join('');
-[...document.querySelectorAll('.bubble.mine')].forEach((el,i)=>el.textContent=messages[i]);
-input.value='';
-}
-</script>
-</body>
-</html>
