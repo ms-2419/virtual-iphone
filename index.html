@@ -401,9 +401,10 @@ window.igPage = function(view, who){
         background:#efefef;padding:8px;cursor:pointer">메시지</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">
-        ${who==='leejaehyun' ? photos.map((f,i)=>`
-          <img src="./${f}" onclick="igOpenPost('${f}')"
-          style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">`).join('') : ''}
+        
+${photos.map((f,i)=>`
+  <img src="./${f}" onclick="igOpenPost('${f}')"
+  style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">`).join('')}
       </div>`;
   }else if(view==='dm'){
     body = `
