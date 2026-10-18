@@ -208,7 +208,7 @@ body{
 </div>
 
 <div class="page" id="page">
- <button class="back" onclick="goHome()">‹ 홈 화면</button>
+<button class="back" onclick="goHome()" style="font-size:12px;padding:5px 9px;border-radius:8px">‹ 홈 화면</button>
  <div id="pageContent"></div>
 </div>
 <div class="homebar" onclick="goHome()"></div>
@@ -364,23 +364,52 @@ window.igPage = function(view, who) {
 
   let body = '';
 
-  if (view === 'profile') {
-    body = `
-      <div style="padding:16px 12px 12px;font-size:18px;font-weight:600">
-        sunwoo_
+  
+if (view === 'profile') {
+  body = `
+    <div style="padding:12px 14px;display:flex;align-items:center;
+      justify-content:space-between;font-size:22px;font-weight:700">
+      <span>＿leejaehyun＿</span>
+      <span onclick="igPage('dm')" style="font-size:22px;cursor:pointer">☰</span>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:22px;padding:18px 14px 24px">
+      <div style="width:100px;height:100px;flex-shrink:0;border-radius:50%;
+        background:#eef0f5;display:grid;place-items:center">
+        <svg width="76" height="76" viewBox="0 0 24 24" fill="#fff">
+          <circle cx="12" cy="8" r="4.5"/>
+          <path d="M3 22v-2a9 9 0 0 1 18 0v2z"/>
+        </svg>
       </div>
-      <div style="display:flex;align-items:center;gap:22px;padding:8px 14px 18px">
-        ${profileIcon}
-        <div><b>${photos.length}</b><div style="font-size:12px">게시물</div></div>
-        <div><b>128</b><div style="font-size:12px">팔로워</div></div>
-        <div><b>96</b><div style="font-size:12px">팔로잉</div></div>
+
+      <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
+        <div><b style="font-size:22px">${photos.length + 2}</b>
+          <div style="font-size:14px;margin-top:4px">게시물</div></div>
+        <div><b style="font-size:22px">913</b>
+          <div style="font-size:14px;margin-top:4px">팔로워</div></div>
+        <div><b style="font-size:22px">96</b>
+          <div style="font-size:14px;margin-top:4px">팔로잉</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
-        ${photos.map(file => `
-          <img src="./${file}" onclick="igOpenPost('${file}')"
-            style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">
-        `).join('')}
-      </div>`;
+    </div>
+
+    <div style="padding:0 14px 18px;font-size:15px;font-weight:600">
+      leejaehyun_
+    </div>
+
+    <div style="display:flex;gap:8px;padding:0 12px 18px">
+      <button style="flex:1;border:0;border-radius:9px;background:#efeff3;
+        padding:10px;font-size:14px;font-weight:600">프로필 편집</button>
+      <button style="flex:1;border:0;border-radius:9px;background:#efeff3;
+        padding:10px;font-size:14px;font-weight:600">프로필 공유</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
+      ${photos.map(file => `
+        <img src="./${file}" onclick="igOpenPost('${file}')"
+          style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
+      `).join('')}
+    </div>`;
+}
   } else if (view === 'post') {
     body = `
       <div style="padding:10px 12px;font-size:14px">
