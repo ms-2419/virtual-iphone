@@ -266,6 +266,33 @@ function movePhoto(n){
   photoIndex = (photoIndex+n+photoFiles.length)%photoFiles.length;
   showPhoto();
 }
+ let albumIndex629 = 0;
+const albumFiles629 = [
+  'IMG_7080.jpeg','IMG_7081.jpeg','IMG_7082.jpeg',
+  'IMG_7083.jpeg','IMG_7084.jpeg','IMG_7085.jpeg',
+  'IMG_6986.jpeg','IMG_6785.jpeg','IMG_6531.jpeg',
+  'IMG_6279.jpeg','IMG_6892.jpeg','IMG_6893.jpeg',
+  'IMG_6934.jpeg','IMG_6937.jpeg'
+];
+
+function openPhotoViewer629(i) {
+  albumIndex629 = (i + albumFiles629.length) % albumFiles629.length;
+  let v = document.getElementById('viewer629');
+  if (!v) {
+    v = document.createElement('div');
+    v.id = 'viewer629';
+    v.style.cssText = 'position:fixed;inset:0;background:#000;z-index:99999;display:flex;align-items:center;justify-content:center;color:white';
+    document.body.appendChild(v);
+  }
+  v.style.display = 'flex';
+  v.innerHTML = '<button onclick="document.getElementById(\'viewer629\').style.display=\'none\'" style="position:absolute;top:20px;left:20px;color:white;background:none;border:0;font-size:32px">×</button><button onclick="openPhotoViewer629(albumIndex629-1)" style="position:absolute;left:8px;color:white;background:#3338;border:0;border-radius:50%;font-size:30px">‹</button><img src="' + albumFiles629[albumIndex629] + '" style="max-width:90%;max-height:80%;object-fit:contain"><button onclick="openPhotoViewer629(albumIndex629+1)" style="position:absolute;right:8px;color:white;background:#3338;border:0;border-radius:50%;font-size:30px">›</button><div style="position:absolute;bottom:25px">' + (albumIndex629+1) + ' / ' + albumFiles629.length + '</div>';
+  let startX = 0;
+  v.ontouchstart = e => startX = e.touches[0].clientX;
+  v.ontouchend = e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) openPhotoViewer629(albumIndex629 + (dx < 0 ? 1 : -1));
+  };
+}
  function openApp(name){
  const page=document.getElementById('page');
  const content=document.getElementById('pageContent');
@@ -276,7 +303,7 @@ function movePhoto(n){
  if(name==='메시지'){
   html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
  }else if(name==='사진'){
-  html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div><div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer"><img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div><span style="color:#aaa;font-size:22px">›</span></div><div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>';
+  html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div><div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer"><img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div><span style="color:#aaa;font-size:22px">›</span></div><div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div><div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'"><img src="IMG_7080.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px"><div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div><div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:65px 12px 30px"><button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["IMG_7080.jpeg","IMG_7081.jpeg","IMG_7082.jpeg","IMG_7083.jpeg","IMG_7084.jpeg","IMG_7085.jpeg","IMG_6986.jpeg","IMG_6785.jpeg","IMG_6531.jpeg","IMG_6279.jpeg","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
  }else if(name==='카메라'){
   html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
  }else if(name==='설정'){
