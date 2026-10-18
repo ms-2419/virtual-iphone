@@ -236,7 +236,37 @@ document.getElementById('lock').addEventListener('touchend', function(e) {
  document.getElementById('page').style.display='none';
  document.getElementById('home').style.display='block';
 }
-function openApp(name){
+let photoIndex = 0;
+const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
+
+function openPhotoViewer(i){
+  photoIndex = i;
+  showPhoto();
+}
+
+function showPhoto(){
+  let v = document.getElementById('photoViewer');
+  if(!v){
+    v = document.createElement('div');
+    v.id = 'photoViewer';
+    v.style.cssText = 'position:fixed;inset:0;background:#000;z-index:99999;display:flex;align-items:center;justify-content:center;color:white';
+    document.body.appendChild(v);
+  }
+  v.style.display = 'flex';
+  v.innerHTML = '<button onclick="document.getElementById(\'photoViewer\').style.display=\'none\'" style="position:absolute;top:25px;left:20px;color:white;background:none;border:0;font-size:32px">×</button><button onclick="movePhoto(-1)" style="position:absolute;left:8px;color:white;background:#3338;border:0;border-radius:50%;font-size:28px">‹</button><img src="'+photoFiles[photoIndex]+'" style="max-width:90%;max-height:80%;object-fit:contain"><button onclick="movePhoto(1)" style="position:absolute;right:8px;color:white;background:#3338;border:0;border-radius:50%;font-size:28px">›</button><div style="position:absolute;bottom:25px">'+(photoIndex+1)+' / '+photoFiles.length+'</div>';
+  let startX = 0;
+  v.ontouchstart = e => startX = e.touches[0].clientX;
+  v.ontouchend = e => {
+    let dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx)>50) movePhoto(dx<0?1:-1);
+  };
+}
+
+function movePhoto(n){
+  photoIndex = (photoIndex+n+photoFiles.length)%photoFiles.length;
+  showPhoto();
+}
+ function openApp(name){
  const page=document.getElementById('page');
  const content=document.getElementById('pageContent');
  document.getElementById('lock').style.display='none';
