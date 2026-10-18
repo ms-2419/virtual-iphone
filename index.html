@@ -91,6 +91,13 @@ body{
  font-size:11px;cursor:pointer;padding:0;min-width:0;
 }
 .icon{
+ .icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+  display:block;
+}
  width:58px;height:58px;border-radius:17px;
  background:#fff;color:#222;margin:0 auto 6px;
  display:grid;place-items:center;font-size:32px;
@@ -152,20 +159,49 @@ body{
  <div class="lock-hint">탭하여 iPhone 열기 ↑</div>
 </div>
 <div class="home" id="home">
- <div class="widgets"><small>♡</small><h2>713일</h2><span>좋아해 ♡</span></div>
+  <div class="widgets">
+    <small>♡</small>
+    <h2>713일</h2>
+    <span>♡</span>
+  </div>
+
   <div class="grid">
-  <button class="app" onclick="openApp('Safari')"><div class="icon">🧭</div>Safari</button>
-  <button class="app" onclick="openApp('Instagram')"><div class="icon">📸</div>Instagram</button>
-  <button class="app" onclick="openApp('시계')"><div class="icon">🕒</div>시계</button>
-  <button class="app" onclick="openApp('캘린더')"><div class="icon">📅</div>캘린더</button>
-  <button class="app" onclick="openApp('메모')"><div class="icon">📝</div>메모</button>
-</div>
-<div class="dock">
-  <button class="app" onclick="openApp('전화')"><div class="icon">📞</div></button>
-  <button class="app" onclick="openApp('메시지')"><div class="icon">💬</div></button>
-  <button class="app" onclick="openApp('사진')"><div class="icon">🌈</div></button>
-  <button class="app" onclick="openApp('카카오톡')"><div class="icon">💛</div></button>
-</div>
+    <button class="app" onclick="openApp('Safari')">
+      <div class="icon"><img src="./IMG_7065.jpeg" alt="Safari"></div>
+      Safari
+    </button>
+    <button class="app" onclick="openApp('Instagram')">
+      <div class="icon"><img src="./IMG_7069.jpeg" alt="Instagram"></div>
+      Instagram
+    </button>
+    <button class="app" onclick="openApp('시계')">
+      <div class="icon"><img src="./IMG_7066.jpeg" alt="시계"></div>
+      시계
+    </button>
+    <button class="app" onclick="openApp('캘린더')">
+      <div class="icon"><img src="./IMG_7070.jpeg" alt="캘린더"></div>
+      캘린더
+    </button>
+    <button class="app" onclick="openApp('메모')">
+      <div class="icon"><img src="./IMG_7068.jpeg" alt="메모"></div>
+      메모
+    </button>
+  </div>
+
+  <div class="dock">
+    <button class="app" onclick="openApp('전화')">
+      <div class="icon"><img src="./IMG_7072.jpeg" alt="전화"></div>
+    </button>
+    <button class="app" onclick="openApp('메시지')">
+      <div class="icon"><img src="./IMG_7067.jpeg" alt="메시지"></div>
+    </button>
+    <button class="app" onclick="openApp('사진')">
+      <div class="icon"><img src="./IMG_7064.jpeg" alt="사진"></div>
+    </button>
+    <button class="app" onclick="openApp('카카오톡')">
+      <div class="icon"><img src="./IMG_7071.jpeg" alt="카카오톡"></div>
+    </button>
+  </div>
 </div>
 
 <div class="page" id="page">
