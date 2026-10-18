@@ -317,10 +317,24 @@ function openPhotoViewer629(i) {
  }else if(name==='Instagram'){
 html = `
 <div style="background:#fff;color:#262626;min-height:100vh;margin:-10px;padding:10px;font-family:Arial,sans-serif">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
-    <b style="font-size:27px;font-family:cursive">Instagram</b>
-    <span style="font-size:25px">♡　➤</span>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 4px 18px;background:#fff">
+  <b style="font-family:cursive;font-size:30px;letter-spacing:-1.5px;color:#111">Instagram</b>
+  <div style="display:flex;align-items:center;gap:22px">
+    <span style="position:relative;display:flex;align-items:center">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="black" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 31S3 21 3 11C3 3 13 1 18 9C23 1 33 3 33 11C33 21 18 31 18 31Z"/>
+      </svg>
+      <i style="position:absolute;right:-3px;top:-2px;width:10px;height:10px;border-radius:50%;background:#ff3040;border:1px solid white"></i>
+    </span>
+    <span style="position:relative;display:flex;align-items:center">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="black" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 5L33 5L17 32L13 18Z"/>
+        <path d="M13 18L33 5"/>
+      </svg>
+      <i style="position:absolute;right:-10px;top:-8px;width:23px;height:23px;border-radius:50%;background:#ff3040;color:white;font-size:14px;font-style:normal;font-weight:bold;display:grid;place-items:center">2</i>
+    </span>
   </div>
+</div>
 
   <div style="display:flex;gap:12px;overflow-x:auto;padding:10px 0">
     <div style="text-align:center;min-width:62px">
@@ -352,9 +366,23 @@ html = `
     </div>
   </div>
 
-  <div style="position:sticky;bottom:0;background:white;border-top:1px solid #ddd;padding:14px 0;display:flex;justify-content:space-around;font-size:24px">
-    <span>⌂</span><span>⌕</span><span>＋</span><span>♡</span><span>☺</span>
-  </div>
+  <div style="position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #dbdbdb;padding:14px 0 8px;display:flex;align-items:center;justify-content:space-around">
+  <span style="display:flex;align-items:center;justify-content:center">
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="black"><path d="M3 16L18 3L33 16V32H22V22H14V32H3Z"/></svg>
+  </span>
+  <span style="display:flex;align-items:center;justify-content:center">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="black" stroke-width="2.8" stroke-linejoin="round"><rect x="3" y="3" width="30" height="30" rx="8"/><path d="M3 11H33M11 3L17 11M22 3L28 11"/><path d="M15 15L24 20L15 25Z" fill="black" stroke="black"/></svg>
+  </span>
+  <span style="display:flex;align-items:center;justify-content:center">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="black" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"><path d="M3 5L33 5L17 32L13 18Z"/><path d="M13 18L33 5"/></svg>
+  </span>
+  <span style="display:flex;align-items:center;justify-content:center">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="black" stroke-width="2.8"><circle cx="16" cy="16" r="11"/><path d="M24 24L33 33" stroke-linecap="round"/></svg>
+  </span>
+  <span style="display:flex;align-items:center;justify-content:center">
+    <svg width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="white" stroke="black" stroke-width="2.5"/><circle cx="19" cy="15" r="7" fill="#dfe3e8"/><path d="M7 31Q7 22 19 22Q31 22 31 31" fill="#dfe3e8"/></svg>
+  </span>
+</div>
 </div>`;}else{
   html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'">🕘 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'">🕘 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'">🕘 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
 
