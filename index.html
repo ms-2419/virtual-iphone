@@ -327,7 +327,6 @@ window.igSunwooProfilePosts = [
   'IMG_7045.jpeg'
 ];
 
-// 이재현 프로필 전용 피드 (IMG_7136 반영)
 window.igJaehyunProfilePosts = [
   'IMG_7136.jpeg',
   'IMG_7116.jpeg',
@@ -700,10 +699,23 @@ window.renderCalendar = function() {
 // 메모 앱 관련 데이터 및 함수
 window.memoList = [
   {
+    id: 4,
+    year: "2026년",
+    title: "형 사랑해",
+    date: "2026. 9. 12.",
+    time: "오후 5:12",
+    content: "형 안녕<br><br>" +
+             "나 지금 형한테 구라 치고 케이크 픽업 하러 가는 중인데, 형한테 편지를 써야 될 거 같아서 급하게 메모장 킨다 ㅋㅋ ㅎ 아니 근데 왜 자꾸 나한테 편지 써달라고 찡찡거려? 나 악필인 거 누가 모르는데 ㅡㅡ 못 읽기만 해봐라 내 손에 죽어<br><br>" +
+             "그래도 형 내가 형 되게 많이 사랑하나봐 해달라고 한다고 다 해주는 거 보니 ㅋㅋㅋ<br><br>" +
+             "근데... 그 요즘 자꾸 형한테 짜증내서 미안해 오래 만나고 막 사랑이 식어서 그러는 게 아니라 대학 막바지라 그런가 좀 자꾸 다들 날 괴롭혀서... ㅜㅜ 그래서 그래 그러니까 형이 나 좀 봐줘 ㅎㅎ<br><br>" +
+             "아 신호등 바뀐다! 아 빨리 형 보고싶ㅇ"
+  },
+  {
     id: 1,
     year: "2025년",
     title: "이재현 생일은 죽지도 않고 오는구나",
     date: "2025. 9. 6.",
+    time: "오전 11:45",
     content: "<b>밥돼지 이재현 생일 거하게 챙기기 리스트</b><br><br>" +
              "<input type='checkbox' checked disabled> 초코 케이크 존나 크게 주문 제작<br>" +
              "<input type='checkbox' checked disabled> 제주도 가서 줄 커플링 주문<br>" +
@@ -714,6 +726,7 @@ window.memoList = [
     year: "2023년",
     title: "이재현 와꾸",
     date: "2023. 9. 28.",
+    time: "오후 4:10",
     content: "나 또 술처먹었어 메모장아... 근데 나 넘 서운해 내가 거울샷 찍은거 나한테만 보여주라 니까 저걸 왜 인스타에 올리냐 씨벌롬... 나빠 깨무러죽일거야"
   },
   {
@@ -721,6 +734,7 @@ window.memoList = [
     year: "2022년",
     title: "이재현",
     date: "2022. 5. 17.",
+    time: "오후 1:23",
     content: "1. 운동 존나 잘한다<br>" +
              "2. 잘생겼다<br>" +
              "3. 여자들한테 인기 많다<br>" +
@@ -742,8 +756,38 @@ window.openMemoDetail = function(id) {
       <span style="color:#ff9f0a;font-size:18px;cursor:pointer">⋯</span>
     </div>
     <div style="font-size:22px;font-weight:700;margin-bottom:8px">${m.title}</div>
-    <div style="font-size:12px;color:#888;margin-bottom:20px">${m.date} 오후 1:23</div>
+    <div style="font-size:12px;color:#888;margin-bottom:20px">${m.date} ${m.time}</div>
     <div style="font-size:15px;line-height:1.6;color:#111;word-break:break-word">${m.content}</div>
+  `;
+};
+
+window.openFolderList = function() {
+  const content = document.getElementById('pageContent');
+  content.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <span style="color:#ff9f0a;font-size:16px;font-weight:600;cursor:pointer" onclick="openApp('메모')">‹ 완료</span>
+      <span style="color:#ff9f0a;font-size:18px;cursor:pointer">⋯</span>
+    </div>
+    <h2 style="margin:0 0 16px;font-size:28px;font-weight:700">폴더</h2>
+    <div style="background:#fff;border-radius:12px;overflow:hidden">
+      <div onclick="openApp('메모')" style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;cursor:pointer">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">📁</span>
+          <span style="font-size:16px;font-weight:600;color:#111">모든 iCloud</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:14px;color:#888">24</span>
+          <span style="color:#ccc;font-size:18px">›</span>
+        </div>
+      </div>
+      <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px">🗑️</span>
+          <span style="font-size:16px;color:#111">최근 삭제된 항목</span>
+        </div>
+        <span style="color:#ccc;font-size:18px">›</span>
+      </div>
+    </div>
   `;
 };
 
@@ -777,11 +821,17 @@ function openApp(name){
   }else if(name==='메모'){
     html = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">‹ 모든 iCloud</span>
+        <span onclick="window.openFolderList()" style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">‹ 모든 iCloud</span>
         <span style="color:#ff9f0a;font-size:20px;cursor:pointer">⋯</span>
       </div>
       <h2 style="margin:0 0 16px;font-size:28px;font-weight:700">메모</h2>
       
+      <div style="font-size:18px;font-weight:700;margin:16px 0 8px;color:#111">2026년</div>
+      <div onclick="window.openMemoDetail(4)" style="background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer">
+        <div style="font-size:15px;font-weight:600;color:#111;margin-bottom:4px">형 사랑해</div>
+        <div style="font-size:12px;color:#888">2026. 9. 12. <span style="color:#aaa">형 안녕...</span></div>
+      </div>
+
       <div style="font-size:18px;font-weight:700;margin:16px 0 8px;color:#111">2025년</div>
       <div onclick="window.openMemoDetail(1)" style="background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer">
         <div style="font-size:15px;font-weight:600;color:#111;margin-bottom:4px">이재현 생일은 죽지도 않고 오는구나</div>
