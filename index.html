@@ -302,7 +302,7 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 순서 (7117이 앱 진입 시 맨 위 정면에 먼저 보이도록 설정)
+// 홈 피드 순서 (7117이 맨 위, 7045가 맨 아래)
 window.igFeedPosts = [
   'IMG_7117.jpeg',
   'IMG_7116.jpeg',
@@ -310,6 +310,20 @@ window.igFeedPosts = [
   ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
   'IMG_7109.jpeg',
   'IMG_7107.jpeg',
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
+];
+
+// 이재현 프로필 전용 피드 (IMG_7134 포함, 최신 사진이 위로 오고 IMG_7045가 맨 밑으로 가는 인스타 프로필 정렬)
+window.igJaehyunProfilePosts = [
+  'IMG_7134.jpeg',
+  'IMG_7116.jpeg',
+  'IMG_7114.jpeg',
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
+  'IMG_7109.jpeg',
   'IMG_7096.jpeg',
   'IMG_7048.jpeg',
   'IMG_7047.jpeg',
@@ -397,7 +411,6 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 스크롤을 맨 아래로 끝까지 내렸을 때만 게시물 밑에 노출되는 하단바
   const bottom = `
     <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:relative;width:100%;z-index:8">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
@@ -414,17 +427,16 @@ window.igPage = function(view, who) {
     const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo_';
     const targetName = isJaehyun ? '이재현' : '김선우';
 
-    let userPosts = window.igFeedPosts.slice().reverse();
+    // 선우 프로필은 기본 피드 역순, 재현이 프로필은 재현이 전용 배열 사용 (IMG_7045가 맨 밑으로 오도록 정렬됨)
+    let userPosts = isJaehyun ? window.igJaehyunProfilePosts : window.igFeedPosts.filter(item => {
+      if (Array.isArray(item)) return false;
+      return item !== 'IMG_7109.jpeg' && item !== 'IMG_7116.jpeg';
+    }).reverse();
 
     if (isJaehyun) {
       userPosts = userPosts.filter(item => {
         const file = Array.isArray(item) ? item[0] : item;
         return file !== 'IMG_7107.jpeg' && file !== 'IMG_7117.jpeg';
-      });
-    } else {
-      userPosts = userPosts.filter(item => {
-        if (Array.isArray(item)) return false;
-        return item !== 'IMG_7109.jpeg' && item !== 'IMG_7116.jpeg';
       });
     }
 
@@ -572,7 +584,6 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 하단바를 스크롤 영역 내부 맨 끝에 배치하여 스크롤 다 내렸을 때만 노출되도록 설정
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
       <div id="igScrollArea" style="height:100%;overflow-y:auto">
