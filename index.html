@@ -822,21 +822,24 @@ window.playVoiceMessage = function() {
 
   const overlay = document.createElement('div');
   overlay.id = 'voicePlayOverlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(235,235,240,0.92);z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:#111;transition:opacity 0.3s';
-  overlay.innerHTML = `
-    <div style="font-size:20px;font-weight:600;line-height:1.6">선우야 너 어디야?</div>
-  `;
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center';
+  
+  const card = document.createElement('div');
+  card.style.cssText = 'width:100%;max-width:320px;min-height:220px;background:#2c2c2e;border-radius:24px;display:flex;align-items:center;justify-content:center;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.5)';
+  card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">선우야 너 어디야?</div>`;
+  
+  overlay.appendChild(card);
   document.body.appendChild(overlay);
 
   window.currentVoiceTimeout1 = setTimeout(() => {
     if(document.getElementById('voicePlayOverlay')) {
-      document.getElementById('voicePlayOverlay').innerHTML = `<div style="font-size:20px;font-weight:600;line-height:1.6">형 무섭게 너 왜 그래...</div>`;
+      card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">형 무섭게 너 왜 그래...</div>`;
     }
   }, 4000);
 
   window.currentVoiceTimeout2 = setTimeout(() => {
     if(document.getElementById('voicePlayOverlay')) {
-      document.getElementById('voicePlayOverlay').innerHTML = `<div style="font-size:20px;font-weight:600;line-height:1.6">제발, 제발... 전화만 좀 받아주라 선우야.</div>`;
+      card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">제발, 제발... 전화만 좀 받아주라 선우야.</div>`;
     }
   }, 8000);
 
@@ -1151,7 +1154,7 @@ function openApp(name){
     content.innerHTML = html;
     return;
   }else if(name==='전화'){
-    window.openPhoneTab('음성 사서함');
+    window.openPhoneTab('최근 통화');
     return;
   }else if(name==='캘린더'){
     html = `
