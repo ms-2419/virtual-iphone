@@ -235,7 +235,7 @@ function goHome(){
 }
 
 let photoIndex = 0;
-const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
+const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
 
 function openPhotoViewer(i){
   photoIndex = i;
@@ -633,7 +633,7 @@ function openApp(name){
          '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
          '<span style="color:#aaa;font-size:22px">›</span></div>' +
-         '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.jpeg","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
+         '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
          '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
          '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
@@ -657,50 +657,52 @@ function openApp(name){
     return;
   }else if(name==='시계'){
     html = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
-        <span style="color:#ff9f0a;font-size:16px;cursor:pointer">편집</span>
-        <h2 style="margin:0;font-size:19px;font-weight:700">알람</h2>
-        <span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span>
+      <div style="height:100%;overflow-y:auto;padding-bottom:60px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+          <span style="color:#ff9f0a;font-size:16px;cursor:pointer">편집</span>
+          <h2 style="margin:0;font-size:19px;font-weight:700">알람</h2>
+          <span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span>
+        </div>
+        <div style="background:#fff;border-radius:12px;overflow:hidden;margin-bottom:20px">
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:03</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:05</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:07</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 6:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 7:48</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+          <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+            <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+          </div>
+        </div>
       </div>
-      <div style="background:#fff;border-radius:12px;overflow:hidden;margin-bottom:20px">
-        <div style="padding:14px 16px;border-bottom:1px.solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:3</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:5</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7시:7</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 6:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 7:48</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-        <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
-          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
-        </div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;height:55px;background:#f1f1f3;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;font-size:10px;color:#888">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:55px;background:#f1f1f3;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;font-size:10px;color:#888;z-index:5">
         <div style="text-align:center">🌐<div style="margin-top:2px">세계 시계</div></div>
         <div style="text-align:center;color:#ff9f0a">⏰<div style="margin-top:2px">알람</div></div>
         <div style="text-align:center">⏱️<div style="margin-top:2px">스톱워치</div></div>
