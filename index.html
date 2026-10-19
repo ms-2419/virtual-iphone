@@ -302,28 +302,33 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 게시물 순서 (7045가 맨 밑, 7117이 맨 위)
+// 피드 순서 (7045가 맨 위 화면에 뜨도록 역순 배열 설정)
 window.igFeedPosts = [
-  'IMG_7045.jpeg',
-  'IMG_7046.jpeg',
-  'IMG_7047.jpeg',
-  'IMG_7048.jpeg',
-  'IMG_7096.jpeg',
-  'IMG_7107.jpeg',
-  'IMG_7109.jpeg',
-  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
-  'IMG_7114.jpeg',
+  'IMG_7117.jpeg',
   'IMG_7116.jpeg',
-  'IMG_7117.jpeg'
+  'IMG_7114.jpeg',
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
+  'IMG_7109.jpeg',
+  'IMG_7107.jpeg',
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
 ];
 
-// 이재현 DM 대화 데이터 (요청하신 문구 및 2026년 4월 12일 추가)
+// 이재현 DM 대화 데이터 (복구된 이전 대화 + 새로운 대화 흐름)
 window.igJaehyunChat = [
   { type: 'date', text: '2022년 5월 17일' },
-  { type: 'them', text: '보고싶어 선우야' },
-  { type: 'them', text: '형 어떻게 살아야 될지를 모르겠어' },
-  { type: 'them', text: '너무 사랑해 선우야.' },
-  { type: 'them', text: '형은 너만 생각해.' },
+  { type: 'them', text: '선우 인스타 그만하고 얼른 집에 와 ㅋㅋ' },
+  { type: 'me', text: '벌써 나 보고싶어?' },
+  { type: 'them', text: '엉' },
+  
+  { type: 'date', text: '2024년 1월 7일' },
+  { type: 'me', text: 'ㅃㄹ 저거 게시물 내려' },
+  { type: 'them', text: '형 벗고 있으니까 걱정 돼? ㅎ' },
+  { type: 'me', text: '그럼 남친이 헐벗고 있는데 좋다고 춤 추겠냐;' },
+  { type: 'them', text: 'ㅋㅋㅋ 귀엽긴' },
   
   { type: 'date', text: '2026년 4월 12일' },
   { type: 'them', text: '어떡하냐' },
@@ -386,7 +391,6 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 하단 네비게이션바 고정 (position:sticky, bottom:0)
   const bottom = `
     <div style="height:45px;flex-shrink:0;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:sticky;bottom:0;z-index:5">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
@@ -403,7 +407,7 @@ window.igPage = function(view, who) {
     const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo_';
     const targetName = isJaehyun ? '이재현' : '김선우';
 
-    let userPosts = window.igFeedPosts.slice().reverse();
+    let userPosts = window.igFeedPosts.slice();
 
     if (isJaehyun) {
       userPosts = userPosts.filter(item => {
@@ -431,8 +435,8 @@ window.igPage = function(view, who) {
         </div>
         <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
           <div><b style="font-size:18px">${userPosts.length}</b><div style="font-size:12px;margin-top:2px">게시물</div></div>
-          <div><b style="font-size:18px">913</b><div style="font-size:12px;margin-top:2px">팔로워</div></div>
-          <div><b style="font-size:18px">96</b><div style="font-size:12px;margin-top:2px">팔로잉</div></div>
+          <div><b style="font-size:18px">${isJaehyun ? '1667' : '913'}</b><div style="font-size:12px;margin-top:2px">팔로워</div></div>
+          <div><b style="font-size:18px">${isJaehyun ? '155' : '96'}</b><div style="font-size:12px;margin-top:2px">팔로잉</div></div>
         </div>
       </div>
       <div style="padding:0 14px 12px;font-size:14px;font-weight:600">${targetName}</div>
@@ -539,11 +543,11 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
-    // 피드 홈 화면
+    // 피드 홈 화면 (IMG_7045.jpeg가 배열의 맨 처음에 와서 들어가자마자 바로 맨 위 화면에 노출됨)
     body = window.igFeedPosts.map((postItem, pIdx) => {
       if (Array.isArray(postItem)) {
         return `
-          <div id="igPost_${pIdx}" style="position:relative;margin:0;padding:0">
+          <div style="position:relative;margin:0;padding:0">
             <img id="slideImg_${pIdx}" src="./${postItem[0]}" onclick="igOpenPost('${postItem[0]}')" style="display:block;width:100%;height:auto;cursor:pointer">
             <button onclick="igMoveSlide(${pIdx}, -1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">‹</button>
             <button onclick="igMoveSlide(${pIdx}, 1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">›</button>
@@ -554,7 +558,7 @@ window.igPage = function(view, who) {
           </div>`;
       } else {
         return `
-          <div id="igPost_${pIdx}" style="margin:0;padding:0">
+          <div style="margin:0;padding:0">
             <img src="./${postItem}" onclick="igOpenPost('${postItem}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
           </div>`;
       }
@@ -568,16 +572,16 @@ window.igPage = function(view, who) {
       ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
-  // 진입 시 맨 아래(IMG_7045.jpeg)부터 시작하도록 스크롤 고정
+  // 피드 홈 진입 시 스크롤을 맨 위로 고정 (7045.jpeg부터 시작)
   if (view === 'home') {
-    const scrollToBottom = () => {
+    const scrollToTop = () => {
       const scrollArea = document.getElementById('igScrollArea');
       if (scrollArea) {
-        scrollArea.scrollTop = scrollArea.scrollHeight;
+        scrollArea.scrollTop = 0;
       }
     };
-    setTimeout(scrollToBottom, 10);
-    setTimeout(scrollToBottom, 100);
+    setTimeout(scrollToTop, 10);
+    setTimeout(scrollToTop, 100);
   }
 };
 
