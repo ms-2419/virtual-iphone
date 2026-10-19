@@ -27,7 +27,7 @@ body{
  position:absolute;top:0;left:0;right:0;height:52px;
  padding:17px 24px 0;display:flex;align-items:center;
  justify-content:space-between;color:white;
- font-size:15px;font-weight:600;z-index:15;
+ font-size:15px;font-weight:600;z-index:5;
  pointer-events:none
 }
 .status-right{display:flex;align-items:center;gap:6px}
@@ -134,7 +134,7 @@ body{
 .homebar{
  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
  width:120px;height:5px;border-radius:9px;
- background:white;z-index:20;cursor:pointer
+ background:white;z-index:10;cursor:pointer
 }
 </style>
 </head>
@@ -208,7 +208,7 @@ body{
 </div>
 
 <div class="page" id="page">
-<button class="back" id="backBtn" onclick="goHome()" style="font-size:12px;padding:5px 9px;border-radius:8px">‹ 홈 화면</button>
+<button class="back" onclick="goHome()" style="font-size:12px;padding:5px 9px;border-radius:8px">‹ 홈 화면</button>
  <div id="pageContent"></div>
 </div>
 <div class="homebar" onclick="goHome()"></div>
@@ -302,19 +302,19 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 데이터 (IMG_7117.jpeg부터 맨 위로 시작하여 IMG_7045.jpeg까지 순서대로 정렬)
+// 피드 게시물 (7045가 맨 위 정면으로 노출)
 window.igFeedPosts = [
-  'IMG_7117.jpeg',
-  'IMG_7116.jpeg',
-  'IMG_7114.jpeg',
-  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
-  'IMG_7109.jpeg',
-  'IMG_7107.jpeg',
-  'IMG_7096.jpeg',
-  'IMG_7048.jpeg',
-  'IMG_7047.jpeg',
+  'IMG_7045.jpeg',
   'IMG_7046.jpeg',
-  'IMG_7045.jpeg'
+  'IMG_7047.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7096.jpeg',
+  'IMG_7107.jpeg',
+  'IMG_7109.jpeg',
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
+  'IMG_7114.jpeg',
+  'IMG_7116.jpeg',
+  'IMG_7117.jpeg'
 ];
 
 // 이재현 DM 대화 데이터
@@ -347,7 +347,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','エ릭','학교 언제 올거냐'],
+  ['eric_00','에릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -355,7 +355,7 @@ window.igSearches = [
   '이재현',
   '바보',
   '남자친구 생일 선물',
-  '20대 남친 생일 선물',
+  '20대 남자친구 생일 선물',
   '10월 제주도 서프라이즈',
   'ㅋㅋ 선우야 형 다 봤는데'
 ];
@@ -397,9 +397,9 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 화면 프레임 하단에 항상 바로 보이는 고정 네비게이션바
+  // 화면 프레임 하단에 완전히 붙는 상시 고정 네비게이션바 (position: absolute)
   const bottom = `
-    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:10">
+    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:8">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
       <span onclick="igPage('reels')" style="cursor:pointer;display:flex">${reelsIcon}</span>
       <span onclick="igPage('dm')" style="cursor:pointer;display:flex">${dmIcon}</span>
@@ -572,7 +572,7 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 상시 고정 하단바 + 독립 스크롤 영역 레이아웃 (하단바가 스크롤 영역 밖에 있으므로 바로 보임)
+  // 스크롤 영역(igScrollArea)과 상시 고정 하단바(bottom) 분리 구조
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
       <div id="igScrollArea" style="height:100%;overflow-y:auto;padding-bottom:${view === 'chat_jaehyun' ? '0' : '45px'}">
@@ -601,16 +601,9 @@ window.igOpenPost = function(file) {
 function openApp(name){
   const page=document.getElementById('page');
   const content=document.getElementById('pageContent');
-  const backBtn=document.getElementById('backBtn');
   document.getElementById('lock').style.display='none';
   document.getElementById('home').style.display='none';
   page.style.display='block';
-  
-  // 기본 앱 서브 레이아웃 스타일
-  page.style.padding = '65px 20px 35px';
-  page.style.overflow = 'auto';
-  if(backBtn) backBtn.style.display = 'block';
-
   let html='';
 
   if(name==='메시지'){
@@ -639,11 +632,6 @@ function openApp(name){
   }else if(name==='캘린더'){
     html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
   }else if(name==='Instagram'){
-    // 인스타그램 진입 시 전용 풀스크린 고정 레이아웃 설정
-    page.style.padding = '0';
-    page.style.overflow = 'hidden';
-    if(backBtn) backBtn.style.display = 'none';
-
     html='<div id="igRoot" style="height:100%"></div>';
     content.innerHTML = html;
     setTimeout(()=>igPage('home'), 10);
