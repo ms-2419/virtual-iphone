@@ -24,8 +24,8 @@ body{
  background-repeat:no-repeat
 }
 .status{
- position:absolute;top:0;left:0;right:0;height:52px;
- padding:17px 24px 0;display:flex;align-items:center;
+ position:absolute;top:0;left:0;right:0;height:44px;
+ padding:10px 24px 0;display:flex;align-items:center;
  justify-content:space-between;color:white;
  font-size:15px;font-weight:600;z-index:5;
  pointer-events:none
@@ -45,7 +45,7 @@ body{
 }
 .lock{
  position:absolute;inset:0;text-align:center;
- padding-top:105px;cursor:pointer;z-index:6;
+ padding-top:85px;cursor:pointer;z-index:6;
  background-image:url('./687AE8AE-4216-4825-9BC5-F094C56021B6.jpeg');
  background-size:cover;background-position:center;
  background-repeat:no-repeat
@@ -60,11 +60,11 @@ body{
  font-size:14px;text-shadow:0 1px 5px #333
 }
 .home{
- position:absolute;inset:52px 0 0;padding:24px 18px 115px;
+ position:absolute;inset:44px 0 0;padding:24px 18px 115px;
  display:none;z-index:2
 }
 .widgets{
- position:absolute;top:90px;right:18px;
+ position:absolute;top:70px;right:18px;
  width:92px;height:112px;border-radius:22px;
  background:#ffffff30;border:1px solid #ffffff35;
  padding:12px 10px;backdrop-filter:blur(12px);
@@ -75,7 +75,7 @@ body{
 .widgets span{font-size:11px}
 .grid{
  position:absolute;
- top:300px;
+ top:280px;
  left:18px;
  right:18px;
  display:grid;
@@ -120,7 +120,7 @@ body{
 }
 .dock .icon{width:58px;height:58px;margin:0}
 .page{
- position:absolute;inset:52px 0 0 0;background:#f7f7fa;color:#222;
+ position:absolute;inset:44px 0 0 0;background:#f7f7fa;color:#222;
  display:none;padding:6px 10px 0 10px;overflow:hidden;z-index:4;
  display:flex;flex-direction:column;
 }
@@ -363,7 +363,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','에릭','학교 언제 올거냐'],
+  ['eric_00','エ릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -1112,7 +1112,7 @@ function openApp(name){
          '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
          '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
-         '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:65px 12px 30px">' +
+         '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:50px 12px 30px">' +
          '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
          '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
     content.innerHTML=html;
