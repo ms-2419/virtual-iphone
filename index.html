@@ -821,6 +821,44 @@ window.kakaoOpenChat = function(name) {
         <div style="font-size:10px;color:#888;flex-shrink:0">오전 2:08</div>
       </div>
     `;
+  } else if (name === '사체 이주연 형') {
+    chatBody = `
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:12px 0 4px">2025년 6월 14일 토요일</div>
+      <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:10px">
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 11:12</div>
+        <div style="background:#fee180;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">형 어디예요?</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">응? 나 집인뎋ㅎ</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오후 12:44</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:10px">
+        <div style="font-size:10px;color:#888;flex-shrink:0">오후 12:45</div>
+        <div style="background:#fee180;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">형 옆에서 재혀니 형이 족구 째면 죽여버린다고 했지 않냐는데여</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">나지금 날라아간다고 형한테 전해재ㅝ</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오후 12:46</div>
+      </div>
+
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:16px 0 4px">2026년 3월 4일 수요일</div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">선우야 요즘 날씨가 좋아</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 1:37</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">너 이맘때 족구 엄첨 열심히 했잖아</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 1:37</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">근데 선우야 재현이 형은 요즘 족구도 안 해</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 1:37</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">너 없다고 잘 돌아가던 재현이 형 세상이 참 안돌아간다 그치</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 1:37</div>
+      </div>
+    `;
   } else {
     chatBody = '<div style="padding:16px;text-align:center;color:#555;font-size:13px;">대화 내용이 없습니다.</div>';
   }
@@ -890,7 +928,7 @@ window.renderKakao = function() {
       { name: '선우', date: '2025. 9. 11', sub: '선우', pin: true, isMe: true },
       { name: '재현이 형', date: '9월 22일', sub: '마지막 메시지 미리보기...', pin: true },
       { name: '도예 김영훈 형', date: '8월 2일', sub: '난 멀 어떻게 해야 할지 모르겠어' },
-      { name: '사체 이주연 형', date: '3월 4일', sub: '채팅 내용 미리보기...' },
+      { name: '사체 이주연 형', date: '3월 4일', sub: '너 없다고 잘 돌아가던 재현이 형 세상이 참 안돌아간다 그치' },
       { name: '손영재', date: '3월 3일', sub: '채팅 내용 미리보기...' }
     ];
 
