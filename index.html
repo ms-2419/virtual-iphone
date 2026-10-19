@@ -118,18 +118,18 @@ body{
 .dock .icon{width:58px;height:58px;margin:0}
 .page{
  position:absolute;inset:52px 0 0 0;background:#f7f7fa;color:#222;
- display:none;padding:16px 16px 65px;overflow:hidden;z-index:4
+ display:none;padding:10px 12px 50px 12px;overflow:hidden;z-index:4
 }
 #pageContent {
  height:100%;
  overflow-y:auto;
  position:relative;
- padding-bottom:60px;
+ padding-bottom:30px;
 }
 .page h2{font-size:27px;margin:18px 0}
 .back{
- border:0;border-radius:12px;padding:8px 12px;
- background:#e4e4eb;color:#222;font-size:14px;margin-bottom:10px;cursor:pointer;
+ border:0;border-radius:8px;padding:5px 10px;
+ background:#e4e4eb;color:#222;font-size:13px;margin-bottom:8px;cursor:pointer;
 }
 .row{padding:10px 0;border-bottom:1px solid #eee}
 .homebar{
@@ -370,7 +370,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','에릭','학교 언제 올거냐'],
+  ['eric_00','エ릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -594,12 +594,12 @@ window.igPage = function(view, who) {
   }
 
   container.innerHTML = `
-    <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
-      <div id="igScrollArea" style="height:100%;overflow-y:auto">
+    <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif;display:flex;flex-direction:column">
+      <div id="igScrollArea" style="flex:1;overflow-y:auto">
         ${(view === 'post' || view === 'search' || view === 'chat_jaehyun') ? '' : top}
         <div>${body}</div>
-        ${view === 'chat_jaehyun' ? '' : bottom}
       </div>
+      ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
   if (view === 'home') {
