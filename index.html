@@ -364,7 +364,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','エ릭','학교 언제 올거냐'],
+  ['eric_00','에릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -1107,6 +1107,16 @@ window.openMsgChat = function(chatKey) {
   let chatHeaderTitle = '';
   let chatBodyHtml = '';
 
+  const inputBarHtml = `
+    <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;background:#fff;border-top:1px solid #eee;position:sticky;bottom:0;flex-shrink:0">
+      <div style="width:30px;height:30px;background:#e4e4eb;border-radius:50%;display:grid;place-items:center;color:#888;font-size:20px;font-weight:600;cursor:pointer">+</div>
+      <div style="flex:1;background:#f2f2f7;border-radius:20px;padding:8px 14px;display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:14px;color:#888">문자 메시지 · RCS</span>
+        <span style="font-size:16px;color:#888">🎤</span>
+      </div>
+    </div>
+  `;
+
   if (chatKey === 'cake') {
     chatHeaderTitle = '+82 2-2222-2419';
     chatBodyHtml = `
@@ -1148,11 +1158,21 @@ Cartier Seoul Boutique</div>
       <div style="display:flex;justify-content:flex-start;margin-bottom:6px">
         <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">너 또 어디갔어 ㅋㅋ</div>
       </div>
-      <div style="display:flex;justify-content:flex-start;margin-bottom:24px">
+      <div style="display:flex;justify-content:flex-start;margin-bottom:16px">
         <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">형 운동 끝나고 집에서 얌전히 기다리는 중</div>
       </div>
 
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:6px 0">2026년 4월 12일 오전 12:01</div>
       <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 생일 축하해</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">오늘은 제발 형 꿈에 나와서 형 숨 좀 쉬게 해주라</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 보고싶다</div>
+        </div>
         <div style="display:flex;justify-content:flex-start">
           <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 너 왜 전화 안받아</div>
         </div>
@@ -1184,6 +1204,7 @@ Cartier Seoul Boutique</div>
       <div style="flex:1;overflow-y:auto;padding:12px">
         ${chatBodyHtml}
       </div>
+      ${inputBarHtml}
     </div>
   `;
 };
@@ -1211,9 +1232,9 @@ function openApp(name){
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
             <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.jaehyun?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0;font-size:16px;font-weight:600">재</div>
-            <div style="flex:1;min-width:0" onclick="openMsgChat('jaehyun')" style="cursor:pointer">
-              <div style="font-size:15px;font-weight:600;color:#111;cursor:pointer" onclick="openMsgChat('jaehyun')">재현이 형</div>
-              <div style="font-size:13px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;cursor:pointer" onclick="openMsgChat('jaehyun')">선우야 보고싶다</div>
+            <div style="flex:1;min-width:0;cursor:pointer" onclick="openMsgChat('jaehyun')">
+              <div style="font-size:15px;font-weight:600;color:#111;cursor:pointer">재현이 형</div>
+              <div style="font-size:13px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;cursor:pointer">선우야 보고싶다</div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;padding-left:8px;cursor:pointer" onclick="openMsgChat('jaehyun')">
