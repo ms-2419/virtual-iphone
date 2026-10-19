@@ -117,19 +117,19 @@ body{
 }
 .dock .icon{width:58px;height:58px;margin:0}
 .page{
- position:absolute;inset:52px 0 0;background:#f7f7fa;color:#222;
- display:none;padding:16px 16px 65px;overflow:hidden;z-index:4
+ position:absolute;inset:52px 0 35px 0;background:#f7f7fa;color:#222;
+ display:none;padding:16px 16px 20px 16px;overflow:hidden;z-index:4
 }
 #pageContent {
  height:100%;
  overflow-y:auto;
  position:relative;
- padding-bottom:40px;
+ padding-bottom:70px;
 }
 .page h2{font-size:27px;margin:18px 0}
 .back{
  border:0;border-radius:12px;padding:8px 12px;
- background:#e4e4eb;color:#222;font-size:14px;margin-bottom:10px
+ background:#e4e4eb;color:#222;font-size:14px;margin-bottom:10px;cursor:pointer;
 }
 .row{padding:10px 0;border-bottom:1px solid #eee}
 .homebar{
@@ -209,6 +209,7 @@ body{
 </div>
 
 <div class="page" id="page">
+ <button class="back" onclick="goHome()">‹ 홈 화면</button>
  <div id="pageContent"></div>
 </div>
 <div class="homebar" onclick="goHome()"></div>
@@ -1210,7 +1211,7 @@ function openApp(name){
               <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
               <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
             </div>
-            <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
               <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
               <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
             </div>
