@@ -235,7 +235,7 @@ function goHome(){
 }
 
 let photoIndex = 0;
-const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
+const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
 
 function openPhotoViewer(i){
   photoIndex = i;
@@ -302,7 +302,6 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 홈 피드 순서
 window.igFeedPosts = [
   'IMG_7117.jpeg',
   'IMG_7116.jpeg',
@@ -317,7 +316,6 @@ window.igFeedPosts = [
   'IMG_7045.jpeg'
 ];
 
-// 김선우 프로필 전용 피드
 window.igSunwooProfilePosts = [
   'IMG_7117.jpeg',
   'IMG_7114.jpeg',
@@ -329,7 +327,6 @@ window.igSunwooProfilePosts = [
   'IMG_7045.jpeg'
 ];
 
-// 이재현 프로필 전용 피드
 window.igJaehyunProfilePosts = [
   'IMG_7134.jpeg',
   'IMG_7116.jpeg',
@@ -343,7 +340,6 @@ window.igJaehyunProfilePosts = [
   'IMG_7045.jpeg'
 ];
 
-// 이재현 DM 대화 데이터
 window.igJaehyunChat = [
   { type: 'date', text: '2022년 5월 17일' },
   { type: 'them', text: '선우 인스타 그만하고 얼른 집에 와 ㅋㅋ' },
@@ -441,7 +437,6 @@ window.igPage = function(view, who) {
 
     let userPosts = isJaehyun ? window.igJaehyunProfilePosts : window.igSunwooProfilePosts;
 
-    // 김선우 본인 프로필일 때는 [프로필 편집], [프로필 공유] / 이재현 프로필일 때는 [팔로잉 v], [메시지] 버튼 적용
     let actionButtons = '';
     if (isJaehyun) {
       actionButtons = `
@@ -576,7 +571,6 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
-    // 피드 홈 화면
     body = window.igFeedPosts.map((postItem, pIdx) => {
       if (Array.isArray(postItem)) {
         return `
@@ -639,7 +633,7 @@ function openApp(name){
          '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
          '<span style="color:#aaa;font-size:22px">›</span></div>' +
-         '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
+         '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.jpeg","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
          '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
          '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
@@ -661,6 +655,58 @@ function openApp(name){
     content.innerHTML = html;
     setTimeout(()=>igPage('home'), 10);
     return;
+  }else if(name==='시계'){
+    html = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+        <span style="color:#ff9f0a;font-size:16px;cursor:pointer">편집</span>
+        <h2 style="margin:0;font-size:19px;font-weight:700">알람</h2>
+        <span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span>
+      </div>
+      <div style="background:#fff;border-radius:12px;overflow:hidden;margin-bottom:20px">
+        <div style="padding:14px 16px;border-bottom:1px.solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:3</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:5</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7시:7</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 6:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 7:48</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+        <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오후 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
+          <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
+        </div>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:55px;background:#f1f1f3;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;font-size:10px;color:#888">
+        <div style="text-align:center">🌐<div style="margin-top:2px">세계 시계</div></div>
+        <div style="text-align:center;color:#ff9f0a">⏰<div style="margin-top:2px">알람</div></div>
+        <div style="text-align:center">⏱️<div style="margin-top:2px">스톱워치</div></div>
+        <div style="text-align:center">⏳<div style="margin-top:2px">타이머</div></div>
+      </div>
+    `;
   }else{
     html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'"> 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'"> 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'"> 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
   }
