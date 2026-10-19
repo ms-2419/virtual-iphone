@@ -27,7 +27,7 @@ body{
  position:absolute;top:0;left:0;right:0;height:52px;
  padding:17px 24px 0;display:flex;align-items:center;
  justify-content:space-between;color:white;
- font-size:15px;font-weight:600;z-index:5;
+ font-size:15px;font-weight:600;z-index:15;
  pointer-events:none
 }
 .status-right{display:flex;align-items:center;gap:6px}
@@ -134,7 +134,7 @@ body{
 .homebar{
  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
  width:120px;height:5px;border-radius:9px;
- background:white;z-index:10;cursor:pointer
+ background:white;z-index:20;cursor:pointer
 }
 </style>
 </head>
@@ -208,7 +208,7 @@ body{
 </div>
 
 <div class="page" id="page">
-<button class="back" onclick="goHome()" style="font-size:12px;padding:5px 9px;border-radius:8px">‹ 홈 화면</button>
+<button class="back" id="backBtn" onclick="goHome()" style="font-size:12px;padding:5px 9px;border-radius:8px">‹ 홈 화면</button>
  <div id="pageContent"></div>
 </div>
 <div class="homebar" onclick="goHome()"></div>
@@ -355,7 +355,7 @@ window.igSearches = [
   '이재현',
   '바보',
   '남자친구 생일 선물',
-  '20대 남자친구 생일,
+  '20대 남자친구 생일 선물',
   '10월 제주도 서프라이즈',
   'ㅋㅋ 선우야 형 다 봤는데'
 ];
@@ -397,9 +397,9 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 앱 화면 밑에 항상 떠 있는 고정 네비게이션바
+  // 화면 하단에 항상 바로 떠 있는 고정 네비게이션바 (position: absolute; bottom: 0)
   const bottom = `
-    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:8">
+    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:10">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
       <span onclick="igPage('reels')" style="cursor:pointer;display:flex">${reelsIcon}</span>
       <span onclick="igPage('dm')" style="cursor:pointer;display:flex">${dmIcon}</span>
@@ -572,7 +572,7 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 상시 고정 하단바와 스크롤 가능한 게시물 영역
+  // 상시 고정 하단바와 스크롤 가능한 게시물 영역 분리 (하단 여백 45px로 하단바 가림 방지)
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
       <div id="igScrollArea" style="height:100%;overflow-y:auto;padding-bottom:${view === 'chat_jaehyun' ? '0' : '45px'}">
@@ -601,9 +601,16 @@ window.igOpenPost = function(file) {
 function openApp(name){
   const page=document.getElementById('page');
   const content=document.getElementById('pageContent');
+  const backBtn=document.getElementById('backBtn');
   document.getElementById('lock').style.display='none';
   document.getElementById('home').style.display='none';
   page.style.display='block';
+  
+  // 기본 앱 화면 설정
+  page.style.padding = '65px 20px 35px';
+  page.style.overflow = 'auto';
+  if(backBtn) backBtn.style.display = 'block';
+
   let html='';
 
   if(name==='메시지'){
@@ -632,6 +639,11 @@ function openApp(name){
   }else if(name==='캘린더'){
     html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
   }else if(name==='Instagram'){
+    // 인스타그램 진입 시 풀스크린 고정 레이아웃 적용
+    page.style.padding = '0';
+    page.style.overflow = 'hidden';
+    if(backBtn) backBtn.style.display = 'none';
+
     html='<div id="igRoot" style="height:100%"></div>';
     content.innerHTML = html;
     setTimeout(()=>igPage('home'), 10);
