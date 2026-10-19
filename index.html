@@ -164,7 +164,7 @@ body{
 <div class="home" id="home">
   <div class="widgets">
     <small>♡</small>
-    <h2>1869일</h2>
+    <h2>713일</h2>
     <span></span>
   </div>
 
@@ -302,7 +302,7 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 순서 (IMG_7117.jpeg가 맨 위 화면에 바로 보이도록 설정)
+// 원본 피드 데이터 복구 (IMG_7117.jpeg부터 IMG_7045.jpeg까지 순서대로 정렬)
 window.igFeedPosts = [
   'IMG_7117.jpeg',
   'IMG_7116.jpeg',
@@ -356,7 +356,7 @@ window.igSearches = [
   '바보',
   '남자친구 생일 선물',
   '20대 남친 생일 선물',
-  '서프라이즈 준비',
+  '10월 제주도 서프라이즈',
   'ㅋㅋ 선우야 형 다 봤는데'
 ];
 
@@ -397,7 +397,7 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 화면 하단에 무조건 고정되어 상시 보이는 하단바 (position: absolute; bottom: 0)
+  // 화면 프레임 하단 고정 네비게이션바 (position: absolute; bottom: 0)
   const bottom = `
     <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:10">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
@@ -572,7 +572,7 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 상시 고정 하단바와 스크롤 가능한 게시물 영역 분리
+  // 상시 고정 하단바 + 독립 스크롤 영역 레이아웃
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
       <div id="igScrollArea" style="height:100%;overflow-y:auto;padding-bottom:${view === 'chat_jaehyun' ? '0' : '45px'}">
@@ -606,7 +606,7 @@ function openApp(name){
   document.getElementById('home').style.display='none';
   page.style.display='block';
   
-  // 기본 앱 레이아웃 스타일 원상복구
+  // 기본 앱 서브 레이아웃 스타일
   page.style.padding = '65px 20px 35px';
   page.style.overflow = 'auto';
   if(backBtn) backBtn.style.display = 'block';
@@ -639,7 +639,7 @@ function openApp(name){
   }else if(name==='캘린더'){
     html='<h2>캘린더</h2><p>'+new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'</p><div class="row">오늘</div>';
   }else if(name==='Instagram'){
-    // 인스타그램 앱 진입 시 풀 스크린 고정 스타일 적용
+    // 인스타그램 진입 시 전용 고정 레이아웃 설정
     page.style.padding = '0';
     page.style.overflow = 'hidden';
     if(backBtn) backBtn.style.display = 'none';
