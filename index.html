@@ -789,17 +789,60 @@ window.openMsgChat = function(chatKey) {
 window.kakaoTab = 'friend'; 
 window.kakaoOpenChat = function(name) {
   const content = document.getElementById('pageContent');
+  
+  let chatBody = '';
+  if (name === '도예 김영훈 형') {
+    chatBody = `
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:12px 0 4px">2025년 4월 12일 토요일</div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">서누 생축! ㅎㅎ</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 11:06</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:10px">
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 11:34</div>
+        <div style="background:#fee180;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">형 땡큐</div>
+      </div>
+
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:16px 0 4px">2026년 8월 2일 일요일</div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">선우야 그냥 좀 많이 보고싶다..</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 2:08</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">재현이 상태가 좀 그래서 너무 걱정돼</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 2:08</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">선우 너 있었으면 웃음이라도 줬을텐데..</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 2:08</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:10px">
+        <div style="background:#fff;color:#111;border-radius:14px;padding:8px 12px;font-size:13px;max-width:70%;word-break:break-word">난 멀 어떻게 해야 할지 모르겠어</div>
+        <div style="font-size:10px;color:#888;flex-shrink:0">오전 2:08</div>
+      </div>
+    `;
+  } else {
+    chatBody = '<div style="padding:16px;text-align:center;color:#555;font-size:13px;">대화 내용이 없습니다.</div>';
+  }
+
   content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#b2c7d9;color:#111">' +
     '<div style="height:48px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;background:#b2c7d9;position:sticky;top:0;z-index:6">' +
-      '<button onclick="openApp(\'카카오톡\')" style="border:0;background:none;font-size:20px;cursor:pointer">‹</button>' +
-      '<span style="font-size:16px;font-weight:600">' + name + '</span>' +
-      '<span style="font-size:18px">🔍</span>' +
+      '<div style="display:flex;align-items:center;gap:12px">' +
+        '<button onclick="openApp(\'카카오톡\')" style="border:0;background:none;font-size:22px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button>' +
+        '<span style="font-size:16px;font-weight:600">' + name + '</span>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:16px;font-size:18px">' +
+        '<span>🔍</span>' +
+        '<span>📞</span>' +
+        '<span>☰</span>' +
+      '</div>' +
     '</div>' +
-    '<div style="flex:1;padding:16px;text-align:center;color:#555;font-size:13px;">' + name + '과의 대화방입니다.</div>' +
-    '<div style="padding:10px 12px;background:#f0f0f0;display:flex;gap:8px;align-items:center">' +
-      '<span style="font-size:20px">➕</span>' +
-      '<input placeholder="메시지 입력..." style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:4px;outline:none;font-size:13px">' +
-      '<span style="font-size:20px">😊</span>' +
+    '<div style="flex:1;padding:16px;overflow-y:auto">' + chatBody + '</div>' +
+    '<div style="padding:8px 12px;background:#f7f7f7;display:flex;gap:8px;align-items:center;border-top:1px solid #ddd">' +
+      '<span style="font-size:20px;color:#666">➕</span>' +
+      '<input placeholder="메시지 입력" style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:4px;outline:none;font-size:13px;background:#fff">' +
+      '<span style="font-size:18px;color:#666">😊</span>' +
+      '<span style="font-size:18px;color:#666">#</span>' +
     '</div>' +
   '</div>';
 };
@@ -846,7 +889,7 @@ window.renderKakao = function() {
     const chatItems = [
       { name: '선우', date: '2025. 9. 11', sub: '선우', pin: true, isMe: true },
       { name: '재현이 형', date: '9월 22일', sub: '마지막 메시지 미리보기...', pin: true },
-      { name: '도예 김영훈 형', date: '8월 2일', sub: '채팅 내용 미리보기...' },
+      { name: '도예 김영훈 형', date: '8월 2일', sub: '난 멀 어떻게 해야 할지 모르겠어' },
       { name: '사체 이주연 형', date: '3월 4일', sub: '채팅 내용 미리보기...' },
       { name: '손영재', date: '3월 3일', sub: '채팅 내용 미리보기...' }
     ];
