@@ -590,11 +590,11 @@ window.igPage = function(view, who) {
 
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
-      <div id="igScrollArea" style="height:100%;overflow-y:auto">
+      <div id="igScrollArea" style="height:calc(100% - 45px);overflow-y:auto">
         ${(view === 'post' || view === 'search' || view === 'chat_jaehyun') ? '' : top}
         <div>${body}</div>
-        ${view === 'chat_jaehyun' ? '' : bottom}
       </div>
+      ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
   if (view === 'home') {
