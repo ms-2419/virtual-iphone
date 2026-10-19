@@ -302,19 +302,19 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 게시물 (7045가 맨 위 정면으로 노출)
+// 피드 순서 (7117이 앱 진입 시 맨 위 정면에 먼저 보이도록 설정)
 window.igFeedPosts = [
-  'IMG_7045.jpeg',
-  'IMG_7046.jpeg',
-  'IMG_7047.jpeg',
-  'IMG_7048.jpeg',
-  'IMG_7096.jpeg',
-  'IMG_7107.jpeg',
-  'IMG_7109.jpeg',
-  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
-  'IMG_7114.jpeg',
+  'IMG_7117.jpeg',
   'IMG_7116.jpeg',
-  'IMG_7117.jpeg'
+  'IMG_7114.jpeg',
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
+  'IMG_7109.jpeg',
+  'IMG_7107.jpeg',
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
 ];
 
 // 이재현 DM 대화 데이터
@@ -355,7 +355,7 @@ window.igSearches = [
   '이재현',
   '바보',
   '남자친구 생일 선물',
-  '20대 남자친구 생일 선물',
+  '20대 남자친구 생일,
   '10월 제주도 서프라이즈',
   'ㅋㅋ 선우야 형 다 봤는데'
 ];
@@ -397,7 +397,7 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 화면 프레임 하단에 완전히 붙는 상시 고정 네비게이션바 (position: absolute)
+  // 앱 화면 밑에 항상 떠 있는 고정 네비게이션바
   const bottom = `
     <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:8">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
@@ -572,7 +572,7 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 스크롤 영역(igScrollArea)과 상시 고정 하단바(bottom) 분리 구조
+  // 상시 고정 하단바와 스크롤 가능한 게시물 영역
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
       <div id="igScrollArea" style="height:100%;overflow-y:auto;padding-bottom:${view === 'chat_jaehyun' ? '0' : '45px'}">
