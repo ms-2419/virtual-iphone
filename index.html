@@ -90,23 +90,23 @@ body{
  font-size:11px;cursor:pointer;padding:0;min-width:0;
 }
 .icon{
-  width:58px;
-  height:58px;
-  border-radius:17px;
-  background:#fff;
-  color:#222;
-  margin:0 auto 6px;
-  display:grid;
-  place-items:center;
-  font-size:32px;
-  box-shadow:0 2px 6px #0002;
+ width:58px;
+ height:58px;
+ border-radius:17px;
+ background:#fff;
+ color:#222;
+ margin:0 auto 6px;
+ display:grid;
+ place-items:center;
+ font-size:32px;
+ box-shadow:0 2px 6px #0002;
 }
 .icon img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  border-radius:inherit;
-  display:block;
+ width:100%;
+ height:100%;
+ object-fit:contain;
+ border-radius:inherit;
+ display:block;
 }
 .dock{
  position:absolute;bottom:20px;left:14px;right:14px;
@@ -123,7 +123,7 @@ body{
 .page h2{font-size:27px;margin:18px 0}
 .back{
  border:0;border-radius:12px;padding:8px 12px;
- background:#e4e4eb;color:#222;font-size:14px;margin-bottom:10px;cursor:pointer
+ background:#e4e4eb;color:#222;font-size:14px;margin-bottom:10px
 }
 .row{padding:10px 0;border-bottom:1px solid #eee}
 .homebar{
@@ -426,7 +426,7 @@ window.igPage = function(view, who) {
 
   if (view === 'profile' || view === 'profile_jaehyun') {
     const isJaehyun = (view === 'profile_jaehyun' || who === 'leejaehyun_');
-    const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo_';
+    const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo';
     const targetName = isJaehyun ? '이재현' : '김선우';
 
     let userPosts = isJaehyun ? window.igJaehyunProfilePosts : window.igSunwooProfilePosts;
@@ -523,9 +523,8 @@ window.igPage = function(view, who) {
   } else if (view === 'post') {
     if (who === 'slide_7111') {
       body = `
-        <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px">
-          <span onclick="igPage('home')" style="font-size:22px;cursor:pointer;font-weight:bold">‹</span>
-          <b>게시물</b>
+        <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
+          <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
         </div>
         <div style="position:relative;margin:0;padding:0">
           <img id="detailSlideImg" src="./IMG_7111.jpeg" style="display:block;width:100%;height:auto">
@@ -534,9 +533,8 @@ window.igPage = function(view, who) {
         </div>`;
     } else {
       body = `
-        <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px">
-          <span onclick="igPage('home')" style="font-size:22px;cursor:pointer;font-weight:bold">‹</span>
-          <b>게시물</b>
+        <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
+          <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
         </div>
         <img src="./${who}" style="display:block;width:100%;height:auto">`;
     }
@@ -570,49 +568,19 @@ window.igPage = function(view, who) {
     body = window.igFeedPosts.map((postItem, pIdx) => {
       if (Array.isArray(postItem)) {
         return `
-          <div style="position:relative;margin-bottom:12px;background:#fff;border-bottom:1px solid #efefef">
-            <div style="display:flex;align-items:center;padding:10px 12px;gap:10px">
-              <div style="width:32px;height:32px;border-radius:50%;background:#eee;display:grid;place-items:center">${profileIcon}</div>
-              <span style="font-size:13px;font-weight:600">sunwoo_</span>
-            </div>
-            <div style="position:relative;margin:0;padding:0">
-              <img id="slideImg_${pIdx}" src="./${postItem[0]}" onclick="igOpenPost('slide_7111')" style="display:block;width:100%;height:auto;cursor:pointer">
-              <button onclick="igMoveSlide(${pIdx}, -1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">‹</button>
-              <button onclick="igMoveSlide(${pIdx}, 1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">›</button>
-              <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px">
-                <span id="dot_${pIdx}_0" style="width:7px;height:7px;border-radius:50%;background:#3797f0"></span>
-                <span id="dot_${pIdx}_1" style="width:7px;height:7px;border-radius:50%;background:#ccc"></span>
-              </div>
-            </div>
-            <div style="padding:10px 12px 14px">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-                <div style="display:flex;gap:14px"><span>${heartIcon}</span><span>💬</span><span>✈️</span></div>
-                <span>📌</span>
-              </div>
-              <div style="font-size:13px;font-weight:600;margin-bottom:4px">좋아요 409개</div>
-              <div style="font-size:13px"><b style="margin-right:6px">sunwoo_</b>이재현 오늘 개짱짱슷보이</div>
-              <div style="font-size:11px;color:#888;margin-top:4px">2025년 4월 12일</div>
+          <div style="position:relative;margin:0;padding:0">
+            <img id="slideImg_${pIdx}" src="./${postItem[0]}" onclick="igOpenPost('${postItem[0]}')" style="display:block;width:100%;height:auto;cursor:pointer">
+            <button onclick="igMoveSlide(${pIdx}, -1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">‹</button>
+            <button onclick="igMoveSlide(${pIdx}, 1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:0;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer">›</button>
+            <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px">
+              <span id="dot_${pIdx}_0" style="width:7px;height:7px;border-radius:50%;background:#3797f0"></span>
+              <span id="dot_${pIdx}_1" style="width:7px;height:7px;border-radius:50%;background:#ccc"></span>
             </div>
           </div>`;
       } else {
         return `
-          <div style="margin-bottom:12px;background:#fff;border-bottom:1px solid #efefef">
-            <div style="display:flex;align-items:center;padding:10px 12px;gap:10px">
-              <div style="width:32px;height:32px;border-radius:50%;background:#eee;display:grid;place-items:center">${profileIcon}</div>
-              <span style="font-size:13px;font-weight:600">sunwoo_</span>
-            </div>
-            <div style="margin:0;padding:0">
-              <img src="./${postItem}" onclick="igOpenPost('${postItem}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
-            </div>
-            <div style="padding:10px 12px 14px">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-                <div style="display:flex;gap:14px"><span>${heartIcon}</span><span>💬</span><span>✈️</span></div>
-                <span>📌</span>
-              </div>
-              <div style="font-size:13px;font-weight:600;margin-bottom:4px">좋아요 409개</div>
-              <div style="font-size:13px"><b style="margin-right:6px">sunwoo_</b>이재현 오늘 개짱짱슷보이</div>
-              <div style="font-size:11px;color:#888;margin-top:4px">2025년 4월 12일</div>
-            </div>
+          <div style="margin:0;padding:0">
+            <img src="./${postItem}" onclick="igOpenPost('${postItem}')" alt="게시물 사진" style="display:block;width:100%;height:auto;cursor:pointer">
           </div>`;
       }
     }).join('');
@@ -620,11 +588,11 @@ window.igPage = function(view, who) {
 
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
-      <div id="igScrollArea" style="height:calc(100% - 45px);overflow-y:auto">
+      <div id="igScrollArea" style="height:100%;overflow-y:auto">
         ${(view === 'post' || view === 'search' || view === 'chat_jaehyun') ? '' : top}
         <div>${body}</div>
+        ${view === 'chat_jaehyun' ? '' : bottom}
       </div>
-      ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
   if (view === 'home') {
@@ -778,7 +746,7 @@ window.openMemoDetail = function(id, isDraft) {
   const backAction = isDraft ? "window.openDraftFolder()" : "openApp('메모')";
   content.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:15px">
-      <button onclick="${backAction}" class="back">‹ ${isDraft ? '작성 중이던 항목' : '모든 iCloud'}</button>
+      <button onclick="${backAction}" style="border:0;background:none;color:#ff9f0a;font-size:16px;font-weight:600;cursor:pointer;padding:0">‹ ${isDraft ? '작성 중이던 항목' : '메모'}</button>
       <span style="font-size:12px;color:#888">${m.date}</span>
       <span style="color:#ff9f0a;font-size:18px;cursor:pointer">⋯</span>
     </div>
@@ -792,7 +760,7 @@ window.openFolderList = function() {
   const content = document.getElementById('pageContent');
   content.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <button onclick="openApp('메모')" class="back">‹ 완료</button>
+      <span style="color:#ff9f0a;font-size:16px;font-weight:600;cursor:pointer" onclick="openApp('메모')">‹ 완료</span>
       <span style="color:#ff9f0a;font-size:18px;cursor:pointer">⋯</span>
     </div>
     <h2 style="margin:0 0 16px;font-size:28px;font-weight:700">폴더</h2>
@@ -825,7 +793,7 @@ window.openDraftFolder = function() {
   const content = document.getElementById('pageContent');
   content.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <button onclick="window.openFolderList()" class="back">‹ 폴더</button>
+      <span onclick="window.openFolderList()" style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">‹ 폴더</span>
       <span style="color:#ff9f0a;font-size:20px;cursor:pointer">⋯</span>
     </div>
     <h2 style="margin:0 0 16px;font-size:28px;font-weight:700">작성 중이던 항목</h2>
@@ -854,24 +822,21 @@ window.playVoiceMessage = function() {
 
   const overlay = document.createElement('div');
   overlay.id = 'voicePlayOverlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center';
-  
-  const card = document.createElement('div');
-  card.style.cssText = 'width:100%;max-width:320px;min-height:220px;background:#2c2c2e;border-radius:24px;display:flex;align-items:center;justify-content:center;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.5)';
-  card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">선우야 너 어디야?</div>`;
-  
-  overlay.appendChild(card);
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(235,235,240,0.92);z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:#111;transition:opacity 0.3s';
+  overlay.innerHTML = `
+    <div style="font-size:20px;font-weight:600;line-height:1.6">선우야 너 어디야?</div>
+  `;
   document.body.appendChild(overlay);
 
   window.currentVoiceTimeout1 = setTimeout(() => {
     if(document.getElementById('voicePlayOverlay')) {
-      card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">형 무섭게 너 왜 그래...</div>`;
+      document.getElementById('voicePlayOverlay').innerHTML = `<div style="font-size:20px;font-weight:600;line-height:1.6">형 무섭게 너 왜 그래...</div>`;
     }
   }, 4000);
 
   window.currentVoiceTimeout2 = setTimeout(() => {
     if(document.getElementById('voicePlayOverlay')) {
-      card.innerHTML = `<div style="font-size:20px;font-weight:500;color:#e5e5ea;line-height:1.6">제발, 제발... 전화만 좀 받아주라 선우야.</div>`;
+      document.getElementById('voicePlayOverlay').innerHTML = `<div style="font-size:20px;font-weight:600;line-height:1.6">제발, 제발... 전화만 좀 받아주라 선우야.</div>`;
     }
   }, 8000);
 
@@ -886,7 +851,7 @@ window.openVoiceDetail = function() {
   const content = document.getElementById('pageContent');
   content.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <button onclick="window.openPhoneTab('음성 사서함')" class="back">‹ 음성 사서함</button>
+      <button onclick="window.openPhoneTab('음성 사서함')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0">‹</button>
       <div style="width:36px;height:36px;background:#34c759;border-radius:50%;display:grid;place-items:center;color:white;font-size:16px;cursor:pointer">📞</div>
     </div>
     <div style="text-align:center;margin-top:10px">
@@ -921,7 +886,7 @@ window.openPhoneTab = function(tabName) {
 
   const navHeader = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-      <button onclick="goHome()" class="back">홈</button>
+      <span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">편집</span>
     </div>
   `;
 
@@ -956,7 +921,7 @@ window.openPhoneTab = function(tabName) {
   } else if (tabName === '최근 통화') {
     innerHtml = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <button onclick="goHome()" class="back">홈</button>
+        <span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">편집</span>
         <div style="display:flex;background:#e4e4eb;border-radius:8px;padding:2px">
           <span style="background:#fff;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600">모두</span>
           <span style="padding:4px 12px;color:#888;font-size:13px;font-weight:600">부재중 전화</span>
@@ -1062,7 +1027,7 @@ window.openPhoneTab = function(tabName) {
     ];
     innerHtml = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <button onclick="goHome()" class="back">홈</button>
+        <span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">‹ 그룹</span>
         <span style="color:#007aff;font-size:20px;font-weight:600;cursor:pointer">+</span>
       </div>
       <h2 style="margin:0 0 8px;font-size:26px;font-weight:700">연락처</h2>
@@ -1078,8 +1043,7 @@ window.openPhoneTab = function(tabName) {
     `;
   } else if (tabName === '키패드') {
     innerHtml = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding-bottom:30px;position:relative">
-        <div style="position:absolute;top:0;left:0;"><button onclick="goHome()" class="back">홈</button></div>
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding-bottom:30px">
         <div style="font-size:28px;font-weight:600;margin-bottom:20px;height:35px;color:#111"></div>
         <div style="display:grid;grid-template-columns:repeat(3,70px);gap:14px;justify-content:center;margin-bottom:15px">
           ${['1','2','3','4','5','6','7','8','9','*','0','#'].map(n => `
@@ -1092,7 +1056,7 @@ window.openPhoneTab = function(tabName) {
   } else if (tabName === '음성 사서함') {
     innerHtml = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <button onclick="goHome()" class="back">홈</button>
+        <span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">편집</span>
         <span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">인사말</span>
       </div>
       <h2 style="margin:0 0 16px;font-size:26px;font-weight:700">음성 메시지</h2>
@@ -1136,10 +1100,10 @@ function openApp(name){
   let html='';
 
   if(name==='메시지'){
-    html='<button onclick="goHome()" class="back">홈</button><h2>메시지</h2><div class="row">메시지가 없습니다</div>';
+    html='<h2>메시지</h2><div class="row">메시지가 없습니다</div>';
     content.innerHTML=html;
   }else if(name==='사진'){
-    html='<button onclick="goHome()" class="back">홈</button><h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div>' +
+    html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div>' +
          '<div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer">' +
          '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
@@ -1149,20 +1113,20 @@ function openApp(name){
          '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
          '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
          '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:65px 12px 30px">' +
-         '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" class="back">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
+         '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
          '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
     content.innerHTML=html;
   }else if(name==='카메라'){
-    html='<button onclick="goHome()" class="back">홈</button><h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
+    html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
     content.innerHTML=html;
   }else if(name==='설정'){
-    html='<button onclick="goHome()" class="back">홈</button><h2>설정</h2><div class="row">✈️ 에어플레인 모드</div><div class="row">Wi-Fi</div><div class="row">Bluetooth</div><div class="row">알림</div><div class="row">디스플레이 및 밝기</div>';
+    html='<h2>설정</h2><div class="row">✈️ 에어플레인 모드</div><div class="row">Wi-Fi</div><div class="row">Bluetooth</div><div class="row">알림</div><div class="row">디스플레이 및 밝기</div>';
     content.innerHTML=html;
   }else if(name==='메모'){
     html = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <button onclick="goHome()" class="back">홈</button>
-        <span onclick="window.openFolderList()" style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">폴더</span>
+        <span onclick="window.openFolderList()" style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">‹ 모든 iCloud</span>
+        <span style="color:#ff9f0a;font-size:20px;cursor:pointer">⋯</span>
       </div>
       <h2 style="margin:0 0 16px;font-size:28px;font-weight:700">모든 iCloud</h2>
       
@@ -1187,18 +1151,17 @@ function openApp(name){
     content.innerHTML = html;
     return;
   }else if(name==='전화'){
-    window.openPhoneTab('최근 통화');
+    window.openPhoneTab('음성 사서함');
     return;
   }else if(name==='캘린더'){
     html = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
-        <button onclick="goHome()" class="back">홈</button>
+        <h2 id="calTitle" style="margin:0;font-size:22px;font-weight:700"></h2>
         <div style="display:flex;gap:12px">
           <button onclick="window.changeCalMonth(-1)" style="border:0;background:#e4e4eb;border-radius:8px;padding:6px 12px;font-weight:bold;cursor:pointer">‹</button>
           <button onclick="window.changeCalMonth(1)" style="border:0;background:#e4e4eb;border-radius:8px;padding:6px 12px;font-weight:bold;cursor:pointer">›</button>
         </div>
       </div>
-      <h2 id="calTitle" style="margin:0 0 15px;font-size:22px;font-weight:700"></h2>
       <div id="calGrid" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;background:#fff;padding:12px;border-radius:14px"></div>
     `;
     content.innerHTML = html;
@@ -1214,12 +1177,12 @@ function openApp(name){
   }else if(name==='시계'){
     html = `
       <div style="display:flex;flex-direction:column;height:100%;position:relative;padding-bottom:55px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
-          <button onclick="goHome()" class="back">홈</button>
-          <span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span>
-        </div>
         <div style="flex:1;overflow-y:auto">
-          <h2 style="margin:0 0 15px;font-size:19px;font-weight:700">알람</h2>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+            <span style="color:#ff9f0a;font-size:16px;cursor:pointer">편집</span>
+            <h2 style="margin:0;font-size:19px;font-weight:700">알람</h2>
+            <span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span>
+          </div>
           <div style="background:#fff;border-radius:12px;overflow:hidden;margin-bottom:20px">
             <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
               <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:00</div><div style="font-size:11px;color:#888;margin-top:2px">월, 화, 수, 목, 금</div></div>
@@ -1241,7 +1204,7 @@ function openApp(name){
               <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
               <input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759">
             </div>
-            <div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+            <div style="padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
               <div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div>
               <input type="checkbox" style="width:45px;height:26px;accent-color:#34c759">
             </div>
@@ -1257,7 +1220,7 @@ function openApp(name){
     `;
     content.innerHTML=html;
   }else{
-    html='<button onclick="goHome()" class="back">홈</button><h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'"> 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'"> 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'"> 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
+    html='<h2>Safari</h2><div style="display:flex;justify-content:space-around;background:#fff;border-radius:40px;padding:18px 5px;margin:20px 0;font-size:26px"><span>▦</span><span>♧</span><span>◎</span><span>◷</span></div><h3>즐겨찾기</h3><div style="display:flex;justify-content:space-around;text-align:center;margin:25px 0"><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.apple.com\'">🍎<br>Apple</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.bing.com\'">🔷<br>Bing</div><div onclick="document.getElementById(\'safariSearch\').value=\'https://www.google.com\'">🌐<br>Google</div></div><h3>최근 검색</h3><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 데이트 맛집 추천\'"> 제주도 데이트 맛집 추천</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 분위기 좋은 맛집\'"> 제주도 분위기 좋은 맛집</div><div class="row" onclick="document.getElementById(\'safariSearch\').value=\'제주도 커플 여행 코스\'"> 제주도 커플 여행 코스</div><input id="safariSearch" placeholder="검색 또는 웹사이트 입력" style="width:100%;padding:14px;border-radius:20px;border:1px solid #ddd;font-size:16px;box-sizing:border-box;margin-top:20px">';
     content.innerHTML=html;
   }
 }
