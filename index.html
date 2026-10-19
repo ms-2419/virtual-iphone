@@ -366,7 +366,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','エ릭','학교 언제 올거냐'],
+  ['eric_00','에릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -844,7 +844,7 @@ window.renderKakao = function() {
     '</div>';
 
     const chatItems = [
-      { name: '나', date: '2025. 9. 11', sub: '선우', pin: true },
+      { name: '선우', date: '2025. 9. 11', sub: '선우', pin: true, isMe: true },
       { name: '재현이 형', date: '9월 22일', sub: '마지막 메시지 미리보기...', pin: true },
       { name: '도예 김영훈 형', date: '8월 2일', sub: '채팅 내용 미리보기...' },
       { name: '사체 이주연 형', date: '3월 4일', sub: '채팅 내용 미리보기...' },
@@ -852,16 +852,27 @@ window.renderKakao = function() {
     ];
 
     middleContent = subHeader + '<div style="background:#fff">' +
-      chatItems.map(c => '<div onclick="window.kakaoOpenChat(\'' + c.name + '\')" style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #f9f9f9">' +
-        '<div style="display:flex;align-items:center;gap:12px">' +
-          '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>' +
-          '<div>' +
-            '<div style="font-size:15px;font-weight:600;display:flex;align-items:center;gap:4px">' + c.name + (c.pin ? ' <span style="font-size:11px">📌</span>' : '') + '</div>' +
-            '<div style="font-size:12px;color:#888;margin-top:2px">' + c.sub + '</div>' +
+      chatItems.map(c => {
+        let profileHtml = '';
+        if (c.isMe) {
+          profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#76838f;display:grid;place-items:center;color:white;font-size:13px;font-weight:600">나</div>';
+        } else {
+          profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>';
+        }
+
+        const pinHtml = c.pin ? ' <span style="font-size:10px;color:#888;transform:rotate(45deg);display:inline-block">📌</span>' : '';
+
+        return '<div onclick="window.kakaoOpenChat(\'' + c.name + '\')" style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #f9f9f9">' +
+          '<div style="display:flex;align-items:center;gap:12px">' +
+            profileHtml +
+            '<div>' +
+              '<div style="font-size:15px;font-weight:600;display:flex;align-items:center;gap:4px">' + c.name + pinHtml + '</div>' +
+              '<div style="font-size:12px;color:#888;margin-top:2px">' + c.sub + '</div>' +
+            '</div>' +
           '</div>' +
-        '</div>' +
-        '<div style="font-size:11px;color:#aaa">' + c.date + '</div>' +
-      '</div>').join('') +
+          '<div style="font-size:11px;color:#aaa">' + c.date + '</div>' +
+        '</div>';
+      }).join('') +
     '</div>';
   }
 
