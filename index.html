@@ -302,7 +302,7 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 피드 게시물 순서 (7045가 가장 오래된 사진)
+// 전체 피드 게시물 순서 (IMG_7047.jpeg 확장자 변경 적용)
 window.igFeedPosts = [
   'IMG_7045.jpeg',
   'IMG_7046.jpeg',
@@ -311,16 +311,27 @@ window.igFeedPosts = [
   'IMG_7096.jpeg',
   'IMG_7107.jpeg',
   'IMG_7109.jpeg',
-  ['IMG_7111.jpeg', 'IMG_7112.jpeg'], // 슬라이드 세트
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'], // 슬라이드
   'IMG_7114.jpeg',
   'IMG_7116.jpeg',
   'IMG_7117.jpeg'
 ];
 
+// 이재현 DM 대화 데이터 (날짜 구분선 + 대화 흐름)
 window.igJaehyunChat = [
-  ['them', '선우야 어디야?'],
-  ['me', '나 집 가는 중!'],
-  ['them', '오면 말해줘 ㅋㅋㅋ']
+  { type: 'date', text: '2022년 5월 17일' },
+  { type: 'them', text: '선우 인스타 그만하고 얼른 집에 와 ㅋㅋ' },
+  { type: 'me', text: '벌써 나 보고싶어?' },
+  { type: 'them', text: '엉' },
+  
+  { type: 'date', text: '2024년 1월 7일' },
+  { type: 'me', text: 'ㅃㄹ 저거 게시물 내려' },
+  { type: 'them', text: '형 벗고 있으니까 걱정 돼? ㅎ' },
+  { type: 'me', text: '그럼 남친이 헐벗고 있는데 좋다고 춤 추겠냐;' },
+  { type: 'them', text: 'ㅋㅋㅋ 귀엽긴' },
+  
+  { type: 'date', text: '2025년 9월 12일' },
+  { type: 'them', text: '형 어떻게 사냐 선우야' }
 ];
 
 window.igChats = [
@@ -394,8 +405,22 @@ window.igPage = function(view, who) {
     const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo_';
     const targetName = isJaehyun ? '이재현' : '김선우';
 
-    // 최신 순서대로 프로필 그리드 정렬 (가장 최근 글이 맨 위, 7045가 맨 밑으로 감)
-    const profileGridList = window.igFeedPosts.slice().reverse();
+    // 최신 순서(위) ➔ 오래된 순서(아래) 정렬
+    let userPosts = window.igFeedPosts.slice().reverse();
+
+    if (isJaehyun) {
+      // 이재현 프로필: 7107, 7117 제외
+      userPosts = userPosts.filter(item => {
+        const file = Array.isArray(item) ? item[0] : item;
+        return file !== 'IMG_7107.jpeg' && file !== 'IMG_7117.jpeg';
+      });
+    } else {
+      // 김선우 프로필: 7109, [7111,7112], 7116 제외
+      userPosts = userPosts.filter(item => {
+        if (Array.isArray(item)) return false; // 7111+7112 제외
+        return item !== 'IMG_7109.jpeg' && item !== 'IMG_7116.jpeg';
+      });
+    }
 
     body = `
       <div style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700">
@@ -410,7 +435,7 @@ window.igPage = function(view, who) {
           </svg>
         </div>
         <div style="display:flex;flex:1;justify-content:space-around;text-align:center;gap:8px">
-          <div><b style="font-size:18px">${profileGridList.length}</b><div style="font-size:12px;margin-top:2px">게시물</div></div>
+          <div><b style="font-size:18px">${userPosts.length}</b><div style="font-size:12px;margin-top:2px">게시물</div></div>
           <div><b style="font-size:18px">913</b><div style="font-size:12px;margin-top:2px">팔로워</div></div>
           <div><b style="font-size:18px">96</b><div style="font-size:12px;margin-top:2px">팔로잉</div></div>
         </div>
@@ -421,9 +446,8 @@ window.igPage = function(view, who) {
         <button style="flex:1;border:0;border-radius:8px;background:#efeff3;padding:8px;font-size:13px;font-weight:600">프로필 공유</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px">
-        ${profileGridList.map((item, idx) => {
+        ${userPosts.map(item => {
           if (Array.isArray(item)) {
-            // 슬라이드 게시물인 경우 1장(7111)만 보여주고 클릭 시 슬라이드 보기로 연결
             return `
               <div style="position:relative;width:100%;aspect-ratio:1;cursor:pointer" onclick="igOpenPost('slide_7111')">
                 <img src="./${item[0]}" style="display:block;width:100%;height:100%;object-fit:cover">
@@ -448,11 +472,16 @@ window.igPage = function(view, who) {
         </div>
       </div>
       <div style="padding:16px 12px;display:flex;flex-direction:column;gap:10px;min-height:380px;background:#fff">
-        ${window.igJaehyunChat.map(m => `
-          <div style="display:flex;justify-content:${m[0]==='me'?'flex-end':'flex-start'}">
-            <span style="background:${m[0]==='me'?'#3797f0':'#f1f1f1'};color:${m[0]==='me'?'white':'#111'};border-radius:18px;padding:9px 14px;font-size:13px;max-width:75\%;word-break:break-word">${m[1]}</span>
-          </div>
-        `).join('')}
+        ${window.igJaehyunChat.map(m => {
+          if (m.type === 'date') {
+            return `<div style="text-align:center;font-size:11px;color:#8e8e8e;margin:12px 0 4px">${m.text}</div>`;
+          } else {
+            return `
+              <div style="display:flex;justify-content:${m.type==='me'?'flex-end':'flex-start'}">
+                <span style="background:${m.type==='me'?'#3797f0':'#f1f1f1'};color:${m.type==='me'?'white':'#111'};border-radius:18px;padding:9px 14px;font-size:13px;max-width:75\%;word-break:break-word">${m.text}</span>
+              </div>`;
+          }
+        }).join('')}
       </div>
       <div style="padding:8px 12px;display:flex;gap:8px;border-top:1px solid #eee;background:#fff;position:sticky;bottom:0">
         <input placeholder="메시지 보내기..." style="flex:1;border:1px solid #ddd;border-radius:20px;padding:9px 14px;font-size:13px;outline:none">
@@ -472,10 +501,9 @@ window.igPage = function(view, who) {
       `).join('')}`;
   } else if (view === 'post') {
     if (who === 'slide_7111') {
-      // 프로필에서 슬라이드 게시물 클릭 시 확대 상세 보기
       body = `
         <div style="padding:10px 12px;font-size:14px;border-bottom:1px solid #f0f0f0">
-          <span onclick="igPage('profile')" style="cursor:pointer">‹ 게시물</span>
+          <span onclick="igPage('home')" style="cursor:pointer">‹ 게시물</span>
         </div>
         <div style="position:relative;margin:0;padding:0">
           <img id="detailSlideImg" src="./IMG_7111.jpeg" style="display:block;width:100%;height:auto">
@@ -545,16 +573,16 @@ window.igPage = function(view, who) {
       ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
-  // 피드 첫 진입 시 가장 과거 게시물인 IMG_7045(맨 밑)로 시작 위치 설정
+  // 피드 홈 진입 시 기본 스크롤 위치를 맨 아래(IMG_7045.jpeg)로 고정
   if (view === 'home') {
-    const scrollToStart = () => {
-      const firstPost = document.getElementById('igPost_0');
-      if (firstPost) {
-        firstPost.scrollIntoView({ block: 'start' });
+    const scrollToBottom = () => {
+      const scrollArea = document.getElementById('igScrollArea');
+      if (scrollArea) {
+        scrollArea.scrollTop = scrollArea.scrollHeight;
       }
     };
-    setTimeout(scrollToStart, 10);
-    setTimeout(scrollToStart, 100);
+    setTimeout(scrollToBottom, 10);
+    setTimeout(scrollToBottom, 100);
   }
 };
 
