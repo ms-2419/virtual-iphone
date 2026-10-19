@@ -350,7 +350,7 @@ window.igJaehyunChat = [
   { type: 'date', text: '2025년 9월 14일' },
   { type: 'them', text: '보고싶어 선우야' },
   { type: 'them', text: '너무 사랑해' },
-  { type: 'dem', text: '게시물 올라 오는 거 보고싶다' },
+  { type: 'them', text: '게시물 올라 오는 거 보고싶다' },
   { type: 'them', text: '형은 너 생각만 해' },
   
   { type: 'date', text: '2026년 4월 12일' },
@@ -364,7 +364,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','에릭','학교 언제 올거냐'],
+  ['eric_00','エ릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -1091,6 +1091,103 @@ window.openPhoneTab = function(tabName) {
   content.innerHTML = `<div style="flex:1;overflow-y:auto;padding:12px 12px 60px 12px">${innerHtml}</div>` + bottomTabBar;
 };
 
+// 메시지 목록 상태 관리 객체
+window.msgUnreadStates = {
+  'bank': false,
+  'cake': true,
+  'cartier': true,
+  'bday1': true,
+  'bday2': true,
+  'jaehyun': true
+};
+
+window.openMsgChat = function(chatKey) {
+  window.msgUnreadStates[chatKey] = false;
+  const content = document.getElementById('pageContent');
+  let chatHeaderTitle = '';
+  let chatBodyHtml = '';
+
+  if (chatKey === 'cake') {
+    chatHeaderTitle = '+82 2-2222-2419';
+    chatBodyHtml = `
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:8px 0">2025년 9월 12일 오후 7:00</div>
+      <div style="display:flex;justify-content:flex-start;margin-bottom:10px">
+        <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:10px 14px;font-size:13px;max-width:85%;line-height:1.4;white-space:pre-wrap">안녕하세요, 고객님! 주문하신 케이크가 완성되었습니다.
+
+픽업 일시: [9월 12일/금(요일) 오후 10시]
+해당 시간은 무인 시간이므로, 방문하셔서 수령 하실 때 매장 앞 QR 코드로 인증 하신 후 픽업 하시길 부탁드립니다. 감사합니다 :)</div>
+      </div>
+    `;
+  } else if (chatKey === 'cartier') {
+    chatHeaderTitle = '까르띠에 서울직영점';
+    chatBodyHtml = `
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:8px 0">2025년 9월 6일 오후 4:12</div>
+      <div style="display:flex;justify-content:flex-start;margin-bottom:10px">
+        <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:10px 14px;font-size:13px;max-width:85%;line-height:1.4;white-space:pre-wrap">[Cartier 까르띠에]
+안녕하세요, 고객님. 까르띠에 서울 부티크입니다.
+금일 구매하신 제품의 결제가 정상적으로 완료되었습니다. 까르띠에와 함께해 주셔서 감사드리며, 두 분의 소중한 순간이 오래도록 빛나기를 바랍니다.
+감사합니다.
+
+Cartier Seoul Boutique</div>
+      </div>
+
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:12px 0 8px">2025년 10월 11일 오전 11:10</div>
+      <div style="display:flex;justify-content:flex-start;margin-bottom:10px">
+        <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:10px 14px;font-size:13px;max-width:85%;line-height:1.4;white-space:pre-wrap">[Cartier 까르띠에]
+안녕하세요, 고객님. 까르띠에 서울 부티크입니다.
+예약하신 제품의 픽업 예정 시간이 경과하여 사전에 작성해 주신 제2 연락처(010-0000-0913)로 확인 연락을 드렸으며, 해당 연락처를 통해 제품이 정상적으로 픽업 완료되었음을 안내드립니다.
+감사합니다.
+
+Cartier Seoul Boutique</div>
+      </div>
+    `;
+  } else if (chatKey === 'jaehyun') {
+    chatHeaderTitle = '재현이 형';
+    chatBodyHtml = `
+      <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:6px 0">2025년 9월 12일 오후 10:11</div>
+      <div style="display:flex;justify-content:flex-start;margin-bottom:6px">
+        <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">너 또 어디갔어 ㅋㅋ</div>
+      </div>
+      <div style="display:flex;justify-content:flex-start;margin-bottom:24px">
+        <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">형 운동 끝나고 집에서 얌전히 기다리는 중</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 너 왜 전화 안받아</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">횡단보도에서 사람 사고 났다고 뉴스 나오는데 자꾸 저 사람 옷이 익숙해서 형 너무 무서워</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">아니지? 그런 거 아니잖아 선우야</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">아 제발 선우야</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">형 화 안낼게...</div>
+        </div>
+        <div style="display:flex;justify-content:flex-start">
+          <div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">전화 한번만 받아봐</div>
+        </div>
+      </div>
+    `;
+  }
+
+  content.innerHTML = `
+    <div style="display:flex;flex-direction:column;height:100%;background:#fff;color:#111">
+      <div style="height:44px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:5">
+        <button onclick="openApp('메시지')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button>
+        <div style="flex:1;text-align:center;font-size:15px;font-weight:600;padding-right:24px">${chatHeaderTitle}</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:12px">
+        ${chatBodyHtml}
+      </div>
+    </div>
+  `;
+};
+
 function openApp(name){
   const page=document.getElementById('page');
   const content=document.getElementById('pageContent');
@@ -1110,24 +1207,24 @@ function openApp(name){
       <input placeholder="검색" style="width:100%;padding:8px 12px;border:0;border-radius:10px;background:#e4e4eb;font-size:14px;outline:none;margin-bottom:10px">
       <div style="background:#fff;border-radius:12px;overflow:hidden">
         
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:default">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.jaehyun?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0;font-size:16px;font-weight:600">재</div>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:15px;font-weight:600;color:#111">재현이 형</div>
-              <div style="font-size:13px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">선우야 보고싶다</div>
+            <div style="flex:1;min-width:0" onclick="openMsgChat('jaehyun')" style="cursor:pointer">
+              <div style="font-size:15px;font-weight:600;color:#111;cursor:pointer" onclick="openMsgChat('jaehyun')">재현이 형</div>
+              <div style="font-size:13px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;cursor:pointer" onclick="openMsgChat('jaehyun')">선우야 보고싶다</div>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;padding-left:8px">
+          <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;padding-left:8px;cursor:pointer" onclick="openMsgChat('jaehyun')">
             <span style="font-size:12px;color:#888">2026. 4. 12.</span>
             <span style="color:#ccc;font-size:16px">›</span>
           </div>
         </div>
 
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:default">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.bday2?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>
             </div>
@@ -1142,9 +1239,9 @@ function openApp(name){
           </div>
         </div>
 
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:default">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.bday1?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>
             </div>
@@ -1159,9 +1256,9 @@ function openApp(name){
           </div>
         </div>
 
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="openMsgChat('cartier')">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.cartier?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0;font-size:16px;font-weight:600">까</div>
             <div style="flex:1;min-width:0">
               <div style="font-size:15px;font-weight:600;color:#111">까르띠에 서울직영점</div>
@@ -1174,9 +1271,9 @@ function openApp(name){
           </div>
         </div>
 
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="openMsgChat('cake')">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.cake?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>
             </div>
@@ -1191,9 +1288,9 @@ function openApp(name){
           </div>
         </div>
 
-        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:0;cursor:pointer">
+        <div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:0;cursor:default">
           <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
-            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:#007aff;border-radius:50%;display:inline-block"></span></div>
+            <div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:${window.msgUnreadStates.bank?'#007aff':'transparent'};border-radius:50%;display:inline-block"></span></div>
             <div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>
             </div>
