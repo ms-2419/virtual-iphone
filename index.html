@@ -366,7 +366,7 @@ window.igChats = [
   ['zuyeon','주연','잘 지내니'],
   ['0hoony_','후니','서누 보고싶다'],
   ['qfeed','지창민','짜증나 김선우'],
-  ['eric_00','에릭','학교 언제 올거냐'],
+  ['eric_00','エ릭','학교 언제 올거냐'],
   ['new_days','김시작','내일 만날래?']
 ];
 
@@ -785,6 +785,103 @@ window.openMsgChat = function(chatKey) {
   content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#fff;color:#111"><div style="height:44px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:5"><button onclick="openApp(\'메시지\')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button><div style="flex:1;text-align:center;font-size:15px;font-weight:600;padding-right:24px">' + chatHeaderTitle + '</div></div><div style="flex:1;overflow-y:auto;padding:12px">' + chatBodyHtml + '</div>' + inputBarHtml + '</div>';
 };
 
+// 카카오톡 관련 전역 상태 및 탭/채팅방 오픈 함수
+window.kakaoTab = 'friend'; // 'friend' 또는 'chat'
+window.kakaoOpenChat = function(name) {
+  const content = document.getElementById('pageContent');
+  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#b2c7d9;color:#111">' +
+    '<div style="height:48px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;background:#b2c7d9;position:sticky;top:0;z-index:6">' +
+      '<button onclick="openApp(\'카카오톡\')" style="border:0;background:none;font-size:20px;cursor:pointer">‹</button>' +
+      '<span style="font-size:16px;font-weight:600">' + name + '</span>' +
+      '<span style="font-size:18px">🔍</span>' +
+    '</div>' +
+    '<div style="flex:1;padding:16px;text-align:center;color:#555;font-size:13px;">' + name + '과의 대화방입니다.</div>' +
+    '<div style="padding:10px 12px;background:#f0f0f0;display:flex;gap:8px;align-items:center">' +
+      '<span style="font-size:20px">➕</span>' +
+      '<input placeholder="메시지 입력..." style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:4px;outline:none;font-size:13px">' +
+      '<span style="font-size:20px">😊</span>' +
+    '</div>' +
+  '</div>';
+};
+
+window.renderKakao = function() {
+  const content = document.getElementById('pageContent');
+  const isFriend = window.kakaoTab === 'friend';
+
+  // 상단 헤더
+  const topHeader = '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px 8px;background:#fff">' +
+    '<span style="font-size:22px;font-weight:700">' + (isFriend ? '친구' : '채팅') + '</span>' +
+    '<div style="display:flex;gap:16px;font-size:20px;color:#111">' +
+      '<span>🔍</span>' +
+      (isFriend ? '<span>👤+</span>' : '<span>💬+</span>') +
+      '<span>🎵</span>' +
+      '<span>⚙️</span>' +
+    '</div>' +
+  '</div>';
+
+  let middleContent = '';
+
+  if (isFriend) {
+    // 친구 목록 화면
+    const contacts = ['도예 김영훈 형', '사체 이주연 형', '손영재', '아빠', '엄마', '유교 지창민 형', '재현이 형', '할머니'];
+    middleContent = '<div style="background:#fff;padding:8px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #f0f0f0">' +
+      '<div style="width:50px;height:50px;border-radius:20px;background:#eee;display:grid;place-items:center;font-size:22px">👤</div>' +
+      '<div><div style="font-size:16px;font-weight:600">선우</div><div style="font-size:12px;color:#888;margin-top:2px">상태메시지가 없습니다</div></div>' +
+    '</div>' +
+    '<div style="padding:10px 16px;font-size:12px;color:#888;font-weight:600">친구 ' + contacts.length + '</div>' +
+    '<div style="background:#fff">' +
+      contacts.map(name => '<div onclick="window.kakaoOpenChat(\'' + name + '\')" style="padding:10px 16px;display:flex;align-items:center;gap:12px;cursor:pointer">' +
+        '<div style="width:40px;height:40px;border-radius:16px;background:#ddd;display:grid;place-items:center;font-size:16px">👤</div>' +
+        '<span style="font-size:15px;font-weight:500">' + name + '</span>' +
+      '</div>').join('') +
+    '</div>';
+  } else {
+    // 채팅 목록 화면
+    const subHeader = '<div style="display:flex;gap:6px;padding:8px 16px;background:#fff;overflow-x:auto;border-bottom:1px solid #f0f0f0">' +
+      '<span style="background:#111;color:#fff;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600">전체</span>' +
+      '<span style="background:#f0f0f0;color:#333;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600">안읽음 412</span>' +
+      '<span style="background:#f0f0f0;color:#333;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600">제미나이</span>' +
+      '<span style="background:#f0f0f0;color:#333;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600">통화</span>' +
+    '</div>';
+
+    const chatItems = [
+      { name: '나', date: '2025. 9. 11', sub: '선우', pin: true },
+      { name: '재현이 형', date: '9월 22일', sub: '마지막 메시지 미리보기...', pin: true },
+      { name: '도예 김영훈 형', date: '8월 2일', sub: '채팅 내용 미리보기...' },
+      { name: '사체 이주연 형', date: '3월 4일', sub: '채팅 내용 미리보기...' },
+      { name: '손영재', date: '3월 3일', sub: '채팅 내용 미리보기...' }
+    ];
+
+    middleContent = subHeader + '<div style="background:#fff">' +
+      chatItems.map(c => '<div onclick="window.kakaoOpenChat(\'' + c.name + '\')" style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #f9f9f9">' +
+        '<div style="display:flex;align-items:center;gap:12px">' +
+          '<div style="width:45px;height:45px;border-radius:18px;background:#ddd;display:grid;place-items:center;font-size:18px">👤</div>' +
+          '<div>' +
+            '<div style="font-size:15px;font-weight:600;display:flex;align-items:center;gap:4px">' + c.name + (c.pin ? ' <span style="font-size:11px">📌</span>' : '') + '</div>' +
+            '<div style="font-size:12px;color:#888;margin-top:2px">' + c.sub + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-size:11px;color:#aaa">' + c.date + '</div>' +
+      '</div>').join('') +
+    '</div>';
+  }
+
+  // 하단바 (숏폼, 쇼핑, 더보기 클릭 불가 처리)
+  const bottomNav = '<div style="height:50px;background:#f7f7fa;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;font-size:11px;color:#888;position:sticky;bottom:0;flex-shrink:0">' +
+    '<div onclick="window.kakaoTab=\'friend\'; window.renderKakao();" style="text-align:center;cursor:pointer;color:' + (isFriend ? '#111' : '#888') + '">👤<div style="margin-top:2px">친구</div></div>' +
+    '<div onclick="window.kakaoTab=\'chat\'; window.renderKakao();" style="text-align:center;cursor:pointer;color:' + (!isFriend ? '#111' : '#888') + '">💬<div style="margin-top:2px">채팅</div></div>' +
+    '<div style="text-align:center;opacity:0.4;cursor:default">▶️<div style="margin-top:2px">숏폼</div></div>' +
+    '<div style="text-align:center;opacity:0.4;cursor:default">🛍️<div style="margin-top:2px">쇼핑</div></div>' +
+    '<div style="text-align:center;opacity:0.4;cursor:default">⋯<div style="margin-top:2px">더보기</div></div>' +
+  '</div>';
+
+  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#f7f7fa">' +
+    topHeader +
+    '<div style="flex:1;overflow-y:auto">' + middleContent + '</div>' +
+    bottomNav +
+  '</div>';
+};
+
 function openApp(name){
   const page=document.getElementById('page');
   const content=document.getElementById('pageContent');
@@ -852,6 +949,10 @@ function openApp(name){
     html='<div id="igRoot" style="height:100%;display:flex;flex-direction:column"></div>';
     content.innerHTML = html;
     setTimeout(()=>igPage('home'), 10);
+    return;
+  }else if(name==='카카오톡'){
+    window.kakaoTab = 'friend';
+    window.renderKakao();
     return;
   }else if(name==='시계'){
     html = '<div style="display:flex;flex-direction:column;height:100%;position:relative"><div style="flex:1;overflow-y:auto"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><span style="color:#ff9f0a;font-size:16px;cursor:pointer">편집</span><h2 style="margin:0;font-size:19px;font-weight:700">알람</h2><span style="color:#ff9f0a;font-size:24px;cursor:pointer">+</span></div><div style="background:#fff;border-radius:12px;overflow:hidden;margin-bottom:20px"><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:00</div><div style="font-size:11px;color:#888;margin-top:2px">월, 화, 수, 목, 금</div></div><input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759"></div><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:03</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div><input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759"></div><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:05</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div><input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759"></div><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:07</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div><input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759"></div><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 7:10</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div><input type="checkbox" checked style="width:45px;height:26px;accent-color:#34c759"></div><div style="padding:14px 16px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:32px;font-weight:300;letter-spacing:-1px">오전 8:00</div><div style="font-size:12px;color:#888;margin-top:2px">알람</div></div><input type="checkbox" style="width:45px;height:26px;accent-color:#34c759"></div></div></div><div style="height:50px;background:#f1f1f3;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;font-size:10px;color:#888;flex-shrink:0"><div style="text-align:center">🌐<div style="margin-top:2px">세계 시계</div></div><div style="text-align:center;color:#ff9f0a">⏰<div style="margin-top:2px">알람</div></div><div style="text-align:center">⏱️<div style="margin-top:2px">스톱워치</div></div><div style="text-align:center">⏳<div style="margin-top:2px">타이머</div></div></div></div>';
