@@ -567,7 +567,6 @@ window.igPage = function(view, who) {
   } else if (view === 'reels') {
     body = `<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>`;
   } else {
-    // 💡 홈 피드 게시물 목록 렌더링 로직 복구
     body = window.igFeedPosts.map((postItem, pIdx) => {
       if (Array.isArray(postItem)) {
         return `
