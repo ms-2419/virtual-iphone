@@ -235,7 +235,7 @@ function goHome(){
 }
 
 let photoIndex = 0;
-const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.jpeg','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
+const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
 
 function openPhotoViewer(i){
   photoIndex = i;
@@ -302,7 +302,7 @@ function openPhotoViewer629(i) {
   };
 }
 
-// 홈 피드 순서 (7117이 맨 위, 7045가 맨 아래)
+// 홈 피드 순서
 window.igFeedPosts = [
   'IMG_7117.jpeg',
   'IMG_7116.jpeg',
@@ -317,7 +317,20 @@ window.igFeedPosts = [
   'IMG_7045.jpeg'
 ];
 
-// 이재현 프로필 전용 피드 (IMG_7134 포함, 최신 사진이 위로 오고 IMG_7045가 맨 밑으로 가는 인스타 프로필 정렬)
+// 김선우 프로필 전용 피드 (최신 사진이 위, IMG_7045가 맨 밑으로 오도록 정렬)
+window.igSunwooProfilePosts = [
+  'IMG_7117.jpeg',
+  'IMG_7114.jpeg',
+  ['IMG_7111.jpeg', 'IMG_7112.jpeg'],
+  'IMG_7107.jpeg',
+  'IMG_7096.jpeg',
+  'IMG_7048.jpeg',
+  'IMG_7047.jpeg',
+  'IMG_7046.jpeg',
+  'IMG_7045.jpeg'
+];
+
+// 이재현 프로필 전용 피드 (IMG_7134 포함, IMG_7045가 맨 밑으로 오도록 정렬)
 window.igJaehyunProfilePosts = [
   'IMG_7134.jpeg',
   'IMG_7116.jpeg',
@@ -427,18 +440,8 @@ window.igPage = function(view, who) {
     const targetId = isJaehyun ? 'leejaehyun_' : 'sunwoo_';
     const targetName = isJaehyun ? '이재현' : '김선우';
 
-    // 선우 프로필은 기본 피드 역순, 재현이 프로필은 재현이 전용 배열 사용 (IMG_7045가 맨 밑으로 오도록 정렬됨)
-    let userPosts = isJaehyun ? window.igJaehyunProfilePosts : window.igFeedPosts.filter(item => {
-      if (Array.isArray(item)) return false;
-      return item !== 'IMG_7109.jpeg' && item !== 'IMG_7116.jpeg';
-    }).reverse();
-
-    if (isJaehyun) {
-      userPosts = userPosts.filter(item => {
-        const file = Array.isArray(item) ? item[0] : item;
-        return file !== 'IMG_7107.jpeg' && file !== 'IMG_7117.jpeg';
-      });
-    }
+    // 선우는 igSunwooProfilePosts, 재현이는 igJaehyunProfilePosts 사용 (7045가 맨 밑)
+    let userPosts = isJaehyun ? window.igJaehyunProfilePosts : window.igSunwooProfilePosts;
 
     body = `
       <div style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:700">
