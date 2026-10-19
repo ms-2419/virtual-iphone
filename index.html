@@ -397,9 +397,9 @@ window.igPage = function(view, who) {
       </div>
     </div>`;
 
-  // 앱 화면 밑에 떠 있는 고정 네비게이션바 (수정 전 버전)
+  // 스크롤을 맨 아래로 끝까지 내렸을 때만 게시물 밑에 노출되는 하단바
   const bottom = `
-    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:absolute;bottom:0;left:0;right:0;z-index:8">
+    <div style="height:45px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;position:relative;width:100%;z-index:8">
       <span onclick="igPage('home')" style="cursor:pointer;display:flex">${homeIcon}</span>
       <span onclick="igPage('reels')" style="cursor:pointer;display:flex">${reelsIcon}</span>
       <span onclick="igPage('dm')" style="cursor:pointer;display:flex">${dmIcon}</span>
@@ -572,14 +572,14 @@ window.igPage = function(view, who) {
     }).join('');
   }
 
-  // 상시 고정 하단바와 스크롤 가능한 게시물 영역 (수정 전 기존 구성)
+  // 하단바를 스크롤 영역 내부 맨 끝에 배치하여 스크롤 다 내렸을 때만 노출되도록 설정
   container.innerHTML = `
     <div style="position:relative;width:100%;height:100%;background:#fff;color:#111;font-family:Arial,sans-serif">
-      <div id="igScrollArea" style="height:100%;overflow-y:auto;padding-bottom:${view === 'chat_jaehyun' ? '0' : '45px'}">
+      <div id="igScrollArea" style="height:100%;overflow-y:auto">
         ${(view === 'post' || view === 'search' || view === 'chat_jaehyun') ? '' : top}
         <div>${body}</div>
+        ${view === 'chat_jaehyun' ? '' : bottom}
       </div>
-      ${view === 'chat_jaehyun' ? '' : bottom}
     </div>`;
 
   if (view === 'home') {
