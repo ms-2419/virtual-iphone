@@ -572,7 +572,7 @@ window.memoList = [
     title: "형 사랑해",
     date: "2026. 9. 12.",
     time: "오후 5:12",
-    content: "형 안녕<br><br>나 지금 형한테 구라 치고 케이크 픽업 하러 가는 중인데, 형한테 편지를 써야 될 거 같아서 급하게 메모장 킨다 ㅋㅋ ㅎ 아니 근데 왜 자꾸 나한테 편지 써달라고 찡찡거려? 나 악필인 거 누가 모르는데 ㅡㅡ 못 읽기만 해봐라 내 손에 죽어<br><br>그래도 형 내가 형 되게 많이 사랑하나봐 해달라고 한다고 다 해주는 거 보니 ㅋㅋㅋ<br><br>근데... 그 요즘 자꾸 형한테 짜증내서 미안해 오래 만나고 막 사랑이 식어서 그러는 게 아니라 대학 막바지라 그런가 좀 자꾸 다들 날 괴롭혀서... ㅜㅜ 그래서 그래 그러니까 형이 나 좀 봐줘 ㅎㅎ<br><br>아 신호등 바뀐다! 아 빨리 형 보고싶ㅇ"
+    content: "형 안녕<br><br>나 지금 형한테 구라 치고 케이크 픽업 하러 가는 중인데, 형한테 편지를 써야 될 거 같아서 급하게 메모장 킨다 ㅋㅋ ㅎ 아니 왜 자꾸 나한테 편지 써달라고 찡찡거려? 나 악필인 거 누가 모르는데 ㅡㅡ 못 읽기만 해봐라 내 손에 죽어<br><br>그래도 형 내가 형 되게 많이 사랑하나봐 해달라고 한다고 다 해주는 거 보니 ㅋㅋㅋ<br><br>근데... 그 요즘 자꾸 형한테 짜증내서 미안해 오래 만나고 막 사랑이 식어서 그러는 게 아니라 대학 막바지라 그런가 좀 자꾸 다들 날 괴롭혀서... ㅜㅜ 그래서 그래 그러니까 형이 나 좀 봐줘 ㅎㅎ<br><br>아 신호등 바뀐다! 아 빨리 형 보고싶ㅇ"
   },
   {
     id: 1,
@@ -855,12 +855,15 @@ window.renderKakao = function() {
       chatItems.map(c => {
         let profileHtml = '';
         if (c.isMe) {
-          profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#76838f;display:grid;place-items:center;color:white;font-size:13px;font-weight:600">나</div>';
+          profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;position:relative;overflow:hidden">' + 
+            defaultProfileSvg + 
+            '<div style="position:absolute;bottom:2px;right:2px;width:15px;height:15px;background:#68717a;border-radius:50%;display:grid;place-items:center;color:white;font-size:9px;font-weight:700;box-shadow:0 0 0 1.5px #fff">나</div>' +
+          '</div>';
         } else {
           profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>';
         }
 
-        const pinHtml = c.pin ? ' <span style="font-size:10px;color:#888;transform:rotate(45deg);display:inline-block">📌</span>' : '';
+        const pinHtml = c.pin ? ' <span style="font-size:11px;color:#888;display:inline-block">📌</span>' : '';
 
         return '<div onclick="window.kakaoOpenChat(\'' + c.name + '\')" style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #f9f9f9">' +
           '<div style="display:flex;align-items:center;gap:12px">' +
