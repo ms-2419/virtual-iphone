@@ -265,7 +265,7 @@ lockScreen.addEventListener('touchend', e => {
 });
 
 let photoIndex = 0;
-const photoFiles = ['IMG_6386.jpeg','IMG_6407.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
+const photoFiles = ['IMG_6386.jpeg','IMG_6445.jpeg','IMG_6558.jpeg','IMG_6559.jpeg','IMG_6707.png','IMG_6718.png','IMG_6892.jpeg','IMG_6893.jpeg','IMG_6934.jpeg','IMG_6937.jpeg'];
 
 function openPhotoViewer(i){
  photoIndex = i;
@@ -1458,7 +1458,7 @@ function openApp(name){
         '<img src="IMG_6934.jpeg" style="width:70px;height:70px;object-fit:cover;border-radius:8px">' +
         '<div style="flex:1"><b style="font-size:15px;color:#222">형</b><div style="font-size:12px;color:#888;margin-top:4px">사진 10장</div></div>' +
         '<span style="color:#aaa;font-size:20px">›</span></div>' +
-        '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:12px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
+        '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:12px">'+["IMG_6386.jpeg","IMG_6445.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
         '<div style="margin-top:18px;display:flex;align-items:center;gap:12px;padding:10px;background:#f4f4f4;border-radius:12px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
         '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:70px;height:70px;object-fit:cover;border-radius:8px">' +
         '<div><b style="font-size:15px;color:#222">ㅋㅋ♥</b><div style="font-size:12px;color:#888;margin-top:4px">사진 14장</div></div></div>' +
