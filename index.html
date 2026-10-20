@@ -7,15 +7,18 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#222;color:white;
+ margin:0;background:#1a1a1a;color:white;
  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
  display:flex;justify-content:center;align-items:center;
  min-height:100vh
 }
 .phone{
- width:min(390px,100vw);height:min(880px,100dvh);
- min-height:600px;background:#111;border:5px solid #444;
- border-radius:42px;overflow:hidden;position:relative
+ width:min(390px,100vw);height:min(844px,100dvh);
+ min-height:600px;background:#000;
+ border:12px solid #2c2c2e; /* 아이폰 테두리 느낌 강화 */
+ border-radius:50px; /* 더 부드러운 아이폰 곡선 */
+ overflow:hidden;position:relative;
+ box-shadow:0 20px 40px rgba(0,0,0,0.6);
 }
 .wallpaper{
  position:absolute;inset:0;
@@ -24,49 +27,55 @@ body{
  background-repeat:no-repeat
 }
 .status{
- position:absolute;top:0;left:0;right:0;height:44px;
- padding:10px 24px 0;display:flex;align-items:center;
+ position:absolute;top:0;left:0;right:0;height:48px;
+ padding:12px 24px 0;display:flex;align-items:center;
  justify-content:space-between;color:white;
- font-size:15px;font-weight:600;z-index:5;
+ font-size:14px;font-weight:600;z-index:10;
  pointer-events:none
+}
+/* 다이나믹 아일랜드 스타일 추가 */
+.dynamic-island{
+ position:absolute;top:10px;left:50%;transform:translateX(-50%);
+ width:110px;height:30px;background:#000;border-radius:20px;
+ z-index:11;pointer-events:none
 }
 .status-right{display:flex;align-items:center;gap:6px}
 .battery{
- width:27px;height:13px;border:1.5px solid white;
- border-radius:4px;position:relative;margin-left:2px
+ width:24px;height:12px;border:1.5px solid white;
+ border-radius:3px;position:relative;margin-left:2px
 }
 .battery:before{
- content:"";position:absolute;left:2px;top:2px;
- height:7px;width:18px;background:white;border-radius:1px
+ content:"";position:absolute;left:1.5px;top:1.5px;
+ height:6px;width:15px;background:white;border-radius:1px
 }
 .battery:after{
- content:"";position:absolute;right:-4px;top:3px;
- height:5px;width:2px;background:white;border-radius:0 2px 2px 0
+ content:"";position:absolute;right:-3.5px;top:2.5px;
+ height:4px;width:1.5px;background:white;border-radius:0 1px 1px 0
 }
 .lock{
  position:absolute;inset:0;text-align:center;
  display:flex;flex-direction:column;align-items:center;
  justify-content:flex-start;
- padding-top:80px;cursor:pointer;z-index:6;
+ padding-top:85px;cursor:pointer;z-index:6;
  background-image:url('./687AE8AE-4216-4825-9BC5-F094C56021B6.jpeg');
  background-size:cover;background-position:center;
  background-repeat:no-repeat
 }
-.date{font-size:17px;margin-bottom:8px;text-shadow:0 1px 5px #333}
+.date{font-size:16px;margin-bottom:6px;text-shadow:0 1px 4px #333}
 .clock{
- font-size:40px;font-weight:500;letter-spacing:-4px;
- text-shadow:0 1px 5px #333
+ font-size:68px;font-weight:600;letter-spacing:-3px;
+ text-shadow:0 2px 8px #333;line-height:1;margin-bottom:4px;
 }
 .lock-hint{
- position:absolute;bottom:48px;left:0;right:0;
- font-size:14px;text-shadow:0 1px 5px #333
+ position:absolute;bottom:42px;left:0;right:0;
+ font-size:13px;text-shadow:0 1px 4px #333;color:rgba(255,255,255,0.8)
 }
 .home{
- position:absolute;inset:44px 0 0;padding:24px 18px 115px;
+ position:absolute;inset:48px 0 0;padding:24px 18px 100px;
  display:none;z-index:2
 }
 .widgets{
- position:absolute;top:70px;right:18px;
+ position:absolute;top:60px;right:18px;
  width:92px;height:112px;border-radius:22px;
  background:#ffffff30;border:1px solid #ffffff35;
  padding:12px 10px;backdrop-filter:blur(12px);
@@ -77,13 +86,13 @@ body{
 .widgets span{font-size:11px}
 .grid{
  position:absolute;
- top:280px;
+ top:270px;
  left:18px;
  right:18px;
  display:grid;
  grid-template-columns:repeat(4,minmax(0,1fr));
  grid-template-rows:auto auto;
- gap:18px 7px;
+ gap:16px 7px;
 }
 .grid .app:nth-child(1){grid-column:1;grid-row:1}
 .grid .app:nth-child(2){grid-column:1;grid-row:2}
@@ -114,7 +123,7 @@ body{
  display:block;
 }
 .dock{
- position:absolute;bottom:20px;left:14px;right:14px;
+ position:absolute;bottom:16px;left:14px;right:14px;
  height:82px;border-radius:28px;
  background:#ffffff40;border:1px solid #ffffff25;
  backdrop-filter:blur(18px);
@@ -123,7 +132,7 @@ body{
 .dock .icon{width:58px;height:58px;margin:0}
 .page{
  position:absolute;inset:0 0 0 0;background:#f7f7fa;color:#222;
- display:none;padding:6px 10px 0 10px;overflow:hidden;z-index:4;
+ display:none;padding:8px 10px 0 10px;overflow:hidden;z-index:4;
  display:flex;flex-direction:column;
 }
 #pageContent {
@@ -140,9 +149,13 @@ body{
 }
 .row{padding:10px 0;border-bottom:1px solid #eee}
 .homebar{
- position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
- width:120px;height:5px;border-radius:9px;
+ position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+ width:130px;height:4.5px;border-radius:9px;
  background:white;z-index:10;cursor:pointer
+}
+@keyframes blink {
+ 0%, 100% { opacity: 0.2; }
+ 50% { opacity: 1; }
 }
 </style>
 </head>
@@ -150,15 +163,18 @@ body{
 <div class="phone">
 <div class="wallpaper"></div>
 
+<div class="dynamic-island"></div>
 <div class="status" id="statusHeader">
- <span id="statusTime">5:31</span>
+ <span id="statusTime" style="padding-left:4px">9:46</span>
  <div class="status-right">
-  <svg width="27" height="18" viewBox="0 0 27 18">
-   <path d="M2 16V12 M8 16V9 M14 16V5 M20 16V1" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <svg width="18" height="12" viewBox="0 0 18 12">
+   <rect x="1" y="6" width="3" height="6" rx="0.5" fill="white"/>
+   <rect x="5" y="4" width="3" height="8" rx="0.5" fill="white"/>
+   <rect x="9" y="2" width="3" height="10" rx="0.5" fill="white"/>
+   <rect x="13" y="0" width="3" height="12" rx="0.5" fill="white"/>
   </svg>
-  <svg width="27" height="20" viewBox="0 0 27 20">
-   <path d="M2 6 Q13.5 -2 25 6 M6 11 Q13.5 5 21 11 M10 15 Q13.5 12 17 15" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-   <circle cx="13.5" cy="18" r="1.5" fill="white"/>
+  <svg width="16" height="12" viewBox="0 0 16 12">
+   <path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5L16 3.2C13.8 1.2 11 0 8 0C5 0 2.2 1.2 0 3.2L1.5 5C3.2 3.5 5.5 2.5 8 2.5ZM8 6C9.7 6 11.2 6.7 12.4 7.8L14 6C12.3 4.5 10.2 3.8 8 3.8C5.8 3.8 3.7 4.5 2 6L3.6 7.8C4.8 6.7 6.3 6 8 6ZM8 9.5C8.8 9.5 9.5 10.2 9.5 11C9.5 11.8 8.8 12.5 8 12.5C7.2 12.5 6.5 11.8 6.5 11C6.5 10.2 7.2 9.5 8 9.5Z" fill="white"/>
   </svg>
   <span class="battery"></span>
  </div>
@@ -166,8 +182,8 @@ body{
 
 <div class="lock" id="lock" onclick="goHome()">
  <div class="date" id="date"></div>
- <div class="clock" id="clock">5:31</div>
- <div class="lock-hint">탭하여 iPhone 열기 ↑</div>
+ <div class="clock" id="clock">9:46</div>
+ <div class="lock-hint">위로 쓸어올리거나 클릭 해서 열기</div>
 </div>
 
 <div class="home" id="home">
@@ -222,7 +238,8 @@ body{
 </div>
 <div class="homebar" onclick="goHome()"></div>
 </div>
- <script>
+
+<script>
 function goHome(){
  document.getElementById('lock').style.display='none';
  document.getElementById('page').style.display='none';
@@ -784,10 +801,7 @@ window.openMsgChat = function(chatKey) {
  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#fff;color:#111"><div style="height:44px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:5"><button onclick="openApp(\'메시지\')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button><div style="flex:1;text-align:center;font-size:15px;font-weight:600;padding-right:24px">' + chatHeaderTitle + '</div></div><div style="flex:1;overflow-y:auto;padding:12px">' + chatBodyHtml + '</div>' + inputBarHtml + '</div>';
 };
 
-// 카카오톡 관련 전역 상태 및 탭/채팅방 오픈 함수
-window.kakaoTab = 'friend'; 
-
-// 전역 저장소에 재현이 형 데이터 보관 (동적 메시지 추가 대응용)
+// 카카오톡 전역 데이터 저장소
 window.kakaoChatDataStore = {
  '도예 김영훈 형': [
   { date: '2025년 4월 12일 토요일' },
@@ -927,17 +941,17 @@ window.kakaoChatDataStore = {
   { who: 'me', text: '집 갈때 저나할게', time: '오후 10:16' },
   { who: 'them', text: '선우 아직도 멀었어?', time: '오후 10:25' },
   { who: 'them', text: '형 너 목소리 듣고 싶은데', time: '오후 10:25' },
-  { who: 'them', text: '선우야', time: '오후 10:32' },
-  { who: 'them', text: '선우야 전화 받아봐', time: '오후 10:32' },
-  { who: 'them', text: '선우야 아 씨발 엘베 데이터', time: '오후 10:32' },
-  { who: 'them', text: '선우야 전화 왜 안받아', time: '오후 10:34' },
-  { who: 'them', text: '형 무섭다고 좀 선우야', time: '오후 10:34' },
-  { who: 'them', text: '형이 다 잘못했어', time: '오후 10:34' },
-  { who: 'them', text: '제발전화좀받아', time: '오후 10:34' },
-  { who: 'them', text: '선우야형두고가지마', time: '오후 10:37' },
-  { who: 'them', text: '형버리지마', time: '오후 10:37' },
-  { who: 'them', text: '횡단보도다와가는데', time: '오후 10:37' },
-  { who: 'them', text: '제발너아니었으면좋겠어', time: '오후 10:37' },
+  { who: 'them', text: '선우야', time: '오전 10:32' },
+  { who: 'them', text: '선우야 전화 받아봐', time: '오전 10:32' },
+  { who: 'them', text: '선우야 아 씨발 엘베 데이터', time: '오전 10:32' },
+  { who: 'them', text: '선우야 전화 왜 안받아', time: '오전 10:34' },
+  { who: 'them', text: '형 무섭다고 좀 선우야', time: '오전 10:34' },
+  { who: 'them', text: '형이 다 잘못했어', time: '오전 10:34' },
+  { who: 'them', text: '제발전화좀받아', time: '오전 10:34' },
+  { who: 'them', text: '선우야형두고가지마', time: '오전 10:37' },
+  { who: 'them', text: '형버리지마', time: '오전 10:37' },
+  { who: 'them', text: '횡단보도다와가는데', time: '오전 10:37' },
+  { who: 'them', text: '제발너아니었으면좋겠어', time: '오전 10:37' },
   { date: '2025년 10월 18일 토요일' },
   { who: 'them', text: '반지 예쁘네', time: '오전 11:05' },
   { who: 'them', text: '내 남자친구 안목 좋다', time: '오전 11:05' },
@@ -1046,7 +1060,6 @@ window.kakaoOpenChat = function(name) {
    groups.push({ type: 'date', text: item.date });
    currentGroup = null;
   } else {
-   // 동일한 발신자이면서 '시간'까지 일치할 때만 하나의 블록으로 묶기 위해 group key 조합 사용
    const groupKey = item.who + '_' + item.time;
    if (!currentGroup || currentGroup.groupKey !== groupKey) {
     if (currentGroup) groups.push(currentGroup);
@@ -1132,7 +1145,6 @@ window.kakaoOpenChat = function(name) {
   inputAreaHtml +
  '</div>';
 
- // 스크롤 위치 초기화 설정 ('재현이 형'은 맨 위 2022년 첫 메시지부터 보이도록 맨 위로, 나머지는 맨 아래로)
  setTimeout(() => {
   const sc = document.getElementById('kakaoChatScroll');
   if(sc) {
@@ -1144,7 +1156,6 @@ window.kakaoOpenChat = function(name) {
   }
  }, 50);
 
- // '재현이 형' 채팅방 전용 전송 인터랙션 로직
  if (name === '재현이 형') {
   const sendBtn = document.getElementById('kakaoSendBtn');
   const inputEl = document.getElementById('kakaoInput');
@@ -1155,12 +1166,10 @@ window.kakaoOpenChat = function(name) {
 
    const nowTime = '오후 ' + new Date().getHours() + ':' + String(new Date().getMinutes()).padStart(2, '0');
    
-   // 1. 유저 메시지 데이터 추가
    window.kakaoChatDataStore['재현이 형'].push({ who: 'me', text: val, time: nowTime });
    inputEl.value = '';
    window.kakaoOpenChat('재현이 형');
 
-   // 2. 답변 분기 결정 ('사랑해' 또는 '보고싶어' 키워드 포함 여부)
    let replyTexts = [];
    if (val.includes('사랑해')) {
     replyTexts = [
@@ -1180,14 +1189,12 @@ window.kakaoOpenChat = function(name) {
    if (replyTexts.length > 0) {
     const typingContainer = document.getElementById('typingIndicatorContainer');
     if (typingContainer) {
-     // 점 3개 타이핑 애니메이션 UI 출력
      typingContainer.innerHTML = '<div style="display:flex;align-items:flex-start;gap:6px;padding:4px 14px"><div style="width:36px;height:36px;border-radius:14px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden;flex-shrink:0">' + defaultProfileSvg + '</div><div style="background:#fff;border-radius:14px;padding:10px 14px;display:flex;gap:4px;align-items:center"><span style="width:6px;height:6px;background:#888;border-radius:50%;animation:blink 1.4s infinite"></span><span style="width:6px;height:6px;background:#888;border-radius:50%;animation:blink 1.4s infinite 0.2s"></span><span style="width:6px;height:6px;background:#888;border-radius:50%;animation:blink 1.4s infinite 0.4s"></span></div></div>';
     }
 
-    // 3초 후 점 3개 제거 및 순차적 착신 답장 추가
     setTimeout(() => {
      if (typingContainer) typingContainer.innerHTML = '';
-     replyTexts.forEach((rt, rIdx) => {
+     replyTexts.forEach((rt) => {
       window.kakaoChatDataStore['재현이 형'].push({ who: 'them', text: rt, time: nowTime });
      });
      window.kakaoOpenChat('재현이 형');
@@ -1210,7 +1217,6 @@ window.renderKakao = function() {
 
  const defaultProfileSvg = '<svg viewBox="0 0 24 24" fill="#fff" width="60%" height="60%"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>';
 
- // 상단바 이모티콘 크기를 작게 줄임
  const topHeader = '<div style="height:43px;padding:0 16px;display:flex;justify-content:space-between;align-items:center;background:#fff">' +
   '<span style="font-size:22px;font-weight:700">' + (isFriend ? '친구' : '채팅') + '</span>' +
   '<div style="display:flex;gap:14px;font-size:15px;color:#111">' +
@@ -1225,8 +1231,6 @@ window.renderKakao = function() {
 
  if (isFriend) {
   const contacts = ['도예 김영훈 형', '사체 이주연 형', '손영재', '아빠', '엄마', '유교 지창민 형', '재현이 형', '할머니'];
-  
-  // 본인 프로필 상태 메시지 삭제
   middleContent = '<div style="background:#fff;padding:8px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #f0f0f0">' +
    '<div style="width:50px;height:50px;border-radius:20px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>' +
    '<div><div style="font-size:16px;font-weight:600">선우</div></div>' +
@@ -1234,9 +1238,8 @@ window.renderKakao = function() {
   '<div style="padding:10px 16px;font-size:12px;color:#888;font-weight:600">친구 ' + contacts.length + '</div>' +
   '<div style="background:#fff">' +
    contacts.map(name => {
-    // 허용된 5명의 프로필만 클릭 가능하도록 설정, 나머지는 클릭 방지
     const isAllowed = ['도예 김영훈 형', '사체 이주연 형', '손영재', '재현이 형', '선우'].includes(name);
-    const clickAttr = isAllowed ? 'onclick="window.kakaoOpenChat(\'' + name + '\')"' : '';
+    const clickAttr = isAllowed ? 'onclick="window.kakaoOpenChat(\'' + name + \')"' : '';
     const cursorStyle = isAllowed ? 'cursor:pointer' : 'cursor:default;opacity:0.6';
     return '<div ' + clickAttr + ' style="padding:10px 16px;display:flex;align-items:center;gap:12px;' + cursorStyle + '">' +
      '<div style="width:40px;height:40px;border-radius:16px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>' +
@@ -1252,7 +1255,6 @@ window.renderKakao = function() {
    '<span style="background:#f0f0f0;color:#333;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:600">통화</span>' +
   '</div>';
 
-  // 채팅 목록 순서 변경: '선우'가 제일 위, 그 바로 밑에 '재현이 형'
   const chatItems = [
    { name: '선우', date: '2025. 9. 11', sub: '아 밥돼지 때문에 찾아 보니까 온통 고기네', pin: true, isMe: true },
    { name: '재현이 형', date: '4월 30일', sub: '형 좀만 기다리고 있어', pin: true },
@@ -1373,7 +1375,7 @@ function openApp(name){
   setTimeout(()=>igPage('home'), 10);
   return;
  }else if(name==='카카오톡'){
-  window.kakaoTab = 'friend'; // 앱 최초 진입 시 '친구' 탭이 기본값
+  window.kakaoTab = 'friend';
   window.renderKakao();
   return;
  }else if(name==='시계'){
