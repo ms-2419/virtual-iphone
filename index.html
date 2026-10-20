@@ -1171,25 +1171,25 @@ window.renderKakao = function() {
    chatItems.map(c => {
     let profileHtml = '';
     if (c.isMe) {
-     profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;position:relative;overflow:hidden">' + 
+     profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;position:relative;overflow:hidden;flex-shrink:0">' + 
       defaultProfileSvg + 
       '<div style="position:absolute;bottom:2px;right:2px;width:15px;height:15px;background:#68717a;border-radius:50%;display:grid;place-items:center;color:white;font-size:9px;font-weight:700;box-shadow:0 0 0 1.5px #fff">나</div>' +
      '</div>';
     } else {
-     profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden">' + defaultProfileSvg + '</div>';
+     profileHtml = '<div style="width:45px;height:45px;border-radius:18px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden;flex-shrink:0">' + defaultProfileSvg + '</div>';
     }
 
     const pinHtml = c.pin ? ' <span style="font-size:11px;color:#888;display:inline-block">📌</span>' : '';
 
     return '<div onclick="window.kakaoOpenChat(\'' + c.name + '\')" style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #f9f9f9">' +
-     '<div style="display:flex;align-items:center;gap:12px">' +
+     '<div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">' +
       profileHtml +
-      '<div>' +
+      '<div style="flex:1;min-width:0">' +
        '<div style="font-size:15px;font-weight:600;display:flex;align-items:center;gap:4px">' + c.name + pinHtml + '</div>' +
-       '<div style="font-size:12px;color:#888;margin-top:2px">' + c.sub + '</div>' +
+       '<div style="font-size:12px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.sub + '</div>' +
       '</div>' +
      '</div>' +
-     '<div style="font-size:11px;color:#aaa">' + c.date + '</div>' +
+     '<div style="font-size:11px;color:#aaa;flex-shrink:0;margin-left:8px;white-space:nowrap">' + c.date + '</div>' +
     '</div>';
    }).join('') +
   '</div>';
@@ -1279,7 +1279,7 @@ function openApp(name){
   setTimeout(()=>igPage('home'), 10);
   return;
  }else if(name==='카카오톡'){
-  window.kakaoTab = 'friend';
+  window.kakaoTab = 'chat';
   window.renderKakao();
   return;
  }else if(name==='시계'){
