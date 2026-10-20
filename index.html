@@ -26,7 +26,7 @@ body{
 .status{
  position:absolute;top:0;left:0;right:0;height:44px;
  padding:10px 24px 0;display:flex;align-items:center;
- justifyContent:space-between;color:white;
+ justify-content:space-between;color:white;
  font-size:15px;font-weight:600;z-index:5;
  pointer-events:none
 }
@@ -46,7 +46,7 @@ body{
 .lock{
  position:absolute;inset:0;text-align:center;
  display:flex;flex-direction:column;align-items:center;
- justifyContent:flex-start;
+ justify-content:flex-start;
  padding-top:80px;cursor:pointer;z-index:6;
  background-image:url('./687AE8AE-4216-4825-9BC5-F094C56021B6.jpeg');
  background-size:cover;background-position:center;
@@ -450,7 +450,7 @@ window.igPage = function(view, who) {
      return '<div style="display:flex;justify-content:' + (m.type === 'me' ? 'flex-end' : 'flex-start') + '"><span style="background:' + (m.type === 'me' ? '#3797f0' : '#f1f1f1') + ';color:' + (m.type === 'me' ? 'white' : '#111') + ';border-radius:18px;padding:9px 14px;font-size:13px;max-width:75%;word-break:break-word">' + m.text + '</span></div>';
     }
    }).join('') + '</div>' +
-   '<div style="padding:8px 12px;display:flex;gap:8px;border-top:1px solid #eee;background:#fff;position:sticky;bottom:0"><input placeholder="메시지 보내기..." style="flex:1;border:1px solid #ddd;border-radius:20px;padding:9px 14px;font-size:16px;outline:none"><button style="border:0;background:none;color:#3797f0;font-weight:600;cursor:pointer">전송</button></div>';
+   '<div style="padding:8px 12px;display:flex;gap:8px;border-top:1px solid #eee;background:#fff;position:sticky;bottom:0"><input placeholder="메시지 보내기..." style="flex:1;border:1px solid #ddd;border-radius:20px;padding:9px 14px;font-size:13px;outline:none"><button style="border:0;background:none;color:#3797f0;font-weight:600;cursor:pointer">전송</button></div>';
  } else if (view === 'dm') {
   body = '<div style="padding:14px;font-size:17px;font-weight:600;border-bottom:1px solid #eee">메시지</div>' +
    window.igChats.map(c => '<div onclick="' + (c[0] === 'leejaehyun_' ? "igPage('chat_jaehyun')" : "") + '" style="display:flex;align-items:center;gap:10px;padding:10px 13px;border-bottom:1px solid #f9f9f9;cursor:pointer"><div style="width:38px;height:38px;border-radius:50%;background:#eee;display:grid;place-items:center">' + profileIcon + '</div><div><div style="font-size:13px;font-weight:600">' + c[0] + '</div><div style="font-size:12px;color:#888;margin-top:3px">' + c[2] + '</div></div></div>').join('');
@@ -463,7 +463,7 @@ window.igPage = function(view, who) {
  } else if (view === 'activity') {
   body = '<div style="padding:15px;font-size:14px">활동 알림이 없습니다.</div>';
  } else if (view === 'search') {
-  body = '<div style="padding:12px"><input id="igSearchInput" placeholder="검색" style="width:100%;padding:10px 12px;border:0;border-radius:10px;background:#efefef;font-size:16px;outline:none"><div style="display:flex;justify-content:space-between;align-items:center;margin:18px 2px 10px"><b style="font-size:15px;color:#111">최근 검색 항목</b><span style="font-size:13px;color:#3797f0;cursor:pointer">모두 보기</span></div><div style="display:flex;flex-direction:column;gap:4px">' +
+  body = '<div style="padding:12px"><input id="igSearchInput" placeholder="검색" style="width:100%;padding:10px 12px;border:0;border-radius:10px;background:#efefef;font-size:14px;outline:none"><div style="display:flex;justify-content:space-between;align-items:center;margin:18px 2px 10px"><b style="font-size:15px;color:#111">최근 검색 항목</b><span style="font-size:13px;color:#3797f0;cursor:pointer">모두 보기</span></div><div style="display:flex;flex-direction:column;gap:4px">' +
    window.igSearches.map(kw => '<div onclick="document.getElementById(\'igSearchInput\').value=\'' + kw + '\'" style="display:flex;align-items:center;justify-content:space-between;padding:10px 4px;cursor:pointer"><div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:50%;background:#f4f4f4;display:grid;place-items:center;color:#888"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><span style="font-size:14px;font-weight:500;color:#222">' + kw + '</span></div><span style="color:#aaa;font-size:18px;padding:0 6px">✕</span></div>').join('') + '</div></div>';
  } else if (view === 'reels') {
   body = '<div style="padding:15px;font-size:14px">릴스 화면입니다.</div>';
@@ -568,9 +568,9 @@ window.renderCalendar = function() {
 window.memoList = [
  {
   id: 4,
-  year: "2025년",
+  year: "2026년",
   title: "형 사랑해",
-  date: "2025. 9. 12.",
+  date: "2026. 9. 12.",
   time: "오후 5:12",
   content: "형 안녕<br><br>나 지금 형한테 구라 치고 케이크 픽업 하러 가는 중인데, 형한테 편지를 써야 될 거 같아서 급하게 메모장 킨다 ㅋㅋ ㅎ 아니 왜 자꾸 나한테 편지 써달라고 찡찡거려? 나 악필인 거 누가 모르는데 ㅡㅡ 못 읽기만 해봐라 내 손에 죽어<br><br>그래도 형 내가 형 되게 많이 사랑하나봐 해달라고 한다고 다 해주는 거 보니 ㅋㅋㅋ<br><br>근데... 그 요즘 자꾸 형한테 짜증내서 미안해 오래 만나고 막 사랑이 식어서 그러는 게 아니라 대학 막바지라 그런가 좀 자꾸 다들 날 괴롭혀서... ㅜㅜ 그래서 그래 그러니까 형이 나 좀 봐줘 ㅎㅎ<br><br>아 신호등 바뀐다! 아 빨리 형 보고싶ㅇ"
  },
@@ -588,7 +588,7 @@ window.memoList = [
   title: "이재현 와꾸",
   date: "2023. 9. 28.",
   time: "오후 4:10",
-  content: "나 또 술처먹었어 메모장아... 근데 나 넘 서운해 내가 거울샷 찍은거 나만 보여주라 니까 저걸 왜 인스타에 올리냐 씨벌롬... 나빠 깨무러죽일거야"
+  content: "나 또 술처먹었어 메모장아... 근데 나 넘 서운해 내가 거울샷 찍은거 나한테만 보여주라 니까 저걸 왜 인스타에 올리냐 씨벌롬... 나빠 깨무러죽일거야"
  },
  {
   id: 3,
@@ -625,7 +625,7 @@ window.openDraftFolder = function() {
  const content = document.getElementById('pageContent');
  content.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span onclick="window.openFolderList()" style="color:#ff9f0a;font-size:15px;font-weight:600;cursor:pointer">‹ 폴더</span><span style="color:#ff9f0a;font-size:20px;cursor:pointer">⋯</span></div>' +
   '<h2 style="margin:0 0 16px;font-size:28px;font-weight:700">작성 중이던 항목</h2>' +
-  '<div onclick="window.openMemoDetail(4, true)" style="background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer"><div style="font-size:15px;font-weight:600;color:#111;margin-bottom:4px">형 사랑해</div><div style="font-size:12px;color:#888">2025. 9. 12. <span style="color:#aaa">형 안녕...</span></div></div>';
+  '<div onclick="window.openMemoDetail(4, true)" style="background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer"><div style="font-size:15px;font-weight:600;color:#111;margin-bottom:4px">형 사랑해</div><div style="font-size:12px;color:#888">2026. 9. 12. <span style="color:#aaa">형 안녕...</span></div></div>';
 };
 
 window.currentVoiceTimeout1 = null;
@@ -689,6 +689,7 @@ window.openPhoneTab = function(tabName) {
  } else if (tabName === '최근 통화') {
   innerHtml = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">편집</span><div style="display:flex;background:#e4e4eb;border-radius:8px;padding:2px"><span style="background:#fff;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600">모두</span><span style="padding:4px 12px;color:#888;font-size:13px;font-weight:600">부재중 전화</span></div></div>' +
    '<div style="background:#fff;border-radius:12px;overflow:hidden;margin-top:8px">' +
+   '<div class="row" style="padding:8px 12px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:14px;font-weight:600">재</div><div><div style="font-size:14px;font-weight:600;color:#111"><span style="display:inline-block;transform:rotate(225deg);font-size:11px;margin-right:2px">↗</span> 재현이 형 <span style="color:#ff3b30">(1)</span></div></div></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:#888">2026. 4. 12.</span><span style="color:#007aff;font-size:16px">ⓘ</span></div></div>' +
    '<div class="row" style="padding:8px 12px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:14px;font-weight:600">재</div><div><div style="font-size:14px;font-weight:600;color:#ff3b30"><span style="display:inline-block;transform:rotate(225deg);font-size:11px;margin-right:2px">↗</span> 재현이 형 (58)</div></div></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:#888">2025. 9. 12.</span><span style="color:#007aff;font-size:16px">ⓘ</span></div></div>' +
    '<div class="row" style="padding:8px 12px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:14px;font-weight:600">사</div><div><div style="font-size:14px;font-weight:600;color:#111"><span style="display:inline-block;transform:rotate(45deg);font-size:11px;margin-right:2px">↙</span> 사체 이주연 형</div></div></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:#888">2025. 9. 10.</span><span style="color:#007aff;font-size:16px">ⓘ</span></div></div>' +
    '<div class="row" style="padding:8px 12px;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:14px;font-weight:600">도</div><div><div style="font-size:14px;font-weight:600;color:#111"><span style="display:inline-block;transform:rotate(45deg);font-size:11px;margin-right:2px">↙</span> 도예 김영훈 형</div></div></div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:#888">2025. 9. 10.</span><span style="color:#007aff;font-size:16px">ⓘ</span></div></div>' +
@@ -709,7 +710,7 @@ window.openPhoneTab = function(tabName) {
   ];
   innerHtml = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">‹ 그룹</span><span style="color:#007aff;font-size:20px;font-weight:600;cursor:pointer">+</span></div>' +
    '<h2 style="margin:0 0 8px;font-size:26px;font-weight:700">연락처</h2>' +
-   '<input placeholder="검색" style="width:100%;padding:7px 12px;border:0;border-radius:10px;background:#e4e4eb;font-size:16px;outline:none;margin-bottom:8px">' +
+   '<input placeholder="검색" style="width:100%;padding:7px 12px;border:0;border-radius:10px;background:#e4e4eb;font-size:14px;outline:none;margin-bottom:8px">' +
    '<div style="background:#fff;border-radius:12px;overflow:hidden">' +
    contacts.map((c, idx) => '<div style="padding:8px 14px;display:flex;align-items:center;gap:12px;border-bottom:' + (idx === contacts.length - 1 ? '0' : '1px solid #eee') + '"><div style="width:32px;height:32px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:13px;font-weight:600">' + c.char + '</div><span style="font-size:14px;font-weight:600;color:#111">' + c.name + '</span></div>').join('') +
    '</div>';
@@ -721,7 +722,7 @@ window.openPhoneTab = function(tabName) {
   innerHtml = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">편집</span><span style="color:#007aff;font-size:15px;font-weight:600;cursor:pointer">인사말</span></div>' +
    '<h2 style="margin:0 0 16px;font-size:26px;font-weight:700">음성 메시지</h2>' +
    '<div style="background:#fff;border-radius:12px;overflow:hidden">' +
-   '<div onclick="window.openVoiceDetail()" class="row" style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer"><div style="display:flex;align-items:center;gap:12px"><div style="width:38px;height:38px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:15px;font-weight:600">재</div><div><div style="font-size:15px;font-weight:600;color:#111">재현이 형</div><div style="font-size:12px;color:#888;margin-top:2px">음성 메시지</div></div></div><div style="text-align:right"><div style="font-size:12px;color:#888">2025. 9. 12.</div><div style="font-size:11px;color:#aeaeb2;margin-top:2px">00:12</div></div></div>' +
+   '<div onclick="window.openVoiceDetail()" class="row" style="padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer"><div style="display:flex;align-items:center;gap:12px"><div style="width:38px;height:38px;border-radius:50%;background:#8e8e93;color:white;display:grid;place-items:center;font-size:15px;font-weight:600">재</div><div><div style="font-size:15px;font-weight:600;color:#111">재현이 형</div><div style="font-size:12px;color:#888;margin-top:2px">음성 메시지</div></div></div><div style="text-align:right"><div style="font-size:12px;color:#888">2026. 9. 12.</div><div style="font-size:11px;color:#aeaeb2;margin-top:2px">00:12</div></div></div>' +
    '</div>';
  }
 
@@ -771,17 +772,25 @@ window.openMsgChat = function(chatKey) {
     <div style="display:flex;justify-content:flex-start"><div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">형 화 안낼게...</div></div>
     <div style="display:flex;justify-content:flex-start"><div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">전화한번만받아봐</div></div>
    </div>
+
+   <div style="text-align:center;font-size:11px;color:#8e8e8e;margin:16px 0 4px">2026년 4월 12일 오전 12:01</div>
+   <div style="display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;justify-content:flex-start"><div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 생일 축하해</div></div>
+    <div style="display:flex;justify-content:flex-start"><div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">오늘은 제발 형 꿈에 나와서 형 숨 좀 쉬게 해주라</div></div>
+    <div style="display:flex;justify-content:flex-start"><div style="background:#e5e5ea;color:#111;border-radius:16px;padding:8px 12px;font-size:13px;max-width:85%;line-height:1.3">선우야 보고싶다</div></div>
+   </div>
   `;
  }
 
  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#fff;color:#111"><div style="height:44px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:5"><button onclick="openApp(\'메시지\')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button><div style="flex:1;text-align:center;font-size:15px;font-weight:600;padding-right:24px">' + chatHeaderTitle + '</div></div><div style="flex:1;overflow-y:auto;padding:12px">' + chatBodyHtml + '</div>' + inputBarHtml + '</div>';
 };
 
-// 카카오톡 관련 전역 상태 및 탭/채팅방 오픈 함수
 window.kakaoTab = 'friend'; 
+
 window.kakaoOpenChat = function(name) {
  const content = document.getElementById('pageContent');
- 
+ const defaultProfileSvg = '<svg viewBox="0 0 24 24" fill="#fff" width="60%" height="60%"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>';
+
  let rawChatData = [];
 
  if (name === '도예 김영훈 형') {
@@ -825,40 +834,6 @@ window.kakaoOpenChat = function(name) {
    { date: '2026년 3월 3일 화요일' },
    { who: 'them', text: '선우야 나 너 없어서 학교에서 왕따다', time: '오후 1:22' },
    { who: 'them', text: '아 보고싶다 내 친구', time: '오후 1:22' }
-  ];
- } else if (name === '선우') {
-  rawChatData = [
-   { date: '2022년 3월 1일 화요일' },
-   { who: 'me', text: '면도기 사야 됨 제발 선우야 까먹지마!!!!', time: '오전 10:55' },
-   { date: '2022년 5월 15일 일요일' },
-   { who: 'me', text: '사체 괜히 왔어', time: '오후 5:17' },
-   { who: 'me', text: '존나 힘들구만', time: '오후 5:17' },
-   { who: 'me', text: '이재현 순 구라쟁이 새끼', time: '오후 5:17' },
-   { date: '2023년 4월 12일 수요일' },
-   { who: 'me', text: '이따가 형 만나면 말해야 할 것', time: '오후 12:24' },
-   { who: 'me', text: '아 뭐더라', time: '오후 12:24' },
-   { who: 'me', text: '아 빨래 왜 안해놨냐고 하기', time: '오후 12:24' },
-   { who: 'me', text: '반성하는거 같으면 치킨 먹자고 하기', time: '오후 12:24' },
-   { date: '2023년 9월 6일 수요일' },
-   { who: 'me', text: '주문 제작 케이크 멘트', time: '오후 4:08' },
-   { who: 'me', text: '형 생일 축하해!', time: '오후 4:08' },
-   { who: 'me', text: '아 너무 식상한가', time: '오후 4:08' },
-   { who: 'me', text: '사랑해 형\n내가 평생 형 생일 챙겨줄게!', time: '오후 4:08' },
-   { date: '2024년 11월 21일 목요일' },
-   { who: 'me', text: '형 자는 모습 너무 예쁘다', time: '오전 7:10' },
-   { who: 'me', text: '내가 맨날 뽀뽀하고 튀는거 모르겠지 ㅋㅋㅋ', time: '오전 7:10' },
-   { date: '2025년 6월 16일 월요일' },
-   { who: 'me', text: '대청소', time: '오후 3:42' },
-   { who: 'me', text: '창틀 닦기', time: '오후 3:42' },
-   { who: 'me', text: '이불 갈기', time: '오후 3:42' },
-   { who: 'me', text: '형 괴롭히기', time: '오후 3:42' },
-   { who: 'me', text: '다 하고 나면 넷플 관람하기!', time: '오후 3:42' },
-   { date: '2025년 8월 22일 금요일' },
-   { who: 'me', text: '제주도 서귀포 맛집', time: '오후 9:36' },
-   { who: 'me', text: '제주가보담', time: '오후 9:36' },
-   { who: 'me', text: '제주미향', time: '오후 9:36' },
-   { who: 'me', text: '화고 흑돼지', time: '오후 9:36' },
-   { who: 'me', text: '아 밥돼지 때문에 찾아 보니까 온통 고기네', time: '오후 9:36' }
   ];
  } else if (name === '재현이 형') {
   rawChatData = [
@@ -1017,16 +992,50 @@ window.kakaoOpenChat = function(name) {
    { who: 'them', text: '형 사실 너 고등학생 때 부터 좋아했다.. ㅋㅋ', time: '오후 1:13' },
    { who: 'them', text: '넌 이상하다고 싫어했지만 너 졸업 사진 아직도 형 지갑에 있어', time: '오후 1:13' },
    { who: 'them', text: '이건 나중에 너 만나면 엄청 혼나겠다 ㅎ', time: '오후 1:13' },
-   { who: 'them', text: '보고싶다', time: '오전 1:14' },
-   { who: 'them', text: '안고싶다', time: '오전 1:14' },
-   { who: 'them', text: '선우 목소리 듣고싶다', time: '오전 1:14' },
-   { who: 'them', text: '바라는 게 너무 많지? 미안 ㅎ', time: '오전 1:14' },
-   { who: 'them', text: '형이 너 못지켜준것도 너무 미안해', time: '오전 1:14' },
-   { who: 'them', text: '아 또 눈물날 거 같다.. ㅋㅋ', time: '오전 1:14' },
-   { who: 'them', text: '아직 학교라 울기는 부끄러네', time: '오전 1:14' },
-   { who: 'them', text: '나중에 또 연락하러 와야겠다', time: '오전 1:14' },
-   { who: 'them', text: '사랑해 우리 선우', time: '오전 1:14' },
-   { who: 'them', text: '형 좀만 기다리고 있어', time: '오전 1:14' }
+   { who: 'them', text: '보고싶다', time: '오후 1:14' },
+   { who: 'them', text: '안고싶다', time: '오후 1:14' },
+   { who: 'them', text: '선우 목소리 듣고싶다', time: '오후 1:14' },
+   { who: 'them', text: '바라는 게 너무 많지? 미안 ㅎ', time: '오후 1:14' },
+   { who: 'them', text: '형이 너 못지켜준것도 너무 미안해', time: '오후 1:14' },
+   { who: 'them', text: '아 또 눈물날 거 같다.. ㅋㅋ', time: '오후 1:14' },
+   { who: 'them', text: '아직 학교라 울기는 부끄러네', time: '오후 1:14' },
+   { who: 'them', text: '나중에 또 연락하러 와야겠다', time: '오후 1:14' },
+   { who: 'them', text: '사랑해 우리 선우', time: '오후 1:14' },
+   { who: 'them', text: '형 좀만 기다리고 있어', time: '오후 1:14' }
+  ];
+ } else if (name === '선우') {
+  rawChatData = [
+   { date: '2022년 3월 1일 화요일' },
+   { who: 'me', text: '면도기 사야 됨 제발 선우야 까먹지마!!!!', time: '오전 10:55' },
+   { date: '2022년 5월 15일 일요일' },
+   { who: 'me', text: '사체 괜히 왔어', time: '오후 5:17' },
+   { who: 'me', text: '존나 힘들구만', time: '오후 5:17' },
+   { who: 'me', text: '이재현 순 구라쟁이 새끼', time: '오후 5:17' },
+   { date: '2023년 4월 12일 수요일' },
+   { who: 'me', text: '이따가 형 만나면 말해야 할 것', time: '오후 12:24' },
+   { who: 'me', text: '아 뭐더라', time: '오후 12:24' },
+   { who: 'me', text: '아 빨래 왜 안해놨냐고 하기', time: '오후 12:24' },
+   { who: 'me', text: '반성하는거 같으면 치킨 먹자고 하기', time: '오후 12:24' },
+   { date: '2023년 9월 6일 수요일' },
+   { who: 'me', text: '주문 제작 케이크 멘트', time: '오후 4:08' },
+   { who: 'me', text: '형 생일 축하해!', time: '오후 4:08' },
+   { who: 'me', text: '아 너무 식상한가', time: '오후 4:08' },
+   { who: 'me', text: '사랑해 형\n내가 평생 형 생일 챙겨줄게!', time: '오후 4:08' },
+   { date: '2024년 11월 21일 목요일' },
+   { who: 'me', text: '형 자는 모습 너무 예쁘다', time: '오전 7:10' },
+   { who: 'me', text: '내가 맨날 뽀뽀하고 튀는거 모르겠지 ㅋㅋㅋ', time: '오전 7:10' },
+   { date: '2025년 6월 16일 월요일' },
+   { who: 'me', text: '대청소', time: '오후 3:42' },
+   { who: 'me', text: '창틀 닦기', time: '오후 3:42' },
+   { who: 'me', text: '이불 갈기', time: '오후 3:42' },
+   { who: 'me', text: '형 괴롭히기', time: '오후 3:42' },
+   { who: 'me', text: '다 하고 나면 넷플 관람하기!', time: '오후 3:42' },
+   { date: '2025년 8월 22일 금요일' },
+   { who: 'me', text: '제주도 서귀포 맛집', time: '오후 9:36' },
+   { who: 'me', text: '제주가보담', time: '오후 9:36' },
+   { who: 'me', text: '제주미향', time: '오후 9:36' },
+   { who: 'me', text: '화고 흑돼지', time: '오후 9:36' },
+   { who: 'me', text: '아 밥돼지 때문에 찾아 보니까 온통 고기네', time: '오후 9:36' }
   ];
  } else {
   rawChatData = [
@@ -1067,7 +1076,7 @@ window.kakaoOpenChat = function(name) {
      chatBody += '<div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:4px">' +
       timeHtml +
       '<div style="background:#fee180;color:#111;border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:70%;word-break:break-word;white-space:pre-wrap;">' + item.text + '</div>' +
-      '</div>';
+     '</div>';
     } else {
      const isFirstInSubGroup = (idx === 0);
      let profileArea = '<div style="width:36px;height:36px;flex-shrink:0"></div>';
