@@ -785,16 +785,13 @@ window.openMsgChat = function(chatKey) {
  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#fff;color:#111"><div style="height:44px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;z-index:5"><button onclick="openApp(\'메시지\')" style="border:0;background:none;color:#007aff;font-size:24px;cursor:pointer;padding:0;display:flex;align-items:center">‹</button><div style="flex:1;text-align:center;font-size:15px;font-weight:600;padding-right:24px">' + chatHeaderTitle + '</div></div><div style="flex:1;overflow-y:auto;padding:12px">' + chatBodyHtml + '</div>' + inputBarHtml + '</div>';
 };
 
-// 카카오톡 관련 전역 상태 및 탭/채팅방 오픈 함수
-window.kakaoTab = 'chat'; // 요청사항: 뒤로 가기 및 기본값은 '채팅' 목록으로 설정
+// 카카오톡 관련 상태 및 렌더링 함수
+window.kakaoTab = 'friend'; // 최초 진입 시 '친구' 탭이 기본값
+
 window.kakaoOpenChat = function(name) {
  const content = document.getElementById('pageContent');
-  
- // 카카오톡 기본 프로필 SVG
  const defaultProfileSvg = '<svg viewBox="0 0 24 24" fill="#fff" width="60%" height="60%"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg>';
 
- // 가상 대화 데이터 파싱 및 렌더링 (날짜별 공백, 첫 대화 꼬리 및 상대방 프로필 적용)
- let chatBody = '';
  let rawChatData = [];
 
  if (name === '도예 김영훈 형') {
@@ -866,57 +863,83 @@ window.kakaoOpenChat = function(name) {
    { who: 'them', text: '사랑해 우리 선우', time: '오후 1:14' },
    { who: 'them', text: '형 좀만 기다리고 있어', time: '오후 1:14' }
   ];
+ } else if (name === '선우') {
+  rawChatData = [
+   { date: '2025년 9월 11일 목요일' },
+   { who: 'me', text: '아 밥돼지 때문에 찾아 보니까 온통 고기네', time: '오후 3:15' }
+  ];
  } else {
   rawChatData = [
    { who: 'them', text: '반가워 선우야!', time: '오후 12:00' }
   ];
  }
 
- // 대화 배열을 순회하며 날짜선 공백 및 첫 번째 대화 프로필/꼬리(Tail) 생성
+ // 연속된 메시지 중 마지막 메시지에만 시간이 표시되도록 그룹화하여 렌더링
+ let chatBody = '';
  let lastWho = null;
- rawChatData.forEach((item, idx) => {
+
+ // 그룹 단위로 묶기 위한 전처리
+ let groups = [];
+ let currentGroup = null;
+
+ rawChatData.forEach(item => {
   if (item.date) {
-   // 요청사항: 날짜선 자체 폰트 유지 + 날짜선과 대화 사이 공백(여백) 추가
-   chatBody += '<div style="text-align:center;font-size:11px;color:#8e8e8e;margin:22px 0 14px">' + item.date + '</div>';
-   lastWho = null; // 날짜가 바뀌면 상대방 연속 대화 끊김 처리
+   if (currentGroup) groups.push(currentGroup);
+   groups.push({ type: 'date', text: item.date });
+   currentGroup = null;
+   lastWho = null;
   } else {
-   const isMe = item.who === 'me';
-   const isFirstInGroup = !isMe && lastWho !== 'them'; // 그룹의 첫 번째 상대방 메시지 여부
-
-   if (isMe) {
-    chatBody += '<div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:8px">' +
-     '<div style="font-size:10px;color:#888;flex-shrink:0">' + item.time + '</div>' +
-     '<div style="background:#fee180;color:#111;border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:70%;word-break:break-word">' + item.text + '</div>' +
-    '</div>';
-    lastWho = 'me';
+   if (!currentGroup || currentGroup.who !== item.who) {
+    if (currentGroup) groups.push(currentGroup);
+    currentGroup = { who: item.who, items: [item] };
    } else {
-    // 상대방 메시지 (첫 번째 대화일 때만 프로필 사진 및 꼬리 모양 적용)
-    let profileArea = '<div style="width:36px;height:36px;flex-shrink:0"></div>';
-    let bubbleStyle = 'background:#fff;color:#111;border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:70%;word-break:break-word;position:relative;';
-    
-    if (isFirstInGroup) {
-     profileArea = '<div style="width:36px;height:36px;border-radius:14px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden;flex-shrink:0">' + defaultProfileSvg + '</div>';
-     // 첫 번째 대화 꼬리(왼쪽 뾰족이 모사)
-     bubbleStyle += 'border-top-left-radius:4px;';
-    } else {
-     // 연속된 대화일 경우 프로필 공간만큼 들여쓰기 효과
-     bubbleStyle += 'margin-left:40px;';
-    }
-
-    chatBody += '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:8px">';
-    if (isFirstInGroup) {
-     chatBody += profileArea + '<div style="display:flex;flex-direction:column"><div style="font-size:11px;color:#555;margin-bottom:2px">' + name + '</div><div style="display:flex;align-items:flex-end;gap:4px"><div style="' + bubbleStyle + '">' + item.text + '</div><div style="font-size:10px;color:#888;flex-shrink:0">' + item.time + '</div></div></div>';
-    } else {
-     chatBody += '<div style="display:flex;align-items:flex-end;gap:4px;width:100%"><div style="' + bubbleStyle + '">' + item.text + '</div><div style="font-size:10px;color:#888;flex-shrink:0">' + item.time + '</div></div>';
-    }
-    chatBody += '</div>';
-
-    lastWho = 'them';
+    currentGroup.items.push(item);
    }
+   lastWho = item.who;
+  }
+ });
+ if (currentGroup) groups.push(currentGroup);
+
+ // 그룹 순회 렌더링
+ groups.forEach(g => {
+  if (g.type === 'date') {
+   chatBody += '<div style="text-align:center;font-size:11px;color:#8e8e8e;margin:22px 0 14px">' + g.text + '</div>';
+  } else {
+   const isMe = g.who === 'me';
+   g.items.forEach((item, idx) => {
+    const isLastInGroup = (idx === g.items.length - 1);
+    const timeHtml = isLastInGroup ? '<div style="font-size:10px;color:#888;flex-shrink:0">' + item.time + '</div>' : '<div style="font-size:10px;color:transparent;flex-shrink:0;user-select:none">' + item.time + '</div>';
+
+    if (isMe) {
+     chatBody += '<div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:4px;margin-bottom:4px">' +
+      timeHtml +
+      '<div style="background:#fee180;color:#111;border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:70%;word-break:break-word">' + item.text + '</div>' +
+     '</div>';
+    } else {
+     const isFirstInSubGroup = (idx === 0);
+     let profileArea = '<div style="width:36px;height:36px;flex-shrink:0"></div>';
+     let bubbleStyle = 'background:#fff;color:#111;border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:70%;word-break:break-word;position:relative;';
+
+     if (isFirstInSubGroup) {
+      profileArea = '<div style="width:36px;height:36px;border-radius:14px;background:#b0b8c1;display:grid;place-items:center;overflow:hidden;flex-shrink:0">' + defaultProfileSvg + '</div>';
+      bubbleStyle += 'border-top-left-radius:4px;';
+     } else {
+      bubbleStyle += 'margin-left:40px;';
+     }
+
+     chatBody += '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px">';
+     if (isFirstInSubGroup) {
+      chatBody += profileArea + '<div style="display:flex;flex-direction:column"><div style="font-size:11px;color:#555;margin-bottom:2px">' + name + '</div><div style="display:flex;align-items:flex-end;gap:4px"><div style="' + bubbleStyle + '">' + item.text + '</div>' + timeHtml + '</div></div>';
+     } else {
+      chatBody += '<div style="display:flex;align-items:flex-end;gap:4px;width:100%"><div style="' + bubbleStyle + '">' + item.text + '</div>' + timeHtml + '</div>';
+     }
+     chatBody += '</div>';
+    }
+   });
   }
  });
 
- // 요청사항: 하단바 입력창을 클릭할 때 줌인 없이 입력창과 키보드가 함께 올라오도록 구성하고, 마지막 채팅 위치로 스크롤 연동
+ // 뒤로 가기 누를 때 window.kakaoTab = 'chat'으로 설정하여 '채팅' 목록이 기본으로 뜨도록 수정[cite: 7]
  content.innerHTML = '<div style="display:flex;flex-direction:column;height:100%;background:#b2c7d9;color:#111">' +
   '<div style="height:48px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;background:#b2c7d9;position:sticky;top:0;z-index:6">' +
    '<div style="display:flex;align-items:center;gap:12px">' +
@@ -930,68 +953,18 @@ window.kakaoOpenChat = function(name) {
    '</div>' +
   '</div>' +
   '<div id="kakaoChatScroll" style="flex:1;padding:12px 14px;overflow-y:auto">' + chatBody + '</div>' +
-  '<div onclick="window.openKakaoKeyboard(this)" style="padding:8px 12px;background:#f7f7f7;display:flex;gap:8px;align-items:center;border-top:1px solid #ddd;cursor:pointer;flex-shrink:0">' +
-   '<span style="font-size:20px;color:#666">➕</span>' +
-   '<div style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:4px;background:#fff;font-size:13px;color:#888">메시지 입력</div>' +
-   '<span style="font-size:18px;color:#666">😊</span>' +
-   '<span style="font-size:18px;color:#666">#</span>' +
+  '<div style="padding:8px 12px;background:#f7f7f7;display:flex;gap:8px;align-items:center;border-top:1px solid #ddd;flex-shrink:0">' +
+   '<span style="font-size:20px;color:#666;cursor:pointer">➕</span>' +
+   '<input type="text" placeholder="메시지 입력" style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:4px;background:#fff;font-size:13px;outline:none;" />' +
+   '<span style="font-size:18px;color:#666;cursor:pointer">😊</span>' +
+   '<span style="font-size:18px;color:#666;cursor:pointer">#</span>' +
   '</div>' +
  '</div>';
 
- // 채팅방 진입 시 마지막 대화 쪽으로 자동 스크롤
  setTimeout(() => {
   const sc = document.getElementById('kakaoChatScroll');
   if(sc) sc.scrollTop = sc.scrollHeight;
  }, 50);
-};
-
-// 하단바 클릭 시 타자판(키보드)이 위로 올라오는 인터랙션 구현 함수
-window.openKakaoKeyboard = function(el) {
- const parentContainer = el.parentElement;
- if(document.getElementById('fakeKoreanKeyboard')) return; // 이미 열려있으면 중복 방지
-
- const keyboardHtml = document.createElement('div');
- keyboardHtml.id = 'fakeKoreanKeyboard';
- keyboardHtml.style.cssText = 'background:#d1d5db;padding:8px 4px;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;flex-shrink:0;border-top:1px solid #9ca3af;animation:slideUp 0.2s ease-out;';
- 
- const keys = ['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ','ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ','⇧','ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ','⌫','123','😊','space','↵'];
- keys.forEach(k => {
-  const btn = document.createElement('div');
-  btn.style.cssText = 'background:#fff;color:#111;border-radius:4px;padding:10px 0;text-align:center;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 1px 1px rgba(0,0,0,0.1);display:grid;place-items:center;';
-  if(k === 'space') {
-   btn.style.gridColumn = 'span 4';
-   btn.textContent = '한글';
-  } else if(k === '↵') {
-   btn.style.background = '#007aff';
-   btn.style.color = '#fff';
-   btn.style.gridColumn = 'span 2';
-   btn.textContent = '전송';
-   btn.onclick = (e) => {
-    e.stopPropagation();
-    keyboardHtml.remove();
-   };
-  } else {
-   btn.textContent = k;
-  }
-  keyboardHtml.appendChild(btn);
- });
-
- parentContainer.appendChild(keyboardHtml);
- 
- // 스크롤을 맨 아래(마지막 메시지 위치)로 부드럽게 이동
- const sc = document.getElementById('kakaoChatScroll');
- if(sc) {
-  setTimeout(() => { sc.scrollTop = sc.scrollHeight; }, 50);
- }
-
- // 키보드 바깥 영역 클릭 시 키보드 닫히기
- const closeFn = (evt) => {
-  if(!keyboardHtml.contains(evt.target) && !el.contains(evt.target)) {
-   keyboardHtml.remove();
-   document.removeEventListener('click', closeFn);
-  }
- };
- setTimeout(() => { document.addEventListener('click', closeFn); }, 100);
 };
 
 window.renderKakao = function() {
@@ -1106,19 +1079,19 @@ function openApp(name){
    '<div class="row" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:0;cursor:default"><div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0"><div style="width:20px;display:flex;justify-content:center"><span style="width:8px;height:8px;background:' + (window.msgUnreadStates.bank ? '#007aff' : 'transparent') + ';border-radius:50%;display:inline-block"></span></div><div style="width:40px;height:40px;border-radius:50%;background:#8e8e93;display:grid;place-items:center;color:white;flex-shrink:0"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6z"/></svg></div><div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600;color:#111">+82 1677-111</div><div style="font-size:13px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">MS 은행 카드 사용 안내...</div></div></div><div style="display:flex;align-items:center;gap:6px;flex-shrink:0;padding-left:8px"><span style="font-size:12px;color:#888">2025. 6. 10.</span><span style="color:#ccc;font-size:16px">›</span></div></div>' +
    '</div>';
   content.innerHTML='<div style="flex:1;overflow-y:auto;padding:12px">' + html + '</div>';
- } else if(name==='사진'){
+ }else if(name==='사진'){
   html='<h2>사진</h2><div style="color:#888;margin:8px 0 16px">앨범</div>' +
-       '<div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer">' +
-       '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
-       '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
-       '<span style="color:#aaa;font-size:22px">›</span></div>' +
-       '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
-       '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
-       '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
-       '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
-       '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:50px 12px 30px">' +
-       '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
-       '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
+        '<div onclick="this.nextElementSibling.style.display=\'grid\'" style="display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer">' +
+        '<img src="IMG_6934.jpeg" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
+        '<div style="flex:1"><b style="font-size:17px;color:#222">형</b><div style="font-size:13px;color:#888;margin-top:5px">사진 10장</div></div>' +
+        '<span style="color:#aaa;font-size:22px">›</span></div>' +
+        '<div style="display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:14px">'+["IMG_6386.jpeg","IMG_6407.jpeg","IMG_6558.jpeg","IMG_6559.jpeg","IMG_6707.png","IMG_6718.png","IMG_6892.jpeg","IMG_6893.jpeg","IMG_6934.jpeg","IMG_6937.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="openPhotoViewer('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div>' +
+        '<div style="margin-top:22px;display:flex;align-items:center;gap:14px;padding:12px;background:#f4f4f4;border-radius:14px;cursor:pointer" onclick="document.getElementById(\'album629\').style.display=\'block\'">' +
+        '<img src="4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png" style="width:82px;height:82px;object-fit:cover;border-radius:10px">' +
+        '<div><b style="font-size:17px;color:#222">ㅋㅋ♥</b><div style="font-size:13px;color:#888;margin-top:5px">사진 14장</div></div></div>' +
+        '<div id="album629" style="display:none;position:fixed;inset:0;background:#f7f7fa;z-index:20;overflow:auto;padding:50px 12px 30px">' +
+        '<button onclick="document.getElementById(\'album629\').style.display=\'none\'" style="border:0;background:#e4e4eb;border-radius:12px;padding:10px 14px">‹ 앨범</button><h2>ㅋㅋ♥</h2>' +
+        '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px">'+["4D6F47F3-82BE-4441-A7DA-2F6CE2F33B4E.png","IMG_7089.jpeg","IMG_7088.jpeg","IMG_7087.jpeg","IMG_7085.jpeg","IMG_7084.jpeg","IMG_7083.jpeg","IMG_7082.jpeg","IMG_7081.jpeg","IMG_7080.jpeg","IMG_6785.jpeg","IMG_6533.jpeg","IMG_6531.jpeg","IMG_6279.jpeg"].map((src,i)=>'<img src="'+src+'" onclick="window.openPhotoViewer629('+i+')" style="width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer">').join('')+'</div></div>';
   content.innerHTML='<div style="flex:1;overflow-y:auto;padding:12px">' + html + '</div>';
  }else if(name==='카메라'){
   html='<h2>카메라</h2><div style="height:280px;background:#222;border-radius:20px;display:grid;place-items:center;color:white;font-size:50px">📷</div>';
@@ -1153,7 +1126,7 @@ function openApp(name){
   setTimeout(()=>igPage('home'), 10);
   return;
  }else if(name==='카카오톡'){
-  window.kakaoTab = 'chat'; // 요청사항: 카카오톡 앱 최초 진입 시 '채팅' 탭이 기본값
+  window.kakaoTab = 'friend'; // 앱 최초 진입 시 '친구' 탭이 기본값[cite: 7]
   window.renderKakao();
   return;
  }else if(name==='시계'){
