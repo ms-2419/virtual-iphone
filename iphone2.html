@@ -10,9 +10,12 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #000;
+            overflow: hidden; /* 스크롤 방지, 한 화면에 고정 */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
         }
-        /* 아이폰 스크롤바 숨기기 */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -22,92 +25,106 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen m-0 p-4">
+<body class="flex items-center justify-center h-screen w-screen select-none">
 
     <!-- 전체 래퍼 (외부 뒤로가기 버튼 + 아이폰 프레임) -->
     <div class="relative flex items-center justify-center">
 
-        <!-- [안전하게 배치된] 왼쪽 상단 원형 '<' 뒤로 가기 버튼 -->
-        <button onclick="goHome()" class="absolute -left-20 top-4 md:-left-28 w-12 h-12 bg-white/80 hover:bg-white backdrop-blur-md rounded-full shadow-lg flex items-center justify-center text-gray-800 font-bold text-xl transition-all duration-200 border border-gray-200 cursor-pointer z-50 group" title="홈 화면으로">
+        <!-- 왼쪽 상단 원형 '<' 뒤로 가기 버튼 -->
+        <button onclick="goHome()" class="absolute -left-20 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full shadow-lg flex items-center justify-center text-white font-bold text-xl transition-all duration-200 border border-white/30 cursor-pointer z-50 group" title="홈으로">
             <span class="group-hover:-translate-x-0.5 transition-transform">&lt;</span>
         </button>
 
-        <!-- 아이폰 기기 프레임 -->
-        <div class="relative w-[390px] h-[844px] bg-black rounded-[55px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden border-[12px] border-gray-800 flex flex-col">
+        <!-- 아이폰 기기 프레임 (한 화면에 딱 맞도록 비율 및 크기 최적화) -->
+        <div class="relative w-[360px] h-[780px] bg-black rounded-[50px] shadow-[0_25px_60px_-15px_rgba(255,255,255,0.15)] overflow-hidden border-[10px] border-gray-800 flex flex-col">
             
             <!-- 아이폰 상단바 (Dynamic Island & 상태표시줄) -->
-            <div class="absolute top-0 left-0 right-0 h-12 bg-transparent z-40 flex justify-between items-center px-7 text-white text-xs font-semibold select-none pointer-events-none">
+            <div class="absolute top-0 left-0 right-0 h-11 bg-transparent z-40 flex justify-between items-center px-6 text-white text-xs font-semibold select-none pointer-events-none">
                 <span id="status-time" class="tracking-tight">9:41</span>
                 <!-- 다이내믹 아일랜드 -->
-                <div class="absolute left-1/2 -translate-x-1/2 top-2.5 w-[120px] h-[30px] bg-black rounded-full flex items-center justify-between px-2.5">
-                    <div class="w-3 h-3 rounded-full bg-[#111] border border-gray-800"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#050505]"></div>
+                <div class="absolute left-1/2 -translate-x-1/2 top-2 w-[100px] h-[26px] bg-black rounded-full flex items-center justify-between px-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#111] border border-gray-800"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#050505]"></div>
                 </div>
                 <div class="flex items-center space-x-1.5">
                     <!-- 신호 -->
-                    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19h15.3l-.62-1.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 2c3.87 0 7 3.13 7 7 0 1.66-.58 3.19-1.55 4.41L12 11.83 6.55 16.41C5.58 15.19 5 13.66 5 12c0-3.87 3.13-7 7-7z"/></svg>
+                    <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19h15.3l-.62-1.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 2c3.87 0 7 3.13 7 7 0 1.66-.58 3.19-1.55 4.41L12 11.83 6.55 16.41C5.58 15.19 5 13.66 5 12c0-3.87 3.13-7 7-7z"/></svg>
                     <!-- 와이파이 -->
-                    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 3C6.95 3 3.15 4.85 0 7.23L12 22 24 7.23C20.85 4.85 17.05 3 12 3zm0 3.2c3.8 0 7.15 1.3 9.9 3.48L12 18.25 2.1 9.68C4.85 7.5 8.2 6.2 12 6.2z"/></svg>
+                    <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path d="M12 3C6.95 3 3.15 4.85 0 7.23L12 22 24 7.23C20.85 4.85 17.05 3 12 3zm0 3.2c3.8 0 7.15 1.3 9.9 3.48L12 18.25 2.1 9.68C4.85 7.5 8.2 6.2 12 6.2z"/></svg>
                     <!-- 배터리 -->
-                    <div class="w-6 h-3 border border-white rounded-[4px] p-0.5 flex items-center">
+                    <div class="w-5 h-2.5 border border-white rounded-[3px] p-0.5 flex items-center">
                         <div class="h-full w-full bg-white rounded-[1px]"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- 화면 콘텐츠 영역 -->
-            <div id="screen-container" class="relative w-full h-full flex flex-col pt-12 pb-8 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop');">
+            <!-- 화면 콘텐츠 영역 (배경화면: 아이폰 기본 스타일) -->
+            <div id="screen-container" class="relative w-full h-full flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop');">
                 
+                <!-- 0. 잠금 화면 (Lock Screen) -->
+                <div id="view-lock" class="absolute inset-0 z-30 flex flex-col items-center justify-between pt-16 pb-8 px-6 text-white bg-black/20 backdrop-blur-[2px] transition-transform duration-500">
+                    <div class="flex flex-col items-center mt-6">
+                        <svg class="w-6 h-6 mb-2 text-white/90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <div class="text-5xl font-light tracking-tight" id="lock-time">9:41</div>
+                        <div class="text-sm font-medium mt-1 text-white/90" id="lock-date">10월 26일 월요일</div>
+                    </div>
+                    <!-- 위로 쓸어올려 잠금해제 영역 -->
+                    <div id="swipe-to-unlock" class="w-full flex flex-col items-center cursor-pointer pb-2 group">
+                        <div class="text-xs tracking-wide text-white/80 font-medium group-hover:translate-y-[-2px] transition-transform">위로 쓸어올려 잠금 해제</div>
+                        <div class="w-32 h-1 bg-white/60 rounded-full mt-3"></div>
+                    </div>
+                </div>
+
                 <!-- 1. 홈 화면 (Home Screen) -->
-                <div id="view-home" class="absolute inset-0 flex flex-col justify-between pt-10 pb-4 px-6 z-10 transition-opacity duration-300">
-                    <!-- 상단 앱 아이콘 그리드 (4개) -->
-                    <div class="grid grid-cols-4 gap-4 pt-4">
+                <div id="view-home" class="absolute inset-0 flex flex-col justify-between pt-14 pb-5 px-6 z-10 opacity-0 pointer-events-none transition-opacity duration-300">
+                    <!-- 상단 앱 아이콘 그리드 (인스타그램, 시계, 캘린더, 메모) -->
+                    <div class="grid grid-cols-4 gap-4 pt-2">
                         <!-- Instagram -->
                         <div onclick="openApp('instagram')" class="flex flex-col items-center cursor-pointer group">
-                            <div class="w-16 h-16 rounded-[20px] bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 shadow-lg flex items-center justify-center text-white text-3xl group-active:scale-95 transition-transform">
-                                <svg class="w-9 h-9 fill-white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            <div class="w-14 h-14 rounded-[18px] bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 shadow-md flex items-center justify-center text-white text-3xl group-active:scale-95 transition-transform">
+                                <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                             </div>
-                            <span class="text-white text-[11px] mt-1.5 drop-shadow">Instagram</span>
+                            <span class="text-white text-[11px] mt-1.5 drop-shadow font-medium">Instagram</span>
                         </div>
                         <!-- 시계 -->
                         <div onclick="openApp('clock')" class="flex flex-col items-center cursor-pointer group">
-                            <div class="w-16 h-16 rounded-[20px] bg-black shadow-lg flex flex-col items-center justify-center text-white border border-gray-700 group-active:scale-95 transition-transform">
-                                <span class="text-2xl font-light" id="clock-icon-time">9:41</span>
-                                <span class="text-[9px] text-gray-400">시계</span>
+                            <div class="w-14 h-14 rounded-[18px] bg-black shadow-md flex flex-col items-center justify-center text-white border border-gray-700 group-active:scale-95 transition-transform">
+                                <span class="text-xl font-light" id="clock-icon-time">9:41</span>
+                                <span class="text-[8px] text-gray-400">시계</span>
                             </div>
-                            <span class="text-white text-[11px] mt-1.5 drop-shadow">시계</span>
+                            <span class="text-white text-[11px] mt-1.5 drop-shadow font-medium">시계</span>
                         </div>
                         <!-- 캘린더 -->
                         <div onclick="openApp('calendar')" class="flex flex-col items-center cursor-pointer group">
-                            <div class="w-16 h-16 rounded-[20px] bg-white shadow-lg flex flex-col items-center justify-center text-black group-active:scale-95 transition-transform">
-                                <span class="text-[10px] text-red-600 font-bold uppercase" id="cal-month">OCT</span>
-                                <span class="text-2xl font-bold leading-none" id="cal-date">26</span>
+                            <div class="w-14 h-14 rounded-[18px] bg-white shadow-md flex flex-col items-center justify-center text-black group-active:scale-95 transition-transform">
+                                <span class="text-[9px] text-red-600 font-bold uppercase" id="cal-month">OCT</span>
+                                <span class="text-xl font-bold leading-none" id="cal-date">26</span>
                             </div>
-                            <span class="text-white text-[11px] mt-1.5 drop-shadow">캘린더</span>
+                            <span class="text-white text-[11px] mt-1.5 drop-shadow font-medium">캘린더</span>
                         </div>
                         <!-- 메모 -->
                         <div onclick="openApp('notes')" class="flex flex-col items-center cursor-pointer group">
-                            <div class="w-16 h-16 rounded-[20px] bg-amber-100 shadow-lg flex flex-col p-2.5 justify-between border border-amber-200 group-active:scale-95 transition-transform">
-                                <div class="w-full h-1.5 bg-amber-400 rounded-full"></div>
+                            <div class="w-14 h-14 rounded-[18px] bg-amber-100 shadow-md flex flex-col p-2 justify-between border border-amber-200 group-active:scale-95 transition-transform">
+                                <div class="w-full h-1 bg-amber-400 rounded-full"></div>
                                 <div class="w-3/4 h-1 bg-amber-300 rounded-full"></div>
                                 <div class="w-1/2 h-1 bg-amber-300 rounded-full"></div>
                             </div>
-                            <span class="text-white text-[11px] mt-1.5 drop-shadow">메모</span>
+                            <span class="text-white text-[11px] mt-1.5 drop-shadow font-medium">메모</span>
                         </div>
                     </div>
 
                     <!-- 하단 독바 (Dock): 전화, 메시지, 사진, 카카오톡 -->
-                    <div class="w-full bg-white/25 backdrop-blur-xl rounded-[30px] p-3 flex justify-around items-center shadow-lg mb-2">
+                    <div class="w-full bg-white/25 backdrop-blur-xl rounded-[26px] p-2.5 flex justify-around items-center shadow-lg mb-1">
                         <!-- 전화 -->
-                        <div onclick="openApp('phone')" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white shadow-md cursor-pointer active:scale-95 transition-transform">
-                            <svg class="w-7 h-7 fill-white" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <div onclick="openApp('phone')" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white shadow-md cursor-pointer active:scale-95 transition-transform">
+                            <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                         </div>
                         <!-- 메시지 -->
-                        <div onclick="openApp('messages')" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white shadow-md cursor-pointer active:scale-95 transition-transform">
-                            <svg class="w-7 h-7 fill-white" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        <div onclick="openApp('messages')" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white shadow-md cursor-pointer active:scale-95 transition-transform">
+                            <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
                         </div>
                         <!-- 사진 -->
-                        <div onclick="openApp('photos')" class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center shadow-md cursor-pointer active:scale-95 transition-transform overflow-hidden">
+                        <div onclick="openApp('photos')" class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-md cursor-pointer active:scale-95 transition-transform overflow-hidden">
                             <div class="grid grid-cols-2 gap-0.5 w-full h-full p-1 bg-gray-100">
                                 <div class="bg-rose-400 rounded-sm"></div>
                                 <div class="bg-amber-400 rounded-sm"></div>
@@ -116,30 +133,30 @@
                             </div>
                         </div>
                         <!-- 카카오톡 -->
-                        <div onclick="openApp('kakaotalk')" class="w-14 h-14 rounded-2xl bg-[#fee500] flex items-center justify-center text-[#3c1e1e] font-bold shadow-md cursor-pointer active:scale-95 transition-transform text-lg">
+                        <div onclick="openApp('kakaotalk')" class="w-12 h-12 rounded-2xl bg-[#fee500] flex items-center justify-center text-[#3c1e1e] font-bold shadow-md cursor-pointer active:scale-95 transition-transform text-base">
                             💬
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. 각 앱 실행 화면 컨테이너 -->
+                <!-- 2. 각 앱 실행 화면 컨테이너 (홈 버튼 잘림 현상 방지 완비) -->
                 <div id="view-app" class="absolute inset-0 bg-white z-20 flex flex-col opacity-0 pointer-events-none transition-opacity duration-300">
-                    <!-- 앱 내부 헤더 -->
-                    <div class="h-14 bg-gray-50 border-b border-gray-200 flex items-center justify-between px-4 pt-12">
-                        <button onclick="goHome()" class="text-blue-600 font-medium text-sm flex items-center">
-                            <span class="text-lg mr-1">&lt;</span> 홈
+                    <!-- 앱 내부 헤더 (상단바 영역 침범 방지 pt-12 적용) -->
+                    <div class="h-14 bg-gray-50 border-b border-gray-200 flex items-center justify-between px-4 pt-4 shrink-0">
+                        <button onclick="goHome()" class="text-blue-600 font-medium text-sm flex items-center cursor-pointer py-1">
+                            <span class="text-lg mr-1 font-bold">&lt;</span> 홈
                         </button>
                         <span id="app-title" class="font-bold text-gray-800 text-sm">앱 이름</span>
                         <div class="w-10"></div>
                     </div>
-                    <!-- 앱 바디 (동적 콘텐츠) -->
+                    <!-- 앱 바디 -->
                     <div id="app-content" class="flex-1 overflow-y-auto no-scrollbar bg-gray-50 p-4">
                         <!-- 각 앱 내용이 여기 로드됩니다 -->
                     </div>
                 </div>
 
                 <!-- 아이폰 하단 홈 인디케이터 바 -->
-                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/40 rounded-full z-40 pointer-events-none"></div>
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/60 rounded-full z-40 pointer-events-none"></div>
 
             </div>
         </div>
@@ -155,8 +172,15 @@
             const timeStr = `${hours}:${minutes}`;
             
             document.getElementById('status-time').innerText = timeStr;
+            const lockTime = document.getElementById('lock-time');
+            if(lockTime) lockTime.innerText = timeStr;
             const clockIconTime = document.getElementById('clock-icon-time');
             if(clockIconTime) clockIconTime.innerText = timeStr;
+
+            // 잠금화면 날짜
+            const days = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+            const lockDate = document.getElementById('lock-date');
+            if(lockDate) lockDate.innerText = `${now.getMonth() + 1}월 ${now.getDate()}일 ${days[now.getDay()]}`;
 
             // 캘린더 날짜 업데이트
             const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -165,6 +189,18 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
+
+        // 잠금해제 제스처 이벤트
+        document.getElementById('swipe-to-unlock').addEventListener('click', function() {
+            const lockView = document.getElementById('view-lock');
+            const homeView = document.getElementById('view-home');
+
+            lockView.style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                lockView.classList.add('hidden');
+                homeView.classList.remove('opacity-0', 'pointer-events-none');
+            }, 300);
+        });
 
         // 앱 열기 함수
         function openApp(appName) {
@@ -176,34 +212,34 @@
             homeView.classList.add('opacity-0', 'pointer-events-none');
             appView.classList.remove('opacity-0', 'pointer-events-none');
 
-            // 앱별 콘텐츠 구성
+            // 앱별 콘텐츠 구성 (아이폰 기본 감성)
             if (appName === 'instagram') {
                 appTitle.innerText = 'Instagram';
                 appContent.innerHTML = `
                     <div class="space-y-4">
                         <div class="flex items-center space-x-3 pb-2 border-b border-gray-100">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 to-purple-600 p-0.5">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-yellow-400 to-purple-600 p-0.5">
                                 <div class="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-xs">김</div>
                             </div>
                             <span class="font-bold text-sm">sunwoo_kim</span>
                         </div>
-                        <div class="bg-gray-200 h-72 rounded-xl flex items-center justify-center text-gray-500 font-medium bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=600&auto=format&fit=crop');"></div>
-                        <div class="text-xs text-gray-700"><span class="font-bold">sunwoo_kim</span> 새로운 가상 아이폰 레이아웃 작업 중 📱✨</div>
+                        <div class="bg-gray-200 h-64 rounded-xl flex items-center justify-center text-gray-500 font-medium bg-cover bg-center shadow-sm" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=600&auto=format&fit=crop');"></div>
+                        <div class="text-xs text-gray-700 leading-relaxed"><span class="font-bold">sunwoo_kim</span> 아이폰 기본 레이아웃 적용 완료 📱✨</div>
                     </div>
                 `;
             } else if (appName === 'clock') {
                 appTitle.innerText = '시계';
                 appContent.innerHTML = `
                     <div class="flex flex-col items-center justify-center h-full text-center">
-                        <div class="text-5xl font-light text-gray-900 mb-2" id="live-clock-large">09:41</div>
-                        <div class="text-gray-500 text-sm">알람 및 세계 시각</div>
+                        <div class="text-5xl font-light text-gray-900 mb-2">09:41</div>
+                        <div class="text-gray-500 text-xs">알람 및 세계 시각</div>
                     </div>
                 `;
             } else if (appName === 'calendar') {
                 appTitle.innerText = '캘린더';
                 appContent.innerHTML = `
                     <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 text-center">
-                        <h3 class="font-bold text-lg mb-2 text-rose-500">2026년 10월</h3>
+                        <h3 class="font-bold text-base mb-2 text-rose-500">2026년 10월</h3>
                         <div class="grid grid-cols-7 gap-2 text-xs font-semibold text-gray-400 mb-2">
                             <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
                         </div>
@@ -212,7 +248,7 @@
                             <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
                             <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
                             <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span>
-                            <span>25</span><span class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center mx-auto font-bold">26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+                            <span>25</span><span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center mx-auto font-bold text-xs">26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
                         </div>
                     </div>
                 `;
@@ -221,8 +257,8 @@
                 appContent.innerHTML = `
                     <div class="space-y-3">
                         <div class="bg-amber-50 p-4 rounded-xl border border-amber-100 shadow-sm">
-                            <h4 class="font-bold text-amber-900 text-sm mb-1">깃허브 프로젝트 체크리스트</h4>
-                            <p class="text-xs text-amber-800">1. 새 HTML 파일 생성<br>2. 아이폰 목업 코드 반영<br>3. 커밋 및 푸시 완료하기</p>
+                            <h4 class="font-bold text-amber-900 text-xs mb-1">체크리스트</h4>
+                            <p class="text-[11px] text-amber-800 leading-relaxed">1. 잠금 화면 및 제스처 적용<br>2. 아이폰 기본 앱 아이콘 정돈<br>3. 한 화면 규격 고정</p>
                         </div>
                     </div>
                 `;
@@ -230,27 +266,27 @@
                 appTitle.innerText = '전화';
                 appContent.innerHTML = `
                     <div class="flex flex-col items-center justify-center h-full">
-                        <div class="text-2xl font-bold mb-6 tracking-widest text-gray-800">010-1234-5678</div>
-                        <div class="grid grid-cols-3 gap-4 mb-6">
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">1</div>
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">2</div>
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">3</div>
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">4</div>
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">5</div>
-                            <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-xl font-bold text-gray-700">6</div>
+                        <div class="text-xl font-bold mb-4 tracking-widest text-gray-800">010-1234-5678</div>
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">1</div>
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">2</div>
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">3</div>
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">4</div>
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">5</div>
+                            <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">6</div>
                         </div>
-                        <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl shadow-lg">📞</div>
+                        <div class="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white text-xl shadow-md">📞</div>
                     </div>
                 `;
             } else if (appName === 'messages') {
                 appTitle.innerText = '메시지';
                 appContent.innerHTML = `
-                    <div class="space-y-3">
+                    <div class="space-y-2">
                         <div class="flex items-center space-x-3 p-3 bg-white rounded-xl shadow-sm border border-gray-100">
-                            <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">김</div>
+                            <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">김</div>
                             <div class="flex-1">
-                                <div class="flex justify-between items-center"><span class="font-bold text-xs">깃허브 알림</span><span class="text-[10px] text-gray-400">오후 3:42</span></div>
-                                <p class="text-xs text-gray-600 truncate">새로운 커밋이 성공적으로 푸시되었습니다.</p>
+                                <div class="flex justify-between items-center"><span class="font-bold text-xs">시스템 알림</span><span class="text-[9px] text-gray-400">오후 9:00</span></div>
+                                <p class="text-[11px] text-gray-600 truncate">잠금 화면 및 아이폰 UI가 업데이트되었습니다.</p>
                             </div>
                         </div>
                     </div>
@@ -267,12 +303,12 @@
             } else if (appName === 'kakaotalk') {
                 appTitle.innerText = '카카오톡';
                 appContent.innerHTML = `
-                    <div class="space-y-3">
+                    <div class="space-y-2">
                         <div class="flex items-center space-x-3 p-3 bg-white rounded-xl shadow-sm border border-gray-100">
-                            <div class="w-11 h-11 rounded-2xl bg-amber-200 flex items-center justify-center text-lg font-bold">💬</div>
+                            <div class="w-10 h-10 rounded-2xl bg-amber-200 flex items-center justify-center text-base font-bold">💬</div>
                             <div class="flex-1">
-                                <div class="flex justify-between items-center"><span class="font-bold text-xs">개발 스터디 톡방</span><span class="text-[10px] text-gray-400">오후 3:50</span></div>
-                                <p class="text-xs text-gray-600 truncate">새로운 가상 아이폰 레이아웃 공유합니다!</p>
+                                <div class="flex justify-between items-center"><span class="font-bold text-xs">개발 톡방</span><span class="text-[9px] text-gray-400">오후 9:02</span></div>
+                                <p class="text-[11px] text-gray-600 truncate">가상 아이폰 디자인 수정 완료!</p>
                             </div>
                         </div>
                     </div>
